@@ -1,0 +1,6 @@
+{
+  "name": "Little English Buddy",
+  "description": "Learn English. Play. Speak. Grow! A cute, cheerful, and interactive English learning app for children featuring letters, numbers, colors, shapes, animals, phonics, games, and speaking practice.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
