@@ -36,11 +36,11 @@ fun SplashScreen() {
   LaunchedEffect(Unit) {
     scaleAnim.animateTo(
       targetValue = 1.05f,
-      animationSpec = tween(800, easing = FastOutSlowInEasing)
+      animationSpec = tween(220, easing = FastOutSlowInEasing)
     )
     scaleAnim.animateTo(
       targetValue = 1.0f,
-      animationSpec = tween(300)
+      animationSpec = tween(80)
     )
   }
 

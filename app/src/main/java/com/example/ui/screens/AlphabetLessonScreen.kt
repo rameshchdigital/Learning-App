@@ -57,6 +57,7 @@ import com.example.audio.AudioController
 import com.example.data.content.GameContentRepository
 import com.example.data.models.AlphabetCard
 import com.example.ui.components.BoboMascot
+import com.example.ui.components.LessonNavigationControls
 import com.example.ui.components.MascotState
 import com.example.ui.components.StarsBar
 
@@ -201,74 +202,30 @@ fun AlphabetLessonScreen(
                 color = Color(0xFF546E7A),
                 textAlign = TextAlign.Center
               )
-
-              Spacer(modifier = Modifier.height(16.dp))
-
-              Button(
-                onClick = {
-                  audioController.speak("${card.letterUpper}! ${card.word}! ${card.phoneticSentence}")
-                },
-                modifier = Modifier
-                  .height(48.dp)
-                  .testTag("listen_letter_audio"),
-                shape = RoundedCornerShape(24.dp),
-                colors = ButtonDefaults.buttonColors(
-                  containerColor = Color(0xFF1E88E5),
-                  contentColor = Color.White
-                )
-              ) {
-                Icon(Icons.AutoMirrored.Filled.VolumeUp, contentDescription = "Listen")
-                Spacer(modifier = Modifier.width(8.dp))
-                Text("LISTEN SOUND 🔊", fontWeight = FontWeight.Bold)
-              }
             }
           }
         }
 
-        // Navigation Controls (Prev / Replay / Next)
-        Row(
-          modifier = Modifier.fillMaxWidth(),
-          horizontalArrangement = Arrangement.SpaceEvenly,
-          verticalAlignment = Alignment.CenterVertically
-        ) {
-          IconButton(
-            onClick = {
-              if (selectedIndex > 0) selectedIndex--
-            },
-            enabled = selectedIndex > 0
-          ) {
-            Surface(
-              shape = CircleShape,
-              color = if (selectedIndex > 0) Color(0xFF1E88E5) else Color.LightGray
-            ) {
-              Icon(Icons.Default.ChevronLeft, contentDescription = "Prev", tint = Color.White, modifier = Modifier.size(36.dp))
+        // Unified Previous / Play / Next Controls
+        LessonNavigationControls(
+          onPrevious = { if (selectedIndex > 0) selectedIndex-- },
+          onPlay = {
+            audioController.speak("${currentCard.letterUpper}! ${currentCard.word}! ${currentCard.phoneticSentence}")
+            onAwardStars(1)
+          },
+          onNext = {
+            if (selectedIndex < alphabets.size - 1) {
+              selectedIndex++
+              onAwardStars(1)
             }
-          }
-
-          Text(
-            text = "${selectedIndex + 1} / ${alphabets.size}",
-            fontSize = 16.sp,
-            fontWeight = FontWeight.Bold,
-            color = Color(0xFF37474F)
-          )
-
-          IconButton(
-            onClick = {
-              if (selectedIndex < alphabets.size - 1) {
-                selectedIndex++
-                onAwardStars(1)
-              }
-            },
-            enabled = selectedIndex < alphabets.size - 1
-          ) {
-            Surface(
-              shape = CircleShape,
-              color = if (selectedIndex < alphabets.size - 1) Color(0xFF1E88E5) else Color.LightGray
-            ) {
-              Icon(Icons.Default.ChevronRight, contentDescription = "Next", tint = Color.White, modifier = Modifier.size(36.dp))
-            }
-          }
-        }
+          },
+          canPrevious = selectedIndex > 0,
+          canNext = selectedIndex < alphabets.size - 1,
+          playLabel = "HEAR SOUND 🔊",
+          currentIndex = selectedIndex,
+          totalCount = alphabets.size,
+          accentColor = Color(0xFF1E88E5)
+        )
 
         // Horizontal A to Z Selector Row
         LazyRow(

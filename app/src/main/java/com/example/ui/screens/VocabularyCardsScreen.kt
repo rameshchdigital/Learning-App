@@ -69,6 +69,7 @@ import androidx.compose.ui.window.Dialog
 import com.example.audio.AudioController
 import com.example.ui.components.BoboMascot
 import com.example.ui.components.CelebrationOverlay
+import com.example.ui.components.LessonNavigationControls
 import com.example.ui.components.LittleBuddyBottomBar
 import com.example.ui.components.MascotState
 import com.example.ui.components.StarsBar
@@ -599,8 +600,21 @@ fun VocabularyCardsScreen(
 
       // Card Modal Dialog
       activeCardModal?.let { item ->
+        val currentModalIndex = filteredCards.indexOfFirst { it.id == item.id }.takeIf { it >= 0 } ?: 0
         VocabDetailDialog(
           item = item,
+          currentIndex = currentModalIndex,
+          totalCount = filteredCards.size,
+          onPrevious = {
+            if (currentModalIndex > 0) {
+              activeCardModal = filteredCards[currentModalIndex - 1]
+            }
+          },
+          onNext = {
+            if (currentModalIndex < filteredCards.size - 1) {
+              activeCardModal = filteredCards[currentModalIndex + 1]
+            }
+          },
           audioController = audioController,
           onDismiss = { activeCardModal = null }
         )
@@ -727,6 +741,10 @@ fun VocabGridCardTile(
 @Composable
 fun VocabDetailDialog(
   item: VocabCardItem,
+  currentIndex: Int,
+  totalCount: Int,
+  onPrevious: () -> Unit,
+  onNext: () -> Unit,
   audioController: AudioController,
   onDismiss: () -> Unit
 ) {
@@ -737,7 +755,7 @@ fun VocabDetailDialog(
       shadowElevation = 12.dp,
       modifier = Modifier
         .fillMaxWidth()
-        .padding(16.dp)
+        .padding(12.dp)
         .testTag("vocab_detail_dialog")
     ) {
       Column(
@@ -746,7 +764,7 @@ fun VocabDetailDialog(
           .background(
             Brush.verticalGradient(colors = item.bgGradient)
           )
-          .padding(24.dp),
+          .padding(20.dp),
         horizontalAlignment = Alignment.CenterHorizontally
       ) {
         Row(
@@ -764,31 +782,31 @@ fun VocabDetailDialog(
         // Huge Emoji Display
         Box(
           modifier = Modifier
-            .size(100.dp)
+            .size(92.dp)
             .clip(CircleShape)
             .background(Color.White),
           contentAlignment = Alignment.Center
         ) {
-          Text(text = item.iconEmoji, fontSize = 60.sp)
+          Text(text = item.iconEmoji, fontSize = 56.sp)
         }
 
-        Spacer(modifier = Modifier.height(12.dp))
+        Spacer(modifier = Modifier.height(10.dp))
 
         Text(
           text = item.word,
-          fontSize = 28.sp,
+          fontSize = 26.sp,
           fontWeight = FontWeight.Black,
           color = item.cardColor
         )
 
         Text(
           text = item.phonetic,
-          fontSize = 15.sp,
+          fontSize = 14.sp,
           fontStyle = FontStyle.Italic,
           color = Color(0xFF512DA8)
         )
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(12.dp))
 
         // Example Sentence Box
         Card(
@@ -797,19 +815,19 @@ fun VocabDetailDialog(
           modifier = Modifier.fillMaxWidth()
         ) {
           Column(
-            modifier = Modifier.padding(16.dp),
+            modifier = Modifier.padding(14.dp),
             horizontalAlignment = Alignment.CenterHorizontally
           ) {
             Text(
               text = "💬 Example Sentence:",
-              fontSize = 12.sp,
+              fontSize = 11.sp,
               fontWeight = FontWeight.Bold,
               color = Color.Gray
             )
             Spacer(modifier = Modifier.height(4.dp))
             Text(
               text = "\"${item.sentence}\"",
-              fontSize = 15.sp,
+              fontSize = 14.sp,
               fontWeight = FontWeight.Medium,
               color = Color(0xFF212121),
               textAlign = TextAlign.Center
@@ -817,30 +835,23 @@ fun VocabDetailDialog(
           }
         }
 
-        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(14.dp))
 
-        // Replay Voice Button
-        Button(
-          onClick = {
+        // Unified Previous / Play / Next Controls in Dialog
+        LessonNavigationControls(
+          onPrevious = onPrevious,
+          onPlay = {
             val animalSoundId = if (item.category.equals("Animals", ignoreCase = true)) item.id else null
             audioController.speakCard(item.word, item.sentence, animalSoundId)
           },
-          shape = RoundedCornerShape(24.dp),
-          colors = ButtonDefaults.buttonColors(
-            containerColor = item.cardColor,
-            contentColor = Color.White
-          ),
-          modifier = Modifier
-            .fillMaxWidth()
-            .testTag("vocab_listen_again_button")
-        ) {
-          Icon(
-            imageVector = Icons.AutoMirrored.Filled.VolumeUp,
-            contentDescription = null,
-            modifier = Modifier.padding(end = 8.dp)
-          )
-          Text("LISTEN AGAIN 🔊", fontWeight = FontWeight.Bold, fontSize = 15.sp)
-        }
+          onNext = onNext,
+          canPrevious = currentIndex > 0,
+          canNext = currentIndex < totalCount - 1,
+          playLabel = "LISTEN 🔊",
+          currentIndex = currentIndex,
+          totalCount = totalCount,
+          accentColor = item.cardColor
+        )
       }
     }
   }

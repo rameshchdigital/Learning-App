@@ -31,6 +31,7 @@ import com.example.ui.screens.DailyQuizScreen
 import com.example.ui.screens.GameScreen
 import com.example.ui.screens.HomeScreen
 import com.example.ui.screens.LearnCategoriesScreen
+import com.example.ui.screens.ListeningChallengeScreen
 import com.example.ui.screens.MusicScreen
 import com.example.ui.screens.NumbersLessonScreen
 import com.example.ui.screens.ParentDashboardScreen
@@ -41,6 +42,7 @@ import com.example.ui.screens.PuzzleScreen
 import com.example.ui.screens.SentenceLearningScreen
 import com.example.ui.screens.SettingsScreen
 import com.example.ui.screens.ShapesLessonScreen
+import com.example.ui.screens.SoundSortingGameScreen
 import com.example.ui.screens.SpeakingPracticeScreen
 import com.example.ui.screens.SpellingLessonScreen
 import com.example.ui.screens.SplashScreen
@@ -204,6 +206,8 @@ fun BabyWorldApp(viewModel: MainViewModel) {
             totalStars = userProgress.totalStars,
             audioController = viewModel.audioController,
             onAwardStars = { stars -> viewModel.awardStarsDirectly(stars, "phonics") },
+            onOpenSoundSortingGame = { viewModel.navigateTo(Screen.SOUND_SORTING) },
+            onOpenListeningChallenge = { viewModel.navigateTo(Screen.LISTENING_CHALLENGE) },
             onHomeClick = { viewModel.navigateTo(Screen.HOME) },
             onParentLockClick = { showParentGateModal = true }
           )
@@ -322,6 +326,24 @@ fun BabyWorldApp(viewModel: MainViewModel) {
             audioController = viewModel.audioController,
             onAwardStars = { stars -> viewModel.awardStarsDirectly(stars, "puzzle") },
             onHomeClick = { viewModel.navigateTo(Screen.HOME) },
+            onParentLockClick = { showParentGateModal = true }
+          )
+
+          Screen.SOUND_SORTING -> SoundSortingGameScreen(
+            totalStars = userProgress.totalStars,
+            learningStreak = userProgress.learningStreak,
+            audioController = viewModel.audioController,
+            onAwardStars = { stars -> viewModel.awardStarsDirectly(stars, "phonics_sorting") },
+            onBackClick = { viewModel.navigateTo(Screen.PLAY_GAMES) },
+            onParentLockClick = { showParentGateModal = true }
+          )
+
+          Screen.LISTENING_CHALLENGE -> ListeningChallengeScreen(
+            totalStars = userProgress.totalStars,
+            learningStreak = userProgress.learningStreak,
+            audioController = viewModel.audioController,
+            onAwardStars = { stars -> viewModel.awardStarsDirectly(stars, "listening_challenge") },
+            onBackClick = { viewModel.navigateTo(Screen.PLAY_GAMES) },
             onParentLockClick = { showParentGateModal = true }
           )
 

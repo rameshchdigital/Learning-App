@@ -51,7 +51,6 @@ import com.example.data.models.CategoryGroup
 import com.example.data.models.DifficultyLevel
 import com.example.data.models.GameCategory
 import com.example.ui.components.BoboMascot
-import com.example.ui.components.LittleBuddyBottomBar
 import com.example.ui.components.MascotState
 import com.example.ui.components.StarsBar
 import com.example.ui.viewmodel.Screen
@@ -90,12 +89,6 @@ fun HomeScreen(
         streak = learningStreak,
         title = "🐘 Little English Buddy",
         onParentLockClick = onParentLockClick
-      )
-    },
-    bottomBar = {
-      LittleBuddyBottomBar(
-        currentScreen = Screen.HOME,
-        onNavigate = onNavigate
       )
     },
     containerColor = Color(0xFFFFFDE7)

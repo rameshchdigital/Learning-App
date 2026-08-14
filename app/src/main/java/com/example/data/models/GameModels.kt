@@ -54,7 +54,7 @@ enum class GameCategory(
   ACTION_WORDS("action_words", "Action Words", "🏃", 0xFFFF7043, 0xFFFBE9E7, "Run, jump, eat & sleep", CategoryGroup.LEARNING_DEV),
   HEALTH("health", "Health & Hygiene", "🏥", 0xFF26A69A, 0xFFE0F2F1, "Doctor, soap & brushing teeth", CategoryGroup.LEARNING_DEV),
   ALPHABETS("alphabets", "Alphabets", "🔤", 0xFF42A5F5, 0xFFE3F2FD, "Learn A to Z with sounds", CategoryGroup.LEARNING_DEV),
-  PHONICS("phonics", "Phonics", "🔠", 0xFF26A69A, 0xFFE0F2F1, "Letter sounds & word blending", CategoryGroup.LEARNING_DEV),
+  PHONICS("phonics", "Phonics & Early Reading", "🔤", 0xFF26A69A, 0xFFE0F2F1, "Sounds, blending, word families & reading", CategoryGroup.LEARNING_DEV),
   NUMBERS("numbers", "Numbers", "🔢", 0xFFFFB300, 0xFFFFF8E1, "Count 1 to 20 with objects", CategoryGroup.LEARNING_DEV),
   SPELLING("spelling", "Spelling Fun", "✏️", 0xFF7E57C2, 0xFFEDE7F6, "Arrange scrambled letters", CategoryGroup.LEARNING_DEV),
   SENTENCES("sentences", "Sentences", "🗣️", 0xFF26A69A, 0xFFE0F2F1, "Listen & read aloud", CategoryGroup.LEARNING_DEV),
@@ -100,6 +100,120 @@ data class PhonicsWord(
   val sounds: List<String>,
   val emoji: String,
   val categoryLevel: String
+)
+
+enum class PhonicsSubcategory(
+  val levelNumber: Int,
+  val title: String,
+  val emoji: String,
+  val subtitle: String,
+  val pedagogicalGoal: String,
+  val colorHex: Long,
+  val bgHex: Long
+) {
+  LETTER_SOUNDS(1, "Letter Sounds", "🔤", "A → /a/, B → /b/, C → /k/", "Learn the distinct sound each letter makes", 0xFF00897B, 0xFFE0F2F1),
+  SHORT_VOWELS(2, "Short Vowels", "🍎", "a, e, i, o, u in words", "Master short vowel core sounds", 0xFFE53935, 0xFFFFEBEE),
+  BEGINNING_SOUNDS(3, "Beginning Sounds", "🐶", "🐶 Dog starts with /d/", "Identify the first sound in spoken words", 0xFFFF8F00, 0xFFFFF3E0),
+  ENDING_SOUNDS(4, "Ending Sounds", "🎯", "🐱 Cat ends with /t/", "Isolate the final consonant sound", 0xFF8E24AA, 0xFFF3E5F5),
+  MIDDLE_SOUNDS(5, "Middle Sounds", "🔠", "🐱 Cat middle vowel is /æ/", "Identify the medial vowel in 3-letter words", 0xFF3949AB, 0xFFE8EAF6),
+  CVC_WORDS(6, "CVC Words", "🐱", "cat, sun, dog, pig, bed", "Read consonant-vowel-consonant words", 0xFF00ACC1, 0xFFE0F7FA),
+  WORD_FAMILIES(7, "Word Families", "🏡", "-at, -an, -og, -ig, -un", "Recognize rhyming ending sound families", 0xFF43A047, 0xFFE8F5E9),
+  BLENDING(8, "Blending", "🧩", "c + a + t → cat", "Join individual sounds smoothly into whole words", 0xFFFB8C00, 0xFFFFF3E0),
+  SEGMENTING(9, "Segmenting", "✂️", "dog → d + o + g", "Break whole words into individual sound parts", 0xFF5E35B1, 0xFFEDE7F6),
+  DIGRAPHS(10, "Digraphs", "✨", "sh, ch, th, wh, ph", "Discover two letters making one special sound", 0xFFD81B60, 0xFFFCE4EC),
+  CONSONANT_BLENDS(11, "Consonant Blends", "🚀", "bl, cl, fl, br, st, sp", "Blend two consonant sounds together", 0xFF1E88E5, 0xFFE3F2FD),
+  LONG_VOWELS(12, "Long Vowels", "🍰", "cake, bike, home, cube", "Learn vowels that say their own name", 0xFFFFB300, 0xFFFFF8E1),
+  SILENT_E(13, "Silent E (Magic E)", "🪄", "cap → cape, kit → kite", "Watch Magic-E change short vowels to long", 0xFF6D4C41, 0xFFEFEBE9),
+  SIGHT_WORDS(14, "Sight Words", "👁️", "the, is, a, I, to, and, you", "Recognize high-frequency words instantly", 0xFF00897B, 0xFFE0F2F1),
+  EARLY_READING(15, "Early Reading", "📖", "Simple decodable sentences", "Read complete illustrated sentences confidently", 0xFF1E88E5, 0xFFE3F2FD);
+
+  companion object {
+    fun fromLevel(level: Int): PhonicsSubcategory {
+      return entries.firstOrNull { it.levelNumber == level } ?: LETTER_SOUNDS
+    }
+  }
+}
+
+data class PhonicsSeeExample(
+  val word: String,
+  val emoji: String,
+  val soundHighlight: String
+)
+
+data class PhonicsLessonItem(
+  val id: String,
+  val subcategory: PhonicsSubcategory,
+  val soundOrTopic: String,          // e.g. "/b/", "Short A", "-at Family", "Magic E"
+  val targetWord: String,            // e.g. "BAT", "APPLE", "CAPE"
+  val letters: List<String>,         // e.g. ["B", "A", "T"]
+  val sounds: List<String>,          // e.g. ["/b/", "/æ/", "/t/"]
+  val emoji: String,                 // e.g. "🦇"
+  val hearPrompt: String,            // e.g. "B says /b/! /b/ for Ball and Bat."
+  val seeExamples: List<PhonicsSeeExample>, // e.g. [("Bee", "🐝", "/b/"), ("Ball", "⚽", "/b/")]
+  val chooseQuestion: String,        // e.g. "Which picture starts with /b/?"
+  val chooseOptions: List<GameOption>,
+  val correctOptionId: String,
+  val blendSequence: String,         // e.g. "B + A + T = BAT"
+  val speakPrompt: String,           // e.g. "Say 'B'!" or "Say 'BAT'!"
+  val magicEBefore: Pair<String, String>? = null, // e.g. ("CAP", "🧢")
+  val magicEAfter: Pair<String, String>? = null,  // e.g. ("CAPE", "🦸‍♂️")
+  val wordFamilyList: List<Pair<String, String>> = emptyList(), // e.g. [("cat", "🐱"), ("bat", "🦇")]
+  val decodableSentence: String? = null // e.g. "The cat sat on the mat."
+)
+
+data class PhonicsMinimalPair(
+  val id: String,
+  val word1: String,
+  val emoji1: String,
+  val word2: String,
+  val emoji2: String,
+  val contrastDescription: String,   // e.g. "/b/ vs /k/" or "/ɪ/ vs /æ/"
+  val spokenWord: String,            // "bat" or "cat"
+  val promptVoice: String = "Which word did you hear?",
+  val category: String = "Consonant Sounds", // e.g. "Consonants", "Vowels", "Digraphs", "Rhyming"
+  val funFact: String = ""
+)
+
+data class PhonicsSoundSortItem(
+  val id: String,
+  val targetSound: String,           // e.g. "/m/"
+  val targetLetter: String,          // e.g. "M"
+  val prompt: String,                // e.g. "Which words start with /m/?"
+  val options: List<SoundSortOption>
+)
+
+data class SoundSortOption(
+  val id: String,
+  val word: String,
+  val emoji: String,
+  val isCorrect: Boolean
+)
+
+data class SoundBucket(
+  val sound: String,          // e.g. "/m/"
+  val letter: String,         // e.g. "M"
+  val name: String,           // e.g. "Monkey M"
+  val emoji: String,          // e.g. "🐒"
+  val colorHex: Long,         // e.g. 0xFFFF8F00
+  val bgHex: Long             // e.g. 0xFFFFF3E0
+)
+
+data class SoundSortGameItem(
+  val id: String,
+  val word: String,           // e.g. "Monkey"
+  val emoji: String,          // e.g. "🐒"
+  val targetLetter: String,   // e.g. "M"
+  val targetSound: String,    // e.g. "/m/"
+  val hint: String = ""       // e.g. "M-M-Monkey! Starts with /m/."
+)
+
+data class SoundSortRound(
+  val id: String,
+  val title: String,          // e.g. "Sound /m/ vs /s/"
+  val description: String,    // e.g. "Sort items starting with M (Monkey) vs S (Sun)"
+  val bucketA: SoundBucket,
+  val bucketB: SoundBucket,
+  val items: List<SoundSortGameItem>
 )
 
 data class NumberCard(

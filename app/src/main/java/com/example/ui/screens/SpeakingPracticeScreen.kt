@@ -53,6 +53,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.audio.AudioController
 import com.example.ui.components.BoboMascot
+import com.example.ui.components.LessonNavigationControls
 import com.example.ui.components.MascotState
 import com.example.ui.components.StarsBar
 import kotlinx.coroutines.delay
@@ -282,8 +283,27 @@ fun SpeakingPracticeScreen(
           }
         }
 
+        // Unified Previous / Play (Hear Model) / Next Controls
+        LessonNavigationControls(
+          onPrevious = { if (currentIndex > 0) currentIndex-- },
+          onPlay = {
+            audioController.speak("Say: ${currentPrompt.word}. ${currentPrompt.sentence}")
+          },
+          onNext = {
+            if (currentIndex < prompts.size - 1) {
+              currentIndex++
+            }
+          },
+          canPrevious = currentIndex > 0,
+          canNext = currentIndex < prompts.size - 1,
+          playLabel = "HEAR PROMPT 🔊",
+          currentIndex = currentIndex,
+          totalCount = prompts.size,
+          accentColor = Color(0xFF00897B)
+        )
+
         BoboMascot(
-          size = 90.dp,
+          size = 72.dp,
           state = if (isListening) MascotState.SPEAKING else MascotState.IDLE_WAVING
         )
       }

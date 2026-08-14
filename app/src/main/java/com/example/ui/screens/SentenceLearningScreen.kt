@@ -51,6 +51,7 @@ import androidx.compose.ui.unit.sp
 import com.example.audio.AudioController
 import com.example.data.content.GameContentRepository
 import com.example.ui.components.BoboMascot
+import com.example.ui.components.LessonNavigationControls
 import com.example.ui.components.MascotState
 import com.example.ui.components.StarsBar
 import kotlinx.coroutines.delay
@@ -179,71 +180,32 @@ fun SentenceLearningScreen(
                   }
                 }
               }
-
-              Spacer(modifier = Modifier.height(24.dp))
-
-              Button(
-                onClick = {
-                  audioController.speak(sentenceText)
-                  onAwardStars(1)
-                },
-                modifier = Modifier
-                  .height(52.dp)
-                  .fillMaxWidth(0.9f)
-                  .testTag("read_sentence_audio"),
-                shape = RoundedCornerShape(26.dp),
-                colors = ButtonDefaults.buttonColors(
-                  containerColor = Color(0xFF00897B),
-                  contentColor = Color.White
-                )
-              ) {
-                Icon(Icons.AutoMirrored.Filled.VolumeUp, contentDescription = "Read Aloud")
-                Spacer(modifier = Modifier.width(8.dp))
-                Text("LISTEN SENTENCE 🔊", fontWeight = FontWeight.ExtraBold, fontSize = 16.sp)
-              }
             }
           }
         }
 
-        // Navigation Controls
-        Row(
-          modifier = Modifier.fillMaxWidth(),
-          horizontalArrangement = Arrangement.SpaceEvenly,
-          verticalAlignment = Alignment.CenterVertically
-        ) {
-          IconButton(
-            onClick = { if (selectedIndex > 0) selectedIndex-- },
-            enabled = selectedIndex > 0
-          ) {
-            Surface(
-              shape = CircleShape,
-              color = if (selectedIndex > 0) Color(0xFF00897B) else Color.LightGray
-            ) {
-              Icon(Icons.Default.ChevronLeft, contentDescription = "Prev", tint = Color.White, modifier = Modifier.size(36.dp))
+        // Unified Previous / Play / Next Controls
+        LessonNavigationControls(
+          onPrevious = { if (selectedIndex > 0) selectedIndex-- },
+          onPlay = {
+            audioController.speak(currentCard.first)
+            onAwardStars(1)
+          },
+          onNext = {
+            if (selectedIndex < sentenceCards.size - 1) {
+              selectedIndex++
+              onAwardStars(1)
             }
-          }
+          },
+          canPrevious = selectedIndex > 0,
+          canNext = selectedIndex < sentenceCards.size - 1,
+          playLabel = "LISTEN SENTENCE 🔊",
+          currentIndex = selectedIndex,
+          totalCount = sentenceCards.size,
+          accentColor = Color(0xFF00897B)
+        )
 
-          Text(
-            text = "${selectedIndex + 1} / ${sentenceCards.size}",
-            fontSize = 16.sp,
-            fontWeight = FontWeight.Bold,
-            color = Color(0xFF004D40)
-          )
-
-          IconButton(
-            onClick = { if (selectedIndex < sentenceCards.size - 1) selectedIndex++ },
-            enabled = selectedIndex < sentenceCards.size - 1
-          ) {
-            Surface(
-              shape = CircleShape,
-              color = if (selectedIndex < sentenceCards.size - 1) Color(0xFF00897B) else Color.LightGray
-            ) {
-              Icon(Icons.Default.ChevronRight, contentDescription = "Next", tint = Color.White, modifier = Modifier.size(36.dp))
-            }
-          }
-        }
-
-        BoboMascot(size = 80.dp, state = MascotState.IDLE_WAVING)
+        BoboMascot(size = 72.dp, state = MascotState.IDLE_WAVING)
       }
     }
   }

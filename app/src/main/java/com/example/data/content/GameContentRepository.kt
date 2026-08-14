@@ -8,8 +8,17 @@ import com.example.data.models.GameCategory
 import com.example.data.models.GameOption
 import com.example.data.models.GameQuestion
 import com.example.data.models.NumberCard
+import com.example.data.models.PhonicsLessonItem
+import com.example.data.models.PhonicsMinimalPair
+import com.example.data.models.PhonicsSeeExample
+import com.example.data.models.PhonicsSoundSortItem
+import com.example.data.models.PhonicsSubcategory
 import com.example.data.models.PhonicsWord
 import com.example.data.models.ShapeCard
+import com.example.data.models.SoundBucket
+import com.example.data.models.SoundSortGameItem
+import com.example.data.models.SoundSortOption
+import com.example.data.models.SoundSortRound
 
 object GameContentRepository {
 
@@ -56,6 +65,1257 @@ object GameContentRepository {
       PhonicsWord("PEN", listOf("P", "E", "N"), listOf("/p/", "/e/", "/n/"), "🖊️", "Level 2 • Word Blending"),
       PhonicsWord("BOX", listOf("B", "O", "X"), listOf("/b/", "/ɒ/", "/ks/"), "📦", "Level 3 • CVC Words"),
       PhonicsWord("FAN", listOf("F", "A", "N"), listOf("/f/", "/æ/", "/n/"), "🪭", "Level 3 • CVC Words")
+    )
+  }
+
+  fun getPhonicsLessonItems(): List<PhonicsLessonItem> {
+    return listOf(
+      // 1. Letter Sounds
+      PhonicsLessonItem(
+        id = "sound_b",
+        subcategory = PhonicsSubcategory.LETTER_SOUNDS,
+        soundOrTopic = "Sound /b/",
+        targetWord = "BALL",
+        letters = listOf("B", "A", "L", "L"),
+        sounds = listOf("/b/", "/ɔː/", "/l/"),
+        emoji = "⚽",
+        hearPrompt = "B says /b/! Let's bounce the ball.",
+        seeExamples = listOf(
+          PhonicsSeeExample("Bee", "🐝", "/b/"),
+          PhonicsSeeExample("Ball", "⚽", "/b/"),
+          PhonicsSeeExample("Bus", "🚌", "/b/"),
+          PhonicsSeeExample("Bear", "🐻", "/b/")
+        ),
+        chooseQuestion = "Which picture starts with the /b/ sound?",
+        chooseOptions = listOf(
+          GameOption("ball", "Ball", "⚽"),
+          GameOption("apple", "Apple", "🍎"),
+          GameOption("cat", "Cat", "🐱")
+        ),
+        correctOptionId = "ball",
+        blendSequence = "B + A + L + L = BALL",
+        speakPrompt = "Can you say /b/ for Ball?"
+      ),
+      PhonicsLessonItem(
+        id = "sound_m",
+        subcategory = PhonicsSubcategory.LETTER_SOUNDS,
+        soundOrTopic = "Sound /m/",
+        targetWord = "MOON",
+        letters = listOf("M", "O", "O", "N"),
+        sounds = listOf("/m/", "/uː/", "/n/"),
+        emoji = "🌙",
+        hearPrompt = "M says /m/! Mmmm, yummy mango.",
+        seeExamples = listOf(
+          PhonicsSeeExample("Monkey", "🐒", "/m/"),
+          PhonicsSeeExample("Moon", "🌙", "/m/"),
+          PhonicsSeeExample("Mouse", "🐭", "/m/"),
+          PhonicsSeeExample("Mango", "🥭", "/m/")
+        ),
+        chooseQuestion = "Which picture starts with the /m/ sound?",
+        chooseOptions = listOf(
+          GameOption("moon", "Moon", "🌙"),
+          GameOption("duck", "Duck", "🦆"),
+          GameOption("sun", "Sun", "☀️")
+        ),
+        correctOptionId = "moon",
+        blendSequence = "M + O + O + N = MOON",
+        speakPrompt = "Can you say /m/ for Moon?"
+      ),
+      PhonicsLessonItem(
+        id = "sound_s",
+        subcategory = PhonicsSubcategory.LETTER_SOUNDS,
+        soundOrTopic = "Sound /s/",
+        targetWord = "SUN",
+        letters = listOf("S", "U", "N"),
+        sounds = listOf("/s/", "/ʌ/", "/n/"),
+        emoji = "☀️",
+        hearPrompt = "S says /s/! Ssss like a friendly snake.",
+        seeExamples = listOf(
+          PhonicsSeeExample("Sun", "☀️", "/s/"),
+          PhonicsSeeExample("Star", "⭐", "/s/"),
+          PhonicsSeeExample("Snake", "🐍", "/s/"),
+          PhonicsSeeExample("Spoon", "🥄", "/s/")
+        ),
+        chooseQuestion = "Which picture starts with the /s/ sound?",
+        chooseOptions = listOf(
+          GameOption("sun", "Sun", "☀️"),
+          GameOption("egg", "Egg", "🥚"),
+          GameOption("pig", "Pig", "🐷")
+        ),
+        correctOptionId = "sun",
+        blendSequence = "S + U + N = SUN",
+        speakPrompt = "Can you say /s/ for Sun?"
+      ),
+
+      // 2. Short Vowels
+      PhonicsLessonItem(
+        id = "vowel_short_a",
+        subcategory = PhonicsSubcategory.SHORT_VOWELS,
+        soundOrTopic = "Short A (/æ/)",
+        targetWord = "APPLE",
+        letters = listOf("A", "P", "P", "L", "E"),
+        sounds = listOf("/æ/", "/p/", "/l/"),
+        emoji = "🍎",
+        hearPrompt = "Short A says /æ/ as in Apple, Ant, and Cat!",
+        seeExamples = listOf(
+          PhonicsSeeExample("Apple", "🍎", "/æ/"),
+          PhonicsSeeExample("Ant", "🐜", "/æ/"),
+          PhonicsSeeExample("Axe", "🪓", "/æ/"),
+          PhonicsSeeExample("Astronaut", "👨‍🚀", "/æ/")
+        ),
+        chooseQuestion = "Which picture has the short /æ/ vowel sound?",
+        chooseOptions = listOf(
+          GameOption("apple", "Apple", "🍎"),
+          GameOption("umbrella", "Umbrella", "☂️"),
+          GameOption("igloo", "Igloo", "🧊")
+        ),
+        correctOptionId = "apple",
+        blendSequence = "A + P + P + L + E = APPLE",
+        speakPrompt = "Say /æ/ ... Apple!"
+      ),
+      PhonicsLessonItem(
+        id = "vowel_short_e",
+        subcategory = PhonicsSubcategory.SHORT_VOWELS,
+        soundOrTopic = "Short E (/e/)",
+        targetWord = "EGG",
+        letters = listOf("E", "G", "G"),
+        sounds = listOf("/e/", "/g/"),
+        emoji = "🥚",
+        hearPrompt = "Short E says /e/ as in Egg, Elephant, and Bed!",
+        seeExamples = listOf(
+          PhonicsSeeExample("Egg", "🥚", "/e/"),
+          PhonicsSeeExample("Elephant", "🐘", "/e/"),
+          PhonicsSeeExample("Envelope", "✉️", "/e/"),
+          PhonicsSeeExample("Elf", "🧝", "/e/")
+        ),
+        chooseQuestion = "Which picture starts with the short /e/ sound?",
+        chooseOptions = listOf(
+          GameOption("egg", "Egg", "🥚"),
+          GameOption("octopus", "Octopus", "🐙"),
+          GameOption("apple", "Apple", "🍎")
+        ),
+        correctOptionId = "egg",
+        blendSequence = "E + G + G = EGG",
+        speakPrompt = "Say /e/ ... Egg!"
+      ),
+      PhonicsLessonItem(
+        id = "vowel_short_i",
+        subcategory = PhonicsSubcategory.SHORT_VOWELS,
+        soundOrTopic = "Short I (/ɪ/)",
+        targetWord = "IGLOO",
+        letters = listOf("I", "G", "L", "O", "O"),
+        sounds = listOf("/ɪ/", "/g/", "/l/", "/uː/"),
+        emoji = "🧊",
+        hearPrompt = "Short I says /ɪ/ as in Igloo, Insect, and Pig!",
+        seeExamples = listOf(
+          PhonicsSeeExample("Igloo", "🧊", "/ɪ/"),
+          PhonicsSeeExample("Insect", "🐛", "/ɪ/"),
+          PhonicsSeeExample("Ink", "🖋️", "/ɪ/"),
+          PhonicsSeeExample("Iguana", "🦎", "/ɪ/")
+        ),
+        chooseQuestion = "Which picture starts with the short /ɪ/ sound?",
+        chooseOptions = listOf(
+          GameOption("igloo", "Igloo", "🧊"),
+          GameOption("orange", "Orange", "🍊"),
+          GameOption("umbrella", "Umbrella", "☂️")
+        ),
+        correctOptionId = "igloo",
+        blendSequence = "I + G + L + O + O = IGLOO",
+        speakPrompt = "Say /ɪ/ ... Igloo!"
+      ),
+      PhonicsLessonItem(
+        id = "vowel_short_o",
+        subcategory = PhonicsSubcategory.SHORT_VOWELS,
+        soundOrTopic = "Short O (/ɒ/)",
+        targetWord = "OCTOPUS",
+        letters = listOf("O", "C", "T", "O", "P", "U", "S"),
+        sounds = listOf("/ɒ/", "/k/", "/t/", "/ə/", "/p/", "/ə/", "/s/"),
+        emoji = "🐙",
+        hearPrompt = "Short O says /ɒ/ as in Octopus, Otter, and Dog!",
+        seeExamples = listOf(
+          PhonicsSeeExample("Octopus", "🐙", "/ɒ/"),
+          PhonicsSeeExample("Otter", "🦦", "/ɒ/"),
+          PhonicsSeeExample("Ostrich", "🦤", "/ɒ/"),
+          PhonicsSeeExample("Ox", "🐂", "/ɒ/")
+        ),
+        chooseQuestion = "Which picture starts with short /ɒ/?",
+        chooseOptions = listOf(
+          GameOption("octopus", "Octopus", "🐙"),
+          GameOption("elephant", "Elephant", "🐘"),
+          GameOption("apple", "Apple", "🍎")
+        ),
+        correctOptionId = "octopus",
+        blendSequence = "O + C + T + O + P + U + S = OCTOPUS",
+        speakPrompt = "Say /ɒ/ ... Octopus!"
+      ),
+      PhonicsLessonItem(
+        id = "vowel_short_u",
+        subcategory = PhonicsSubcategory.SHORT_VOWELS,
+        soundOrTopic = "Short U (/ʌ/)",
+        targetWord = "UMBRELLA",
+        letters = listOf("U", "M", "B", "R", "E", "L", "L", "A"),
+        sounds = listOf("/ʌ/", "/m/", "/b/", "/r/", "/e/", "/l/", "/ə/"),
+        emoji = "☂️",
+        hearPrompt = "Short U says /ʌ/ as in Umbrella, Up, and Sun!",
+        seeExamples = listOf(
+          PhonicsSeeExample("Umbrella", "☂️", "/ʌ/"),
+          PhonicsSeeExample("Under", "👇", "/ʌ/"),
+          PhonicsSeeExample("Up", "⬆️", "/ʌ/"),
+          PhonicsSeeExample("Uncle", "👨", "/ʌ/")
+        ),
+        chooseQuestion = "Which picture starts with the short /ʌ/ sound?",
+        chooseOptions = listOf(
+          GameOption("umbrella", "Umbrella", "☂️"),
+          GameOption("igloo", "Igloo", "🧊"),
+          GameOption("egg", "Egg", "🥚")
+        ),
+        correctOptionId = "umbrella",
+        blendSequence = "U + M + B + R + E + L + L + A = UMBRELLA",
+        speakPrompt = "Say /ʌ/ ... Umbrella!"
+      ),
+
+      // 3. Beginning Sounds
+      PhonicsLessonItem(
+        id = "beg_sound_d",
+        subcategory = PhonicsSubcategory.BEGINNING_SOUNDS,
+        soundOrTopic = "Beginning /d/",
+        targetWord = "DOG",
+        letters = listOf("D", "O", "G"),
+        sounds = listOf("/d/", "/ɒ/", "/g/"),
+        emoji = "🐶",
+        hearPrompt = "Listen closely: Dog! What is the first sound? /d/ for Dog!",
+        seeExamples = listOf(
+          PhonicsSeeExample("Dog", "🐶", "/d/"),
+          PhonicsSeeExample("Duck", "🦆", "/d/"),
+          PhonicsSeeExample("Drum", "🥁", "/d/"),
+          PhonicsSeeExample("Door", "🚪", "/d/")
+        ),
+        chooseQuestion = "🐶 Dog begins with which letter sound?",
+        chooseOptions = listOf(
+          GameOption("d", "Letter D (/d/)", "🐶"),
+          GameOption("m", "Letter M (/m/)", "🐒"),
+          GameOption("s", "Letter S (/s/)", "☀️")
+        ),
+        correctOptionId = "d",
+        blendSequence = "D + O + G = DOG",
+        speakPrompt = "Say /d/ ... Dog!"
+      ),
+      PhonicsLessonItem(
+        id = "beg_sound_c",
+        subcategory = PhonicsSubcategory.BEGINNING_SOUNDS,
+        soundOrTopic = "Beginning /k/",
+        targetWord = "CAT",
+        letters = listOf("C", "A", "T"),
+        sounds = listOf("/k/", "/æ/", "/t/"),
+        emoji = "🐱",
+        hearPrompt = "Listen closely: Cat! The first sound is /k/! Letter C.",
+        seeExamples = listOf(
+          PhonicsSeeExample("Cat", "🐱", "/k/"),
+          PhonicsSeeExample("Car", "🚗", "/k/"),
+          PhonicsSeeExample("Cup", "☕", "/k/"),
+          PhonicsSeeExample("Cake", "🎂", "/k/")
+        ),
+        chooseQuestion = "🐱 Cat starts with which sound?",
+        chooseOptions = listOf(
+          GameOption("c", "Letter C (/k/)", "🐱"),
+          GameOption("b", "Letter B (/b/)", "⚽"),
+          GameOption("p", "Letter P (/p/)", "🐷")
+        ),
+        correctOptionId = "c",
+        blendSequence = "C + A + T = CAT",
+        speakPrompt = "Say /k/ ... Cat!"
+      ),
+
+      // 4. Ending Sounds
+      PhonicsLessonItem(
+        id = "end_sound_t",
+        subcategory = PhonicsSubcategory.ENDING_SOUNDS,
+        soundOrTopic = "Ending /t/",
+        targetWord = "BAT",
+        letters = listOf("B", "A", "T"),
+        sounds = listOf("/b/", "/æ/", "/t/"),
+        emoji = "🦇",
+        hearPrompt = "Listen to the end: Ba-t! It ends with /t/!",
+        seeExamples = listOf(
+          PhonicsSeeExample("Bat", "🦇", "/t/"),
+          PhonicsSeeExample("Cat", "🐱", "/t/"),
+          PhonicsSeeExample("Hat", "🎩", "/t/"),
+          PhonicsSeeExample("Nut", "🥜", "/t/")
+        ),
+        chooseQuestion = "Which sound is at the very END of 'Cat' 🐱?",
+        chooseOptions = listOf(
+          GameOption("t", "/t/ (Letter T)", "🎯"),
+          GameOption("p", "/p/ (Letter P)", "🐷"),
+          GameOption("m", "/m/ (Letter M)", "🐒")
+        ),
+        correctOptionId = "t",
+        blendSequence = "B + A + T = BAT",
+        speakPrompt = "Say the ending sound: /t/!"
+      ),
+      PhonicsLessonItem(
+        id = "end_sound_g",
+        subcategory = PhonicsSubcategory.ENDING_SOUNDS,
+        soundOrTopic = "Ending /g/",
+        targetWord = "PIG",
+        letters = listOf("P", "I", "G"),
+        sounds = listOf("/p/", "/ɪ/", "/g/"),
+        emoji = "🐷",
+        hearPrompt = "Listen to the end: Pi-g! It ends with /g/!",
+        seeExamples = listOf(
+          PhonicsSeeExample("Pig", "🐷", "/g/"),
+          PhonicsSeeExample("Dog", "🐶", "/g/"),
+          PhonicsSeeExample("Bug", "🐞", "/g/"),
+          PhonicsSeeExample("Frog", "🐸", "/g/")
+        ),
+        chooseQuestion = "Which sound is at the END of 'Pig' 🐷?",
+        chooseOptions = listOf(
+          GameOption("g", "/g/ (Letter G)", "🐷"),
+          GameOption("d", "/d/ (Letter D)", "🐶"),
+          GameOption("s", "/s/ (Letter S)", "☀️")
+        ),
+        correctOptionId = "g",
+        blendSequence = "P + I + G = PIG",
+        speakPrompt = "Say the ending sound: /g/!"
+      ),
+
+      // 5. Middle Sounds
+      PhonicsLessonItem(
+        id = "mid_sound_a",
+        subcategory = PhonicsSubcategory.MIDDLE_SOUNDS,
+        soundOrTopic = "Middle /æ/",
+        targetWord = "HAT",
+        letters = listOf("H", "A", "T"),
+        sounds = listOf("/h/", "/æ/", "/t/"),
+        emoji = "🎩",
+        hearPrompt = "Listen to the middle: H - /æ/ - T. The middle vowel is /æ/ (Letter A)!",
+        seeExamples = listOf(
+          PhonicsSeeExample("Hat", "🎩", "/æ/"),
+          PhonicsSeeExample("Cat", "🐱", "/æ/"),
+          PhonicsSeeExample("Map", "🗺️", "/æ/"),
+          PhonicsSeeExample("Bag", "🎒", "/æ/")
+        ),
+        chooseQuestion = "What is the middle vowel sound in 'HAT' 🎩?",
+        chooseOptions = listOf(
+          GameOption("a", "Short A (/æ/)", "🎩"),
+          GameOption("i", "Short I (/ɪ/)", "🧊"),
+          GameOption("o", "Short O (/ɒ/)", "🐙")
+        ),
+        correctOptionId = "a",
+        blendSequence = "H + A + T = HAT",
+        speakPrompt = "Say the middle sound: /æ/!"
+      ),
+      PhonicsLessonItem(
+        id = "mid_sound_u",
+        subcategory = PhonicsSubcategory.MIDDLE_SOUNDS,
+        soundOrTopic = "Middle /ʌ/",
+        targetWord = "CUP",
+        letters = listOf("C", "U", "P"),
+        sounds = listOf("/k/", "/ʌ/", "/p/"),
+        emoji = "☕",
+        hearPrompt = "Listen to the middle: C - /ʌ/ - P. The middle vowel is /ʌ/ (Letter U)!",
+        seeExamples = listOf(
+          PhonicsSeeExample("Cup", "☕", "/ʌ/"),
+          PhonicsSeeExample("Sun", "☀️", "/ʌ/"),
+          PhonicsSeeExample("Bug", "🐞", "/ʌ/"),
+          PhonicsSeeExample("Bus", "🚌", "/ʌ/")
+        ),
+        chooseQuestion = "What is the middle vowel sound in 'CUP' ☕?",
+        chooseOptions = listOf(
+          GameOption("u", "Short U (/ʌ/)", "☕"),
+          GameOption("e", "Short E (/e/)", "🥚"),
+          GameOption("a", "Short A (/æ/)", "🍎")
+        ),
+        correctOptionId = "u",
+        blendSequence = "C + U + P = CUP",
+        speakPrompt = "Say the middle sound: /ʌ/!"
+      ),
+
+      // 6. CVC Words
+      PhonicsLessonItem(
+        id = "cvc_cat",
+        subcategory = PhonicsSubcategory.CVC_WORDS,
+        soundOrTopic = "CVC: C-A-T",
+        targetWord = "CAT",
+        letters = listOf("C", "A", "T"),
+        sounds = listOf("/k/", "/æ/", "/t/"),
+        emoji = "🐱",
+        hearPrompt = "Consonant C + Vowel A + Consonant T makes CAT! /k/ - /æ/ - /t/.",
+        seeExamples = listOf(
+          PhonicsSeeExample("Cat", "🐱", "C-A-T"),
+          PhonicsSeeExample("Bat", "🦇", "B-A-T"),
+          PhonicsSeeExample("Hat", "🎩", "H-A-T"),
+          PhonicsSeeExample("Rat", "🐀", "R-A-T")
+        ),
+        chooseQuestion = "Which 3-letter word spells 🐱?",
+        chooseOptions = listOf(
+          GameOption("cat", "C-A-T (Cat)", "🐱"),
+          GameOption("dog", "D-O-G (Dog)", "🐶"),
+          GameOption("sun", "S-U-N (Sun)", "☀️")
+        ),
+        correctOptionId = "cat",
+        blendSequence = "C + A + T = CAT",
+        speakPrompt = "Read aloud: C-A-T ... CAT!"
+      ),
+      PhonicsLessonItem(
+        id = "cvc_dog",
+        subcategory = PhonicsSubcategory.CVC_WORDS,
+        soundOrTopic = "CVC: D-O-G",
+        targetWord = "DOG",
+        letters = listOf("D", "O", "G"),
+        sounds = listOf("/d/", "/ɒ/", "/g/"),
+        emoji = "🐶",
+        hearPrompt = "D + O + G blends into DOG! /d/ - /ɒ/ - /g/.",
+        seeExamples = listOf(
+          PhonicsSeeExample("Dog", "🐶", "D-O-G"),
+          PhonicsSeeExample("Log", "🪵", "L-O-G"),
+          PhonicsSeeExample("Frog", "🐸", "F-R-O-G"),
+          PhonicsSeeExample("Fog", "🌫️", "F-O-G")
+        ),
+        chooseQuestion = "Which word matches this cute puppy 🐶?",
+        chooseOptions = listOf(
+          GameOption("dog", "D-O-G", "🐶"),
+          GameOption("pig", "P-I-G", "🐷"),
+          GameOption("bed", "B-E-D", "🛏️")
+        ),
+        correctOptionId = "dog",
+        blendSequence = "D + O + G = DOG",
+        speakPrompt = "Read aloud: D-O-G ... DOG!"
+      ),
+      PhonicsLessonItem(
+        id = "cvc_sun",
+        subcategory = PhonicsSubcategory.CVC_WORDS,
+        soundOrTopic = "CVC: S-U-N",
+        targetWord = "SUN",
+        letters = listOf("S", "U", "N"),
+        sounds = listOf("/s/", "/ʌ/", "/n/"),
+        emoji = "☀️",
+        hearPrompt = "S + U + N blends into SUN! /s/ - /ʌ/ - /n/.",
+        seeExamples = listOf(
+          PhonicsSeeExample("Sun", "☀️", "S-U-N"),
+          PhonicsSeeExample("Run", "🏃", "R-U-N"),
+          PhonicsSeeExample("Fun", "🎉", "F-U-N"),
+          PhonicsSeeExample("Bun", "🍞", "B-U-N")
+        ),
+        chooseQuestion = "Which word matches the bright sun ☀️?",
+        chooseOptions = listOf(
+          GameOption("sun", "S-U-N", "☀️"),
+          GameOption("pan", "P-A-N", "🍳"),
+          GameOption("box", "B-O-X", "📦")
+        ),
+        correctOptionId = "sun",
+        blendSequence = "S + U + N = SUN",
+        speakPrompt = "Read aloud: S-U-N ... SUN!"
+      ),
+
+      // 7. Word Families
+      PhonicsLessonItem(
+        id = "fam_at",
+        subcategory = PhonicsSubcategory.WORD_FAMILIES,
+        soundOrTopic = "-AT Family",
+        targetWord = "CAT",
+        letters = listOf("C", "A", "T"),
+        sounds = listOf("/k/", "/æ/", "/t/"),
+        emoji = "🏡",
+        hearPrompt = "All words in the -AT family end with /æt/! Cat, Bat, Hat, Mat.",
+        seeExamples = listOf(
+          PhonicsSeeExample("Cat", "🐱", "-AT"),
+          PhonicsSeeExample("Bat", "🦇", "-AT"),
+          PhonicsSeeExample("Hat", "🎩", "-AT"),
+          PhonicsSeeExample("Mat", "🧘", "-AT")
+        ),
+        chooseQuestion = "Which word rhymes with Cat in the -AT family?",
+        chooseOptions = listOf(
+          GameOption("hat", "Hat 🎩", "🎩"),
+          GameOption("dog", "Dog 🐶", "🐶"),
+          GameOption("sun", "Sun ☀️", "☀️")
+        ),
+        correctOptionId = "hat",
+        blendSequence = "H + AT = HAT",
+        speakPrompt = "Say: Cat, Bat, Hat, Mat!",
+        wordFamilyList = listOf("cat" to "🐱", "bat" to "🦇", "hat" to "🎩", "mat" to "🧘", "rat" to "🐀")
+      ),
+      PhonicsLessonItem(
+        id = "fam_an",
+        subcategory = PhonicsSubcategory.WORD_FAMILIES,
+        soundOrTopic = "-AN Family",
+        targetWord = "FAN",
+        letters = listOf("F", "A", "N"),
+        sounds = listOf("/f/", "/æ/", "/n/"),
+        emoji = "🪭",
+        hearPrompt = "The -AN family sounds like /æn/! Fan, Pan, Can, Van, Man.",
+        seeExamples = listOf(
+          PhonicsSeeExample("Fan", "🪭", "-AN"),
+          PhonicsSeeExample("Pan", "🍳", "-AN"),
+          PhonicsSeeExample("Can", "🥫", "-AN"),
+          PhonicsSeeExample("Van", "🚐", "-AN")
+        ),
+        chooseQuestion = "Which word belongs to the -AN family?",
+        chooseOptions = listOf(
+          GameOption("pan", "Pan 🍳", "🍳"),
+          GameOption("pig", "Pig 🐷", "🐷"),
+          GameOption("bed", "Bed 🛏️", "🛏️")
+        ),
+        correctOptionId = "pan",
+        blendSequence = "P + AN = PAN",
+        speakPrompt = "Say: Fan, Pan, Can, Van!",
+        wordFamilyList = listOf("fan" to "🪭", "pan" to "🍳", "can" to "🥫", "van" to "🚐", "man" to "👨")
+      ),
+
+      // 8. Blending
+      PhonicsLessonItem(
+        id = "blend_bat",
+        subcategory = PhonicsSubcategory.BLENDING,
+        soundOrTopic = "Sound Blending",
+        targetWord = "BAT",
+        letters = listOf("B", "A", "T"),
+        sounds = listOf("/b/", "/æ/", "/t/"),
+        emoji = "🦇",
+        hearPrompt = "Let's join the sounds smoothly: /b/ ... /æ/ ... /t/ → BAT!",
+        seeExamples = listOf(
+          PhonicsSeeExample("B", "🔵", "/b/"),
+          PhonicsSeeExample("A", "🔵", "/æ/"),
+          PhonicsSeeExample("T", "🔵", "/t/"),
+          PhonicsSeeExample("BAT", "🦇", "BAT")
+        ),
+        chooseQuestion = "Join /b/ + /æ/ + /t/. What word does it make?",
+        chooseOptions = listOf(
+          GameOption("bat", "BAT 🦇", "🦇"),
+          GameOption("bag", "BAG 🎒", "🎒"),
+          GameOption("bed", "BED 🛏️", "🛏️")
+        ),
+        correctOptionId = "bat",
+        blendSequence = "B + A + T = BAT",
+        speakPrompt = "Swipe and blend: B + A + T → BAT!"
+      ),
+      PhonicsLessonItem(
+        id = "blend_pig",
+        subcategory = PhonicsSubcategory.BLENDING,
+        soundOrTopic = "Sound Blending",
+        targetWord = "PIG",
+        letters = listOf("P", "I", "G"),
+        sounds = listOf("/p/", "/ɪ/", "/g/"),
+        emoji = "🐷",
+        hearPrompt = "Let's blend: /p/ ... /ɪ/ ... /g/ → PIG!",
+        seeExamples = listOf(
+          PhonicsSeeExample("P", "🔵", "/p/"),
+          PhonicsSeeExample("I", "🔵", "/ɪ/"),
+          PhonicsSeeExample("G", "🔵", "/g/"),
+          PhonicsSeeExample("PIG", "🐷", "PIG")
+        ),
+        chooseQuestion = "Join /p/ + /ɪ/ + /g/. What word is it?",
+        chooseOptions = listOf(
+          GameOption("pig", "PIG 🐷", "🐷"),
+          GameOption("pen", "PEN 🖊️", "🖊️"),
+          GameOption("pin", "PIN 📌", "📌")
+        ),
+        correctOptionId = "pig",
+        blendSequence = "P + I + G = PIG",
+        speakPrompt = "Blend the sounds: P + I + G → PIG!"
+      ),
+
+      // 9. Segmenting
+      PhonicsLessonItem(
+        id = "seg_dog",
+        subcategory = PhonicsSubcategory.SEGMENTING,
+        soundOrTopic = "Word Segmenting",
+        targetWord = "DOG",
+        letters = listOf("D", "O", "G"),
+        sounds = listOf("/d/", "/ɒ/", "/g/"),
+        emoji = "🐶",
+        hearPrompt = "Let's break the word DOG into 3 pieces: D ... O ... G!",
+        seeExamples = listOf(
+          PhonicsSeeExample("DOG", "🐶", "Word"),
+          PhonicsSeeExample("D", "✂️", "/d/"),
+          PhonicsSeeExample("O", "✂️", "/ɒ/"),
+          PhonicsSeeExample("G", "✂️", "/g/")
+        ),
+        chooseQuestion = "Break 'DOG' 🐶 into individual sounds. Which is correct?",
+        chooseOptions = listOf(
+          GameOption("dog_seg", "/d/ + /ɒ/ + /g/", "🐶"),
+          GameOption("cat_seg", "/k/ + /æ/ + /t/", "🐱"),
+          GameOption("sun_seg", "/s/ + /ʌ/ + /n/", "☀️")
+        ),
+        correctOptionId = "dog_seg",
+        blendSequence = "DOG = D + O + G",
+        speakPrompt = "Tap each sound: /d/ ... /ɒ/ ... /g/!"
+      ),
+
+      // 10. Digraphs
+      PhonicsLessonItem(
+        id = "digraph_sh",
+        subcategory = PhonicsSubcategory.DIGRAPHS,
+        soundOrTopic = "Digraph SH (/ʃ/)",
+        targetWord = "SHIP",
+        letters = listOf("S", "H", "I", "P"),
+        sounds = listOf("/ʃ/", "/ɪ/", "/p/"),
+        emoji = "🚢",
+        hearPrompt = "S and H come together to make the quiet sound: /ʃ/! Shhh like a Ship.",
+        seeExamples = listOf(
+          PhonicsSeeExample("Ship", "🚢", "SH"),
+          PhonicsSeeExample("Shell", "🐚", "SH"),
+          PhonicsSeeExample("Sheep", "🐑", "SH"),
+          PhonicsSeeExample("Shoe", "👟", "SH")
+        ),
+        chooseQuestion = "Which picture starts with the SH /ʃ/ sound?",
+        chooseOptions = listOf(
+          GameOption("ship", "Ship 🚢", "🚢"),
+          GameOption("chair", "Chair 🪑", "🪑"),
+          GameOption("thumb", "Thumb 👍", "👍")
+        ),
+        correctOptionId = "ship",
+        blendSequence = "SH + I + P = SHIP",
+        speakPrompt = "Say: Shhh ... SHIP!"
+      ),
+      PhonicsLessonItem(
+        id = "digraph_ch",
+        subcategory = PhonicsSubcategory.DIGRAPHS,
+        soundOrTopic = "Digraph CH (/tʃ/)",
+        targetWord = "CHAIR",
+        letters = listOf("C", "H", "A", "I", "R"),
+        sounds = listOf("/tʃ/", "/eə/"),
+        emoji = "🪑",
+        hearPrompt = "C and H make the choo-choo sound: /tʃ/! Chair and Cheese.",
+        seeExamples = listOf(
+          PhonicsSeeExample("Chair", "🪑", "CH"),
+          PhonicsSeeExample("Cheese", "🧀", "CH"),
+          PhonicsSeeExample("Chick", "🐥", "CH"),
+          PhonicsSeeExample("Chips", "🍟", "CH")
+        ),
+        chooseQuestion = "Which picture starts with the CH /tʃ/ sound?",
+        chooseOptions = listOf(
+          GameOption("chair", "Chair 🪑", "🪑"),
+          GameOption("ship", "Ship 🚢", "🚢"),
+          GameOption("whale", "Whale 🐋", "🐋")
+        ),
+        correctOptionId = "chair",
+        blendSequence = "CH + A + I + R = CHAIR",
+        speakPrompt = "Say: Ch-ch-chair!"
+      ),
+
+      // 11. Consonant Blends
+      PhonicsLessonItem(
+        id = "blend_st",
+        subcategory = PhonicsSubcategory.CONSONANT_BLENDS,
+        soundOrTopic = "Blend ST",
+        targetWord = "STAR",
+        letters = listOf("S", "T", "A", "R"),
+        sounds = listOf("/st/", "/ɑː/"),
+        emoji = "⭐",
+        hearPrompt = "S and T blend fast together: /st/! Star, Stop, Step.",
+        seeExamples = listOf(
+          PhonicsSeeExample("Star", "⭐", "ST"),
+          PhonicsSeeExample("Stop", "🛑", "ST"),
+          PhonicsSeeExample("Step", "🪜", "ST"),
+          PhonicsSeeExample("Stick", "🥢", "ST")
+        ),
+        chooseQuestion = "Which picture starts with the ST blend?",
+        chooseOptions = listOf(
+          GameOption("star", "Star ⭐", "⭐"),
+          GameOption("frog", "Frog 🐸", "🐸"),
+          GameOption("cloud", "Cloud ☁️", "☁️")
+        ),
+        correctOptionId = "star",
+        blendSequence = "ST + A + R = STAR",
+        speakPrompt = "Say: St-st-star!"
+      ),
+      PhonicsLessonItem(
+        id = "blend_bl",
+        subcategory = PhonicsSubcategory.CONSONANT_BLENDS,
+        soundOrTopic = "Blend BL",
+        targetWord = "BLUE",
+        letters = listOf("B", "L", "U", "E"),
+        sounds = listOf("/bl/", "/uː/"),
+        emoji = "🔵",
+        hearPrompt = "B and L blend together: /bl/! Blue, Block, Blow.",
+        seeExamples = listOf(
+          PhonicsSeeExample("Blue", "🔵", "BL"),
+          PhonicsSeeExample("Block", "🧱", "BL"),
+          PhonicsSeeExample("Blow", "💨", "BL"),
+          PhonicsSeeExample("Blanket", "🛏️", "BL")
+        ),
+        chooseQuestion = "Which picture starts with the BL blend?",
+        chooseOptions = listOf(
+          GameOption("blue", "Blue 🔵", "🔵"),
+          GameOption("red", "Red 🔴", "🔴"),
+          GameOption("green", "Green 🟢", "🟢")
+        ),
+        correctOptionId = "blue",
+        blendSequence = "BL + U + E = BLUE",
+        speakPrompt = "Say: Bl-bl-blue!"
+      ),
+
+      // 12. Long Vowels
+      PhonicsLessonItem(
+        id = "long_vowel_a",
+        subcategory = PhonicsSubcategory.LONG_VOWELS,
+        soundOrTopic = "Long A (/eɪ/)",
+        targetWord = "CAKE",
+        letters = listOf("C", "A", "K", "E"),
+        sounds = listOf("/k/", "/eɪ/", "/k/"),
+        emoji = "🎂",
+        hearPrompt = "Long A says its own name: /eɪ/! Cake, Rain, Train.",
+        seeExamples = listOf(
+          PhonicsSeeExample("Cake", "🎂", "Long A"),
+          PhonicsSeeExample("Rain", "🌧️", "Long A"),
+          PhonicsSeeExample("Train", "🚂", "Long A"),
+          PhonicsSeeExample("Lake", "🏞️", "Long A")
+        ),
+        chooseQuestion = "Which delicious treat has the LONG A sound?",
+        chooseOptions = listOf(
+          GameOption("cake", "Cake 🎂", "🎂"),
+          GameOption("cat", "Cat 🐱", "🐱"),
+          GameOption("cup", "Cup ☕", "☕")
+        ),
+        correctOptionId = "cake",
+        blendSequence = "C + A + K + E = CAKE",
+        speakPrompt = "Say: Long A ... Cake!"
+      ),
+      PhonicsLessonItem(
+        id = "long_vowel_i",
+        subcategory = PhonicsSubcategory.LONG_VOWELS,
+        soundOrTopic = "Long I (/aɪ/)",
+        targetWord = "BIKE",
+        letters = listOf("B", "I", "K", "E"),
+        sounds = listOf("/b/", "/aɪ/", "/k/"),
+        emoji = "🚲",
+        hearPrompt = "Long I says its own name: /aɪ/! Bike, Kite, Pie.",
+        seeExamples = listOf(
+          PhonicsSeeExample("Bike", "🚲", "Long I"),
+          PhonicsSeeExample("Kite", "🪁", "Long I"),
+          PhonicsSeeExample("Pie", "🥧", "Long I"),
+          PhonicsSeeExample("Ice", "🧊", "Long I")
+        ),
+        chooseQuestion = "Which ride has the LONG I sound?",
+        chooseOptions = listOf(
+          GameOption("bike", "Bike 🚲", "🚲"),
+          GameOption("bus", "Bus 🚌", "🚌"),
+          GameOption("boat", "Boat ⛵", "⛵")
+        ),
+        correctOptionId = "bike",
+        blendSequence = "B + I + K + E = BIKE",
+        speakPrompt = "Say: Long I ... Bike!"
+      ),
+
+      // 13. Silent E (Magic E)
+      PhonicsLessonItem(
+        id = "magic_e_cap",
+        subcategory = PhonicsSubcategory.SILENT_E,
+        soundOrTopic = "Magic E (Cap → Cape)",
+        targetWord = "CAPE",
+        letters = listOf("C", "A", "P", "E"),
+        sounds = listOf("/k/", "/eɪ/", "/p/"),
+        emoji = "🦸‍♂️",
+        hearPrompt = "Watch Magic E work! Cap 🧢 + Magic E becomes superhero CAPE 🦸‍♂️!",
+        seeExamples = listOf(
+          PhonicsSeeExample("Cap", "🧢", "Short A"),
+          PhonicsSeeExample("Cape", "🦸‍♂️", "Magic E"),
+          PhonicsSeeExample("Kit", "🧰", "Short I"),
+          PhonicsSeeExample("Kite", "🪁", "Magic E")
+        ),
+        chooseQuestion = "When Magic-E joins 'CAP' 🧢, what does it turn into?",
+        chooseOptions = listOf(
+          GameOption("cape", "CAPE 🦸‍♂️ (Hero Cape!)", "🦸‍♂️"),
+          GameOption("cup", "CUP ☕", "☕"),
+          GameOption("cat", "CAT 🐱", "🐱")
+        ),
+        correctOptionId = "cape",
+        blendSequence = "CAP + E = CAPE",
+        speakPrompt = "Wave your magic wand: Cap turns into CAPE!",
+        magicEBefore = "CAP" to "🧢",
+        magicEAfter = "CAPE" to "🦸‍♂️"
+      ),
+      PhonicsLessonItem(
+        id = "magic_e_kit",
+        subcategory = PhonicsSubcategory.SILENT_E,
+        soundOrTopic = "Magic E (Kit → Kite)",
+        targetWord = "KITE",
+        letters = listOf("K", "I", "T", "E"),
+        sounds = listOf("/k/", "/aɪ/", "/t/"),
+        emoji = "🪁",
+        hearPrompt = "Magic E transforms KIT 🧰 into flying KITE 🪁 in the sky!",
+        seeExamples = listOf(
+          PhonicsSeeExample("Kit", "🧰", "Short I"),
+          PhonicsSeeExample("Kite", "🪁", "Magic E"),
+          PhonicsSeeExample("Hop", "🦘", "Short O"),
+          PhonicsSeeExample("Hope", "🙏", "Magic E")
+        ),
+        chooseQuestion = "When Magic-E joins 'KIT' 🧰, what flying toy is made?",
+        chooseOptions = listOf(
+          GameOption("kite", "KITE 🪁 (Flying Kite!)", "🪁"),
+          GameOption("king", "KING 👑", "👑"),
+          GameOption("cat", "CAT 🐱", "🐱")
+        ),
+        correctOptionId = "kite",
+        blendSequence = "KIT + E = KITE",
+        speakPrompt = "Say: Kit + Magic E makes KITE!",
+        magicEBefore = "KIT" to "🧰",
+        magicEAfter = "KITE" to "🪁"
+      ),
+
+      // 14. Sight Words
+      PhonicsLessonItem(
+        id = "sight_the",
+        subcategory = PhonicsSubcategory.SIGHT_WORDS,
+        soundOrTopic = "Sight Word: THE & SEE",
+        targetWord = "THE",
+        letters = listOf("T", "H", "E"),
+        sounds = listOf("/ð/", "/ə/"),
+        emoji = "👁️",
+        hearPrompt = "High-frequency word: THE! 'I see THE sun.' Remember it by sight!",
+        seeExamples = listOf(
+          PhonicsSeeExample("the", "⭐", "Sight Word"),
+          PhonicsSeeExample("see", "👀", "Sight Word"),
+          PhonicsSeeExample("is", "✨", "Sight Word"),
+          PhonicsSeeExample("and", "➕", "Sight Word")
+        ),
+        chooseQuestion = "Which is the sight word 'THE'?",
+        chooseOptions = listOf(
+          GameOption("the", "THE", "⭐"),
+          GameOption("and", "AND", "➕"),
+          GameOption("you", "YOU", "👉")
+        ),
+        correctOptionId = "the",
+        blendSequence = "T + H + E = THE",
+        speakPrompt = "Say: THE ... I see the sun!"
+      ),
+      PhonicsLessonItem(
+        id = "sight_play",
+        subcategory = PhonicsSubcategory.SIGHT_WORDS,
+        soundOrTopic = "Sight Word: PLAY & LIKE",
+        targetWord = "PLAY",
+        letters = listOf("P", "L", "A", "Y"),
+        sounds = listOf("/p/", "/l/", "/eɪ/"),
+        emoji = "🎮",
+        hearPrompt = "Sight word: PLAY! 'We can play together!'",
+        seeExamples = listOf(
+          PhonicsSeeExample("play", "🎮", "Sight Word"),
+          PhonicsSeeExample("like", "❤️", "Sight Word"),
+          PhonicsSeeExample("can", "👍", "Sight Word"),
+          PhonicsSeeExample("we", "👫", "Sight Word")
+        ),
+        chooseQuestion = "Which word says 'PLAY'?",
+        chooseOptions = listOf(
+          GameOption("play", "PLAY 🎮", "🎮"),
+          GameOption("pig", "PIG 🐷", "🐷"),
+          GameOption("pan", "PAN 🍳", "🍳")
+        ),
+        correctOptionId = "play",
+        blendSequence = "P + L + A + Y = PLAY",
+        speakPrompt = "Say: We love to PLAY!"
+      ),
+
+      // 15. Early Reading
+      PhonicsLessonItem(
+        id = "read_cat_mat",
+        subcategory = PhonicsSubcategory.EARLY_READING,
+        soundOrTopic = "Decodable Story 1",
+        targetWord = "CAT ON MAT",
+        letters = listOf("T", "H", "E", " ", "C", "A", "T"),
+        sounds = listOf("/ðə/", "/kæt/"),
+        emoji = "🐱",
+        hearPrompt = "Let's read our first sentence: The cat sat on the mat!",
+        seeExamples = listOf(
+          PhonicsSeeExample("The", "📖", "Word 1"),
+          PhonicsSeeExample("cat", "🐱", "Word 2"),
+          PhonicsSeeExample("sat", "🪑", "Word 3"),
+          PhonicsSeeExample("on the mat", "🧘", "Ending")
+        ),
+        chooseQuestion = "Where did the cat sit?",
+        chooseOptions = listOf(
+          GameOption("mat", "On the mat 🧘", "🧘"),
+          GameOption("tree", "In the tree 🌳", "🌳"),
+          GameOption("car", "In the car 🚗", "🚗")
+        ),
+        correctOptionId = "mat",
+        blendSequence = "The + cat + sat + on + the + mat.",
+        speakPrompt = "Read with me: The cat sat on the mat!",
+        decodableSentence = "The cat sat on the mat."
+      ),
+      PhonicsLessonItem(
+        id = "read_big_dog",
+        subcategory = PhonicsSubcategory.EARLY_READING,
+        soundOrTopic = "Decodable Story 2",
+        targetWord = "I SEE DOG",
+        letters = listOf("I", " ", "S", "E", "E"),
+        sounds = listOf("/aɪ/", "/siː/"),
+        emoji = "🐶",
+        hearPrompt = "Let's read together: I see a big red dog!",
+        seeExamples = listOf(
+          PhonicsSeeExample("I", "🙋", "Word 1"),
+          PhonicsSeeExample("see", "👀", "Word 2"),
+          PhonicsSeeExample("a big", "🐘", "Word 3"),
+          PhonicsSeeExample("dog", "🐶", "Word 4")
+        ),
+        chooseQuestion = "What animal did you see?",
+        chooseOptions = listOf(
+          GameOption("dog", "A big dog 🐶", "🐶"),
+          GameOption("duck", "A little duck 🦆", "🦆"),
+          GameOption("fish", "A tiny fish 🐟", "🐟")
+        ),
+        correctOptionId = "dog",
+        blendSequence = "I + see + a + big + dog.",
+        speakPrompt = "Read with me: I see a big dog!",
+        decodableSentence = "I see a big red dog."
+      )
+    )
+  }
+
+  fun getPhonicsMinimalPairs(): List<PhonicsMinimalPair> {
+    return listOf(
+      PhonicsMinimalPair(
+        id = "mp_bat_cat",
+        word1 = "BAT",
+        emoji1 = "🦇",
+        word2 = "CAT",
+        emoji2 = "🐱",
+        contrastDescription = "Initial /b/ vs /k/",
+        spokenWord = "BAT",
+        promptVoice = "Listen carefully: Bat. Which word did you hear?",
+        category = "Consonants",
+        funFact = "Bat starts with /b/, while Cat starts with /k/!"
+      ),
+      PhonicsMinimalPair(
+        id = "mp_pin_pan",
+        word1 = "PIN",
+        emoji1 = "📌",
+        word2 = "PAN",
+        emoji2 = "🍳",
+        contrastDescription = "Vowel /ɪ/ vs /æ/",
+        spokenWord = "PIN",
+        promptVoice = "Listen carefully: Pin. Which word did you hear?",
+        category = "Vowels",
+        funFact = "Pin has the short 'i' sound /ɪ/, Pan has short 'a' /æ/!"
+      ),
+      PhonicsMinimalPair(
+        id = "mp_ship_chip",
+        word1 = "SHIP",
+        emoji1 = "🚢",
+        word2 = "CHIP",
+        emoji2 = "🍟",
+        contrastDescription = "Digraph /ʃ/ vs /tʃ/",
+        spokenWord = "SHIP",
+        promptVoice = "Listen carefully: Ship. Which word did you hear?",
+        category = "Digraphs",
+        funFact = "Ship starts with shhh /ʃ/, Chip starts with ch-ch /tʃ/!"
+      ),
+      PhonicsMinimalPair(
+        id = "mp_pen_pan",
+        word1 = "PEN",
+        emoji1 = "🖊️",
+        word2 = "PAN",
+        emoji2 = "🍳",
+        contrastDescription = "Vowel /e/ vs /æ/",
+        spokenWord = "PAN",
+        promptVoice = "Listen carefully: Pan. Which word did you hear?",
+        category = "Vowels",
+        funFact = "Pen has short /e/, Pan has short /æ/!"
+      ),
+      PhonicsMinimalPair(
+        id = "mp_hat_hot",
+        word1 = "HAT",
+        emoji1 = "🎩",
+        word2 = "HOT",
+        emoji2 = "🔥",
+        contrastDescription = "Vowel /æ/ vs /ɒ/",
+        spokenWord = "HAT",
+        promptVoice = "Listen carefully: Hat. Which word did you hear?",
+        category = "Vowels",
+        funFact = "Hat has short /æ/, Hot has short /ɒ/!"
+      ),
+      PhonicsMinimalPair(
+        id = "mp_dog_log",
+        word1 = "DOG",
+        emoji1 = "🐶",
+        word2 = "LOG",
+        emoji2 = "🪵",
+        contrastDescription = "Initial /d/ vs /l/",
+        spokenWord = "DOG",
+        promptVoice = "Listen carefully: Dog. Which word did you hear?",
+        category = "Consonants",
+        funFact = "Dog starts with bouncy /d/, Log starts with smooth /l/!"
+      ),
+      PhonicsMinimalPair(
+        id = "mp_bear_pear",
+        word1 = "BEAR",
+        emoji1 = "🐻",
+        word2 = "PEAR",
+        emoji2 = "🍐",
+        contrastDescription = "Voiced /b/ vs Unvoiced /p/",
+        spokenWord = "PEAR",
+        promptVoice = "Listen carefully: Pear. Which word did you hear?",
+        category = "Consonants",
+        funFact = "Bear uses voice box /b/, Pear is a gentle puff /p/!"
+      ),
+      PhonicsMinimalPair(
+        id = "mp_fan_van",
+        word1 = "FAN",
+        emoji1 = "🪭",
+        word2 = "VAN",
+        emoji2 = "🚐",
+        contrastDescription = "Unvoiced /f/ vs Voiced /v/",
+        spokenWord = "VAN",
+        promptVoice = "Listen carefully: Van. Which word did you hear?",
+        category = "Consonants",
+        funFact = "Fan makes a soft whisper /f/, Van buzzes with voice /v/!"
+      ),
+      PhonicsMinimalPair(
+        id = "mp_bed_red",
+        word1 = "BED",
+        emoji1 = "🛏️",
+        word2 = "RED",
+        emoji2 = "🔴",
+        contrastDescription = "Initial /b/ vs /r/",
+        spokenWord = "BED",
+        promptVoice = "Listen carefully: Bed. Which word did you hear?",
+        category = "Rhyming",
+        funFact = "Both rhyme with -ed, but start with /b/ vs /r/!"
+      ),
+      PhonicsMinimalPair(
+        id = "mp_fox_box",
+        word1 = "FOX",
+        emoji1 = "🦊",
+        word2 = "BOX",
+        emoji2 = "📦",
+        contrastDescription = "Initial /f/ vs /b/",
+        spokenWord = "BOX",
+        promptVoice = "Listen carefully: Box. Which word did you hear?",
+        category = "Rhyming",
+        funFact = "Both end in -ox, but start with /f/ vs /b/!"
+      ),
+      PhonicsMinimalPair(
+        id = "mp_snake_cake",
+        word1 = "SNAKE",
+        emoji1 = "🐍",
+        word2 = "CAKE",
+        emoji2 = "🎂",
+        contrastDescription = "Blend /sn/ vs Initial /k/",
+        spokenWord = "SNAKE",
+        promptVoice = "Listen carefully: Snake. Which word did you hear?",
+        category = "Blends",
+        funFact = "Snake has a hiss blend /sn/, Cake has a crisp /k/!"
+      ),
+      PhonicsMinimalPair(
+        id = "mp_tree_three",
+        word1 = "TREE",
+        emoji1 = "🌳",
+        word2 = "THREE",
+        emoji2 = "3️⃣",
+        contrastDescription = "Blend /tr/ vs Digraph /θr/",
+        spokenWord = "THREE",
+        promptVoice = "Listen carefully: Three. Which word did you hear?",
+        category = "Digraphs",
+        funFact = "Tree starts with /tr/, Three starts with soft th- /θ/!"
+      )
+    )
+  }
+
+  fun getPhonicsSoundSortItems(): List<PhonicsSoundSortItem> {
+    return listOf(
+      PhonicsSoundSortItem(
+        id = "sort_m",
+        targetSound = "/m/",
+        targetLetter = "M",
+        prompt = "Which words start with /m/?",
+        options = listOf(
+          SoundSortOption("m_mouse", "Mouse", "🐭", true),
+          SoundSortOption("m_moon", "Moon", "🌙", true),
+          SoundSortOption("m_apple", "Apple", "🍎", false),
+          SoundSortOption("m_cat", "Cat", "🐱", false)
+        )
+      ),
+      PhonicsSoundSortItem(
+        id = "sort_s",
+        targetSound = "/s/",
+        targetLetter = "S",
+        prompt = "Which words start with /s/?",
+        options = listOf(
+          SoundSortOption("s_sun", "Sun", "☀️", true),
+          SoundSortOption("s_star", "Star", "⭐", true),
+          SoundSortOption("s_dog", "Dog", "🐶", false),
+          SoundSortOption("s_banana", "Banana", "🍌", false)
+        )
+      ),
+      PhonicsSoundSortItem(
+        id = "sort_b",
+        targetSound = "/b/",
+        targetLetter = "B",
+        prompt = "Which words start with /b/?",
+        options = listOf(
+          SoundSortOption("b_ball", "Ball", "⚽", true),
+          SoundSortOption("b_bee", "Bee", "🐝", true),
+          SoundSortOption("b_car", "Car", "🚗", false),
+          SoundSortOption("b_frog", "Frog", "🐸", false)
+        )
+      )
+    )
+  }
+
+  fun getSoundSortingRounds(): List<SoundSortRound> {
+    return listOf(
+      // Round 1: /m/ vs /s/
+      SoundSortRound(
+        id = "round_m_s",
+        title = "Sound /m/ vs /s/",
+        description = "Drag objects into the /m/ Monkey basket or /s/ Sun basket!",
+        bucketA = SoundBucket(
+          sound = "/m/",
+          letter = "M",
+          name = "Monkey M",
+          emoji = "🐒",
+          colorHex = 0xFFFF8F00,
+          bgHex = 0xFFFFF3E0
+        ),
+        bucketB = SoundBucket(
+          sound = "/s/",
+          letter = "S",
+          name = "Sun S",
+          emoji = "☀️",
+          colorHex = 0xFF00897B,
+          bgHex = 0xFFE0F2F1
+        ),
+        items = listOf(
+          SoundSortGameItem("m1", "Monkey", "🐒", "M", "/m/", "M-M-Monkey! Starts with /m/!"),
+          SoundSortGameItem("s1", "Sun", "☀️", "S", "/s/", "S-S-Sun! Starts with /s/!"),
+          SoundSortGameItem("m2", "Moon", "🌙", "M", "/m/", "M-M-Moon! Starts with /m/!"),
+          SoundSortGameItem("s2", "Star", "⭐", "S", "/s/", "S-S-Star! Starts with /s/!"),
+          SoundSortGameItem("m3", "Milk", "🥛", "M", "/m/", "M-M-Milk! Starts with /m/!"),
+          SoundSortGameItem("s3", "Snake", "🐍", "S", "/s/", "S-S-Snake! Starts with /s/!"),
+          SoundSortGameItem("m4", "Mouse", "🐭", "M", "/m/", "M-M-Mouse! Starts with /m/!"),
+          SoundSortGameItem("s4", "Spoon", "🥄", "S", "/s/", "S-S-Spoon! Starts with /s/!")
+        )
+      ),
+
+      // Round 2: /b/ vs /p/
+      SoundSortRound(
+        id = "round_b_p",
+        title = "Sound /b/ vs /p/",
+        description = "Drag objects into the /b/ Ball basket or /p/ Pig basket!",
+        bucketA = SoundBucket(
+          sound = "/b/",
+          letter = "B",
+          name = "Ball B",
+          emoji = "⚽",
+          colorHex = 0xFF1E88E5,
+          bgHex = 0xFFE3F2FD
+        ),
+        bucketB = SoundBucket(
+          sound = "/p/",
+          letter = "P",
+          name = "Pig P",
+          emoji = "🐷",
+          colorHex = 0xFFEC407A,
+          bgHex = 0xFFFCE4EC
+        ),
+        items = listOf(
+          SoundSortGameItem("b1", "Ball", "⚽", "B", "/b/", "B-B-Ball! Starts with /b/!"),
+          SoundSortGameItem("p1", "Pig", "🐷", "P", "/p/", "P-P-Pig! Starts with /p/!"),
+          SoundSortGameItem("b2", "Bear", "🐻", "B", "/b/", "B-B-Bear! Starts with /b/!"),
+          SoundSortGameItem("p2", "Pizza", "🍕", "P", "/p/", "P-P-Pizza! Starts with /p/!"),
+          SoundSortGameItem("b3", "Bee", "🐝", "B", "/b/", "B-B-Bee! Starts with /b/!"),
+          SoundSortGameItem("p3", "Panda", "🐼", "P", "/p/", "P-P-Panda! Starts with /p/!"),
+          SoundSortGameItem("b4", "Book", "📖", "B", "/b/", "B-B-Book! Starts with /b/!"),
+          SoundSortGameItem("p4", "Pencil", "✏️", "P", "/p/", "P-P-Pencil! Starts with /p/!")
+        )
+      ),
+
+      // Round 3: /d/ vs /t/
+      SoundSortRound(
+        id = "round_d_t",
+        title = "Sound /d/ vs /t/",
+        description = "Sort puppy /d/ objects vs tiger /t/ objects!",
+        bucketA = SoundBucket(
+          sound = "/d/",
+          letter = "D",
+          name = "Dog D",
+          emoji = "🐶",
+          colorHex = 0xFF43A047,
+          bgHex = 0xFFE8F5E9
+        ),
+        bucketB = SoundBucket(
+          sound = "/t/",
+          letter = "T",
+          name = "Tiger T",
+          emoji = "🐯",
+          colorHex = 0xFFFB8C00,
+          bgHex = 0xFFFFF3E0
+        ),
+        items = listOf(
+          SoundSortGameItem("d1", "Dog", "🐶", "D", "/d/", "D-D-Dog! Starts with /d/!"),
+          SoundSortGameItem("t1", "Tiger", "🐯", "T", "/t/", "T-T-Tiger! Starts with /t/!"),
+          SoundSortGameItem("d2", "Duck", "🦆", "D", "/d/", "D-D-Duck! Starts with /d/!"),
+          SoundSortGameItem("t2", "Tree", "🌳", "T", "/t/", "T-T-Tree! Starts with /t/!"),
+          SoundSortGameItem("d3", "Drum", "🥁", "D", "/d/", "D-D-Drum! Starts with /d/!"),
+          SoundSortGameItem("t3", "Train", "🚂", "T", "/t/", "T-T-Train! Starts with /t/!"),
+          SoundSortGameItem("d4", "Donut", "🍩", "D", "/d/", "D-D-Donut! Starts with /d/!"),
+          SoundSortGameItem("t4", "Turtle", "🐢", "T", "/t/", "T-T-Turtle! Starts with /t/!")
+        )
+      ),
+
+      // Round 4: /c/ vs /f/
+      SoundSortRound(
+        id = "round_c_f",
+        title = "Sound /c/ vs /f/",
+        description = "Sort kitty /k/ objects vs fish /f/ objects!",
+        bucketA = SoundBucket(
+          sound = "/k/",
+          letter = "C",
+          name = "Cat C",
+          emoji = "🐱",
+          colorHex = 0xFF8E24AA,
+          bgHex = 0xFFF3E5F5
+        ),
+        bucketB = SoundBucket(
+          sound = "/f/",
+          letter = "F",
+          name = "Fish F",
+          emoji = "🐟",
+          colorHex = 0xFF00ACC1,
+          bgHex = 0xFFE0F7FA
+        ),
+        items = listOf(
+          SoundSortGameItem("c1", "Cat", "🐱", "C", "/k/", "C-C-Cat! Starts with /k/!"),
+          SoundSortGameItem("f1", "Fish", "🐟", "F", "/f/", "F-F-Fish! Starts with /f/!"),
+          SoundSortGameItem("c2", "Car", "🚗", "C", "/k/", "C-C-Car! Starts with /k/!"),
+          SoundSortGameItem("f2", "Frog", "🐸", "F", "/f/", "F-F-Frog! Starts with /f/!"),
+          SoundSortGameItem("c3", "Cake", "🎂", "C", "/k/", "C-C-Cake! Starts with /k/!"),
+          SoundSortGameItem("f3", "Flower", "🌸", "F", "/f/", "F-F-Flower! Starts with /f/!"),
+          SoundSortGameItem("c4", "Cow", "🐮", "C", "/k/", "C-C-Cow! Starts with /k/!"),
+          SoundSortGameItem("f4", "Fox", "🦊", "F", "/f/", "F-F-Fox! Starts with /f/!")
+        )
+      ),
+
+      // Round 5: /h/ vs /r/
+      SoundSortRound(
+        id = "round_h_r",
+        title = "Sound /h/ vs /r/",
+        description = "Sort cozy /h/ objects vs speedy /r/ objects!",
+        bucketA = SoundBucket(
+          sound = "/h/",
+          letter = "H",
+          name = "Hat H",
+          emoji = "🎩",
+          colorHex = 0xFF6D4C41,
+          bgHex = 0xFFEFEBE9
+        ),
+        bucketB = SoundBucket(
+          sound = "/r/",
+          letter = "R",
+          name = "Rabbit R",
+          emoji = "🐰",
+          colorHex = 0xFFE53935,
+          bgHex = 0xFFFFEBEE
+        ),
+        items = listOf(
+          SoundSortGameItem("h1", "Hat", "🎩", "H", "/h/", "H-H-Hat! Starts with /h/!"),
+          SoundSortGameItem("r1", "Rabbit", "🐰", "R", "/r/", "R-R-Rabbit! Starts with /r/!"),
+          SoundSortGameItem("h2", "House", "🏠", "H", "/h/", "H-H-House! Starts with /h/!"),
+          SoundSortGameItem("r2", "Rocket", "🚀", "R", "/r/", "R-R-Rocket! Starts with /r/!"),
+          SoundSortGameItem("h3", "Heart", "💖", "H", "/h/", "H-H-Heart! Starts with /h/!"),
+          SoundSortGameItem("r3", "Rainbow", "🌈", "R", "/r/", "R-R-Rainbow! Starts with /r/!"),
+          SoundSortGameItem("h4", "Horse", "🐴", "H", "/h/", "H-H-Horse! Starts with /h/!"),
+          SoundSortGameItem("r4", "Robot", "🤖", "R", "/r/", "R-R-Robot! Starts with /r/!")
+        )
+      )
     )
   }
 

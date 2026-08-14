@@ -44,6 +44,8 @@ enum class Screen {
   SPELLING_LESSON,
   VOCABULARY_CARDS,
   GAME,
+  SOUND_SORTING,
+  LISTENING_CHALLENGE,
   MUSIC_PLAYGROUND,
   PUZZLE_PLAYGROUND,
   PARENT_DASHBOARD,
@@ -130,7 +132,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
   init {
     viewModelScope.launch {
-      delay(1800)
+      delay(300)
       val progress = userProgress.value
       if (progress.firstLaunchCompleted) {
         _currentScreen.value = Screen.HOME

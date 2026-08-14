@@ -41,6 +41,100 @@ class AudioController(private val context: Context) : TextToSpeech.OnInitListene
     tts?.speak(text, TextToSpeech.QUEUE_FLUSH, null, "UtteranceId_${System.currentTimeMillis()}")
   }
 
+  fun playSoundResource(soundResId: Int, fallbackText: String? = null) {
+    if (!soundEnabled && !voiceEnabled) return
+    try {
+      if (soundResId != 0) {
+        val mediaPlayer = android.media.MediaPlayer.create(context, soundResId)
+        if (mediaPlayer != null) {
+          mediaPlayer.setOnCompletionListener { mp ->
+            mp.release()
+          }
+          mediaPlayer.start()
+          return
+        }
+      }
+    } catch (e: Exception) {
+      e.printStackTrace()
+    }
+    if (!fallbackText.isNullOrEmpty()) {
+      speak(fallbackText)
+    }
+  }
+
+  fun playSoundResourceOrSpeak(soundResId: Int?, textToSpeak: String) {
+    if (soundResId != null && soundResId != 0) {
+      playSoundResource(soundResId, fallbackText = textToSpeak)
+    } else {
+      speak(textToSpeak)
+    }
+  }
+
+  fun playLetterSound(letter: String, phoneme: String? = null, exampleWord: String? = null) {
+    if (!voiceEnabled) return
+    playTapSound()
+    val cleanLetter = letter.trim().uppercase(Locale.ROOT)
+    val phonemeText = phoneme?.trim()?.replace("/", "") ?: getPhoneticSoundForLetter(cleanLetter)
+    val text = if (!exampleWord.isNullOrEmpty()) {
+      "Letter $cleanLetter. Sound: $phonemeText. $exampleWord!"
+    } else {
+      "$cleanLetter. $phonemeText!"
+    }
+    speak(text)
+  }
+
+  fun playCvcSound(
+    word: String,
+    letters: List<String> = emptyList(),
+    sounds: List<String> = emptyList(),
+    slowBlend: Boolean = false
+  ) {
+    if (!voiceEnabled) return
+    playTapSound()
+    val cleanWord = word.trim().uppercase(Locale.ROOT)
+    if (slowBlend && letters.isNotEmpty()) {
+      val letterSequence = letters.joinToString(separator = " ... ")
+      speak("$letterSequence ... makes $cleanWord!")
+    } else if (sounds.isNotEmpty()) {
+      val soundSeq = sounds.map { it.replace("/", "") }.joinToString(separator = " ... ")
+      speak("$soundSeq ... $cleanWord!")
+    } else {
+      speak("$cleanWord!")
+    }
+  }
+
+  private fun getPhoneticSoundForLetter(letter: String): String {
+    return when (letter.uppercase(Locale.ROOT)) {
+      "A" -> "ah"
+      "B" -> "buh"
+      "C" -> "kuh"
+      "D" -> "duh"
+      "E" -> "eh"
+      "F" -> "fff"
+      "G" -> "guh"
+      "H" -> "huh"
+      "I" -> "ih"
+      "J" -> "juh"
+      "K" -> "kuh"
+      "L" -> "lll"
+      "M" -> "mmm"
+      "N" -> "nnn"
+      "O" -> "aw"
+      "P" -> "puh"
+      "Q" -> "kwah"
+      "R" -> "rrr"
+      "S" -> "sss"
+      "T" -> "tuh"
+      "U" -> "uh"
+      "V" -> "vvv"
+      "W" -> "wuh"
+      "X" -> "ks"
+      "Y" -> "yuh"
+      "Z" -> "zzz"
+      else -> letter
+    }
+  }
+
   fun speakCard(word: String, sentence: String? = null, animalId: String? = null) {
     if (!voiceEnabled) return
     val speakText = if (!sentence.isNull_or_empty_or_blank(sentence)) "$word! $sentence" else word
@@ -133,6 +227,10 @@ class AudioController(private val context: Context) : TextToSpeech.OnInitListene
     Thread {
       playTone(550.0, 850.0, 40, "sine")
     }.start()
+  }
+
+  fun playTapSound() {
+    playClickSound()
   }
 
   fun playNavigationSound() {

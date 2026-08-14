@@ -49,6 +49,7 @@ import androidx.compose.ui.unit.sp
 import com.example.audio.AudioController
 import com.example.data.content.GameContentRepository
 import com.example.ui.components.BoboMascot
+import com.example.ui.components.LessonNavigationControls
 import com.example.ui.components.MascotState
 import com.example.ui.components.StarsBar
 
@@ -230,47 +231,53 @@ fun SpellingLessonScreen(
                 }
               }
 
-              Spacer(modifier = Modifier.height(20.dp))
+              Spacer(modifier = Modifier.height(14.dp))
 
-              if (isSuccess) {
-                Button(
-                  onClick = {
-                    isSuccess = false
-                    if (selectedIndex < spellingList.size - 1) {
-                      selectedIndex++
-                    } else {
-                      selectedIndex = 0
-                    }
-                  },
-                  shape = RoundedCornerShape(24.dp),
-                  colors = ButtonDefaults.buttonColors(
-                    containerColor = Color(0xFF66BB6A),
-                    contentColor = Color.White
-                  )
-                ) {
-                  Text("NEXT WORD ➔", fontWeight = FontWeight.Bold, fontSize = 16.sp)
-                }
-              } else {
-                Button(
-                  onClick = {
-                    userLetters.clear()
-                    scrambledLetters = targetWord.map { it.toString() }.shuffled().toMutableList()
-                  },
-                  shape = RoundedCornerShape(24.dp),
-                  colors = ButtonDefaults.buttonColors(
-                    containerColor = Color(0xFFAB47BC),
-                    contentColor = Color.White
-                  )
-                ) {
-                  Text("RESET 🔄", fontWeight = FontWeight.Bold)
-                }
+              Button(
+                onClick = {
+                  userLetters.clear()
+                  scrambledLetters = targetWord.map { it.toString() }.shuffled().toMutableList()
+                  isSuccess = false
+                },
+                shape = RoundedCornerShape(24.dp),
+                colors = ButtonDefaults.buttonColors(
+                  containerColor = Color(0xFFAB47BC),
+                  contentColor = Color.White
+                )
+              ) {
+                Text("RESET LETTERS 🔄", fontWeight = FontWeight.Bold, fontSize = 13.sp)
               }
             }
           }
         }
 
+        // Unified Previous / Play / Next Controls
+        LessonNavigationControls(
+          onPrevious = {
+            if (selectedIndex > 0) {
+              isSuccess = false
+              selectedIndex--
+            }
+          },
+          onPlay = {
+            audioController.speak("Spell the word $targetWord!")
+          },
+          onNext = {
+            if (selectedIndex < spellingList.size - 1) {
+              isSuccess = false
+              selectedIndex++
+            }
+          },
+          canPrevious = selectedIndex > 0,
+          canNext = selectedIndex < spellingList.size - 1,
+          playLabel = "HEAR WORD 🔊",
+          currentIndex = selectedIndex,
+          totalCount = spellingList.size,
+          accentColor = Color(0xFF7E57C2)
+        )
+
         BoboMascot(
-          size = 80.dp,
+          size = 72.dp,
           state = if (isSuccess) MascotState.CELEBRATING else MascotState.IDLE_WAVING
         )
       }

@@ -39,7 +39,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.data.models.GameCategory
 import com.example.ui.components.BoboMascot
-import com.example.ui.components.LittleBuddyBottomBar
 import com.example.ui.components.MascotState
 import com.example.ui.components.StarsBar
 import com.example.ui.viewmodel.Screen
@@ -64,7 +63,10 @@ fun PlayGamesScreen(
   onParentLockClick: () -> Unit
 ) {
   val miniGames = listOf(
+    MiniGameItem("Listening Challenge 🎧", "🎧", "Distinguish similar-sounding words (bat vs cat)", Screen.LISTENING_CHALLENGE, null, 0xFF5E35B1, 0xFFEDE7F6),
+    MiniGameItem("Sound Sorting 🎯", "🎯", "Drag items into /m/ vs /s/ beginning sound baskets", Screen.SOUND_SORTING, null, 0xFFE65100, 0xFFFFF3E0),
     MiniGameItem("Daily Quiz 🎯", "📝", "5 questions from practiced topics", Screen.DAILY_QUIZ, null, 0xFFFF8F00, 0xFFFFF3E0),
+    MiniGameItem("Phonics & Blending 🔤", "🔤", "15 levels of sounds, blending & reading", Screen.PHONICS_LESSON, GameCategory.PHONICS, 0xFF00897B, 0xFFE0F2F1),
     MiniGameItem("Find Letter & Word", "🔤", "Listen & choose correct letter", Screen.GAME, GameCategory.ALPHABETS, 0xFF1E88E5, 0xFFE3F2FD),
     MiniGameItem("Find Color", "🎨", "Identify bright color objects", Screen.COLORS_LESSON, GameCategory.COLORS, 0xFFEF5350, 0xFFFFEBEE),
     MiniGameItem("Animal Sounds", "🐶", "Which animal says Woof?", Screen.ANIMALS_EXPLORER, GameCategory.ANIMALS, 0xFF42A5F5, 0xFFE3F2FD),
@@ -82,12 +84,6 @@ fun PlayGamesScreen(
         streak = learningStreak,
         title = "🎮 Play & Learn Games",
         onParentLockClick = onParentLockClick
-      )
-    },
-    bottomBar = {
-      LittleBuddyBottomBar(
-        currentScreen = Screen.PLAY_GAMES,
-        onNavigate = onNavigate
       )
     },
     containerColor = Color(0xFFFFF3E0)

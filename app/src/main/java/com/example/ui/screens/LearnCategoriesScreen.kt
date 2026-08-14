@@ -49,7 +49,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.data.models.GameCategory
-import com.example.ui.components.LittleBuddyBottomBar
 import com.example.ui.components.StarsBar
 import com.example.ui.viewmodel.Screen
 import kotlinx.coroutines.launch
@@ -86,12 +85,6 @@ fun LearnCategoriesScreen(
         streak = learningStreak,
         title = "📚 All Categories",
         onParentLockClick = onParentLockClick
-      )
-    },
-    bottomBar = {
-      LittleBuddyBottomBar(
-        currentScreen = Screen.LEARN_CATEGORIES,
-        onNavigate = onNavigate
       )
     },
     containerColor = Color(0xFFE8F5E9)

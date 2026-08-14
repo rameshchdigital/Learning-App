@@ -58,7 +58,6 @@ import com.example.audio.AudioController
 import com.example.data.models.CategoryStatEntity
 import com.example.ui.components.BoboMascot
 import com.example.ui.components.CelebrationOverlay
-import com.example.ui.components.LittleBuddyBottomBar
 import com.example.ui.components.MascotState
 import com.example.ui.components.StarsBar
 import com.example.ui.components.TapStarBurstOverlay
@@ -157,12 +156,6 @@ fun ProgressRewardsScreen(
         stars = totalStars,
         title = "📊 Learning Progress",
         onParentLockClick = onParentLockClick
-      )
-    },
-    bottomBar = {
-      LittleBuddyBottomBar(
-        currentScreen = Screen.PROGRESS_REWARDS,
-        onNavigate = onNavigate
       )
     },
     containerColor = Color(0xFFFFF8E1)

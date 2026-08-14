@@ -54,6 +54,7 @@ import com.example.audio.AudioController
 import com.example.data.content.GameContentRepository
 import com.example.data.models.NumberCard
 import com.example.ui.components.BoboMascot
+import com.example.ui.components.LessonNavigationControls
 import com.example.ui.components.MascotState
 import com.example.ui.components.StarsBar
 
@@ -176,68 +177,30 @@ fun NumbersLessonScreen(
                 fontWeight = FontWeight.Bold,
                 color = Color(0xFF00897B)
               )
-
-              Spacer(modifier = Modifier.height(16.dp))
-
-              Button(
-                onClick = {
-                  audioController.speak("Let's count! ${item.number}! ${item.word}! ${item.countText}")
-                  onAwardStars(1)
-                },
-                modifier = Modifier
-                  .height(48.dp)
-                  .testTag("count_audio_button"),
-                shape = RoundedCornerShape(24.dp),
-                colors = ButtonDefaults.buttonColors(
-                  containerColor = Color(0xFFFFB300),
-                  contentColor = Color.White
-                )
-              ) {
-                Icon(Icons.AutoMirrored.Filled.VolumeUp, contentDescription = "Count")
-                Spacer(modifier = Modifier.width(8.dp))
-                Text("TAP TO COUNT 🔊", fontWeight = FontWeight.Bold)
-              }
             }
           }
         }
 
-        // Navigation
-        Row(
-          modifier = Modifier.fillMaxWidth(),
-          horizontalArrangement = Arrangement.SpaceEvenly,
-          verticalAlignment = Alignment.CenterVertically
-        ) {
-          IconButton(
-            onClick = { if (selectedIndex > 0) selectedIndex-- },
-            enabled = selectedIndex > 0
-          ) {
-            Surface(
-              shape = CircleShape,
-              color = if (selectedIndex > 0) Color(0xFFFFB300) else Color.LightGray
-            ) {
-              Icon(Icons.Default.ChevronLeft, contentDescription = "Prev", tint = Color.White, modifier = Modifier.size(36.dp))
+        // Unified Previous / Play / Next Controls
+        LessonNavigationControls(
+          onPrevious = { if (selectedIndex > 0) selectedIndex-- },
+          onPlay = {
+            audioController.speak("Let's count! ${currentNumber.number}! ${currentNumber.word}! ${currentNumber.countText}")
+            onAwardStars(1)
+          },
+          onNext = {
+            if (selectedIndex < numbers.size - 1) {
+              selectedIndex++
+              onAwardStars(1)
             }
-          }
-
-          Text(
-            text = "${selectedIndex + 1} / ${numbers.size}",
-            fontSize = 16.sp,
-            fontWeight = FontWeight.Bold,
-            color = Color(0xFFE65100)
-          )
-
-          IconButton(
-            onClick = { if (selectedIndex < numbers.size - 1) selectedIndex++ },
-            enabled = selectedIndex < numbers.size - 1
-          ) {
-            Surface(
-              shape = CircleShape,
-              color = if (selectedIndex < numbers.size - 1) Color(0xFFFFB300) else Color.LightGray
-            ) {
-              Icon(Icons.Default.ChevronRight, contentDescription = "Next", tint = Color.White, modifier = Modifier.size(36.dp))
-            }
-          }
-        }
+          },
+          canPrevious = selectedIndex > 0,
+          canNext = selectedIndex < numbers.size - 1,
+          playLabel = "TAP TO COUNT 🔊",
+          currentIndex = selectedIndex,
+          totalCount = numbers.size,
+          accentColor = Color(0xFFFF8F00)
+        )
 
         // Horizontal Number Picker
         LazyRow(

@@ -75,7 +75,6 @@ import com.example.data.models.CategoryStatEntity
 import com.example.data.models.UserProgressEntity
 import com.example.ui.components.BoboMascot
 import com.example.ui.components.CelebrationOverlay
-import com.example.ui.components.LittleBuddyBottomBar
 import com.example.ui.components.MascotState
 import com.example.ui.components.StarsBar
 import com.example.ui.components.TapStarBurstOverlay
@@ -483,12 +482,6 @@ fun BadgeCollectionScreen(
         stars = totalStars,
         title = "🏆 Badge Collection",
         onParentLockClick = onParentLockClick
-      )
-    },
-    bottomBar = {
-      LittleBuddyBottomBar(
-        currentScreen = Screen.BADGE_COLLECTION,
-        onNavigate = onNavigate
       )
     },
     containerColor = Color(0xFFFFFDE7)
