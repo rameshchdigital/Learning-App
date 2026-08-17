@@ -175,7 +175,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
       GameCategory.COLORS -> navigateTo(Screen.COLORS_LESSON)
       GameCategory.SHAPES -> navigateTo(Screen.SHAPES_LESSON)
       GameCategory.ANIMALS -> navigateTo(Screen.ANIMALS_EXPLORER)
-      GameCategory.FRUITS_VEG -> navigateTo(Screen.FRUITS_VEG_LESSON)
       GameCategory.BODY_PARTS -> navigateTo(Screen.BODY_PARTS_LESSON)
       GameCategory.SENTENCES -> navigateTo(Screen.SENTENCE_LEARNING)
       GameCategory.SPELLING -> navigateTo(Screen.SPELLING_LESSON)

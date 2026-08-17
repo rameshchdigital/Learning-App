@@ -11,32 +11,6 @@ object CategoryRepository {
     listOf(
       // 👨‍👩‍👧 Everyday Life
       StructuredCategoryContent(
-        category = GameCategory.COMMUNITY_HELPERS,
-        group = CategoryGroup.EVERYDAY_LIFE,
-        items = listOf(
-          CategoryItem("ch_1", "Police Officer", "👮‍♂️", "Keeps our community safe"),
-          CategoryItem("ch_2", "Firefighter", "👨‍🚒", "Puts out fires and saves lives"),
-          CategoryItem("ch_3", "Doctor", "👨‍⚕️", "Helps us stay healthy"),
-          CategoryItem("ch_4", "Nurse", "👩‍⚕️", "Cares for sick people"),
-          CategoryItem("ch_5", "Teacher", "👩‍🏫", "Teaches us new things at school"),
-          CategoryItem("ch_6", "Farmer", "👨‍🌾", "Grows fresh food and crops"),
-          CategoryItem("ch_7", "Chef", "👨‍🍳", "Cooks delicious meals"),
-          CategoryItem("ch_8", "Baker", "🧑‍🍳", "Bakes fresh bread and treats"),
-          CategoryItem("ch_9", "Postman", "📬", "Delivers letters and packages"),
-          CategoryItem("ch_10", "Pilot", "👨‍✈️", "Flies airplanes in the sky"),
-          CategoryItem("ch_11", "Bus Driver", "🚌", "Drives children safely"),
-          CategoryItem("ch_12", "Plumber", "🔧", "Fixes water pipes and sinks"),
-          CategoryItem("ch_13", "Electrician", "⚡", "Fixes lights and electricity"),
-          CategoryItem("ch_14", "Carpenter", "🔨", "Builds wooden furniture"),
-          CategoryItem("ch_15", "Dentist", "🦷", "Takes care of our teeth"),
-          CategoryItem("ch_16", "Vet", "🐶", "Takes care of sick animals"),
-          CategoryItem("ch_17", "Construction Worker", "👷‍♂️", "Builds houses and roads"),
-          CategoryItem("ch_18", "Gardener", "🧑‍🌾", "Plants flowers and trees"),
-          CategoryItem("ch_19", "Mechanic", "🚘", "Fixes cars and engines"),
-          CategoryItem("ch_20", "Soldier", "🎖️", "Protects our country")
-        )
-      ),
-      StructuredCategoryContent(
         category = GameCategory.TOYS,
         group = CategoryGroup.EVERYDAY_LIFE,
         items = listOf(
@@ -191,66 +165,8 @@ object CategoryRepository {
           CategoryItem("act_29", "Cook", "🍳", "Prepare warm food")
         )
       ),
-      StructuredCategoryContent(
-        category = GameCategory.HEALTH,
-        group = CategoryGroup.LEARNING_DEV,
-        items = listOf(
-          CategoryItem("hl_1", "Doctor", "👨‍⚕️", "Helps when feeling sick"),
-          CategoryItem("hl_2", "Hospital", "🏥", "Healthcare place"),
-          CategoryItem("hl_3", "Medicine", "💊", "Helps body recover"),
-          CategoryItem("hl_4", "Bandage", "🩹", "Covers small scratches"),
-          CategoryItem("hl_5", "Thermometer", "🌡️", "Checks body temperature"),
-          CategoryItem("hl_6", "Stethoscope", "🩺", "Listens to heartbeat"),
-          CategoryItem("hl_7", "Toothbrush", "🪥", "Keeps teeth sparkling"),
-          CategoryItem("hl_8", "Toothpaste", "🧴", "Minty paste for teeth"),
-          CategoryItem("hl_9", "Soap", "🧼", "Washes away germs"),
-          CategoryItem("hl_10", "Hand Sanitizer", "🧴", "Cleans hands on the go"),
-          CategoryItem("hl_11", "First Aid Kit", "🧰", "Emergency medical box"),
-          CategoryItem("hl_12", "Syringe", "💉", "Protective vaccine shot"),
-          CategoryItem("hl_13", "Healthy Food", "🥗", "Fruits and veggies"),
-          CategoryItem("hl_14", "Water", "💧", "Fresh clean drink"),
-          CategoryItem("hl_15", "Exercise", "🤸", "Play and move body"),
-          CategoryItem("hl_16", "Sleep", "🛌", "Rest for strong energy"),
-          CategoryItem("hl_17", "Washing Hands", "🧼", "Wash before eating"),
-          CategoryItem("hl_18", "Brushing Teeth", "🪥", "Brush morning and night"),
-          CategoryItem("hl_19", "Healthy Body", "💪", "Strong and happy body"),
-          CategoryItem("hl_20", "Ambulance", "🚑", "Emergency rescue car")
-        )
-      ),
 
       // 🌎 World Around Us
-      StructuredCategoryContent(
-        category = GameCategory.NATURE,
-        group = CategoryGroup.WORLD_AROUND,
-        items = listOf(
-          CategoryItem("nat_1", "Sun", "☀️", "Bright warm star in sky"),
-          CategoryItem("nat_2", "Moon", "🌙", "Glowing moon at night"),
-          CategoryItem("nat_3", "Stars", "⭐", "Twinkling night stars"),
-          CategoryItem("nat_4", "Cloud", "☁️", "Fluffy cloud in sky"),
-          CategoryItem("nat_5", "Rain", "🌧️", "Water drops from sky"),
-          CategoryItem("nat_6", "Rainbow", "🌈", "Colorful arch after rain"),
-          CategoryItem("nat_7", "Tree", "🌳", "Tall green tree with leaves"),
-          CategoryItem("nat_8", "Flower", "🌸", "Pretty blooming petal"),
-          CategoryItem("nat_9", "Grass", "🌱", "Soft green lawn grass"),
-          CategoryItem("nat_10", "Leaf", "🍃", "Green leaf on branch"),
-          CategoryItem("nat_11", "Mountain", "🏔️", "Tall rocky peak"),
-          CategoryItem("nat_12", "River", "🏞️", "Flowing water stream"),
-          CategoryItem("nat_13", "Lake", "🌊", "Calm water lake"),
-          CategoryItem("nat_14", "Waterfall", "🌊", "Water cascading down"),
-          CategoryItem("nat_15", "Rock", "🪨", "Hard stone rock"),
-          CategoryItem("nat_16", "Soil", "🪴", "Earth soil for plants"),
-          CategoryItem("nat_17", "Sand", "🏖️", "Soft beach sand"),
-          CategoryItem("nat_18", "Forest", "🌲", "Many trees together"),
-          CategoryItem("nat_19", "Bird", "🐦", "Feathered flying friend"),
-          CategoryItem("nat_20", "Butterfly", "🦋", "Colorful fluttering wing"),
-          CategoryItem("nat_21", "Bee", "🐝", "Buzzy honey bee"),
-          CategoryItem("nat_22", "Fish", "🐟", "Swims in fresh water"),
-          CategoryItem("nat_23", "Ant", "🐜", "Tiny hardworking ant"),
-          CategoryItem("nat_24", "Ladybug", "🐞", "Red spotted ladybug"),
-          CategoryItem("nat_25", "Earth", "🌍", "Our beautiful planet"),
-          CategoryItem("nat_26", "Wind", "💨", "Blowing gentle breeze")
-        )
-      ),
       StructuredCategoryContent(
         category = GameCategory.ANIMALS,
         group = CategoryGroup.WORLD_AROUND,
@@ -390,6 +306,66 @@ object CategoryRepository {
           CategoryItem("bp_10", "Fingers", "🤌", "Ten fingers on hands"),
           CategoryItem("bp_11", "Teeth", "🦷", "Clean white teeth"),
           CategoryItem("bp_12", "Tongue", "👅", "Tastes sweet food")
+        )
+      ),
+      StructuredCategoryContent(
+        category = GameCategory.CLOTHES,
+        group = CategoryGroup.EVERYDAY_LIFE,
+        items = listOf(
+          CategoryItem("cl_1", "Shirt", "👕", "Comfortable cotton t-shirt"),
+          CategoryItem("cl_2", "Pants", "👖", "Blue denim trousers"),
+          CategoryItem("cl_3", "Dress", "👗", "Pretty summer dress"),
+          CategoryItem("cl_4", "Shoes", "👟", "Walking sneakers"),
+          CategoryItem("cl_5", "Hat", "🧢", "Cap to protect from sun"),
+          CategoryItem("cl_6", "Socks", "🧦", "Cozy warm socks"),
+          CategoryItem("cl_7", "Jacket", "🧥", "Warm winter jacket"),
+          CategoryItem("cl_8", "Scarf", "🧣", "Soft neck scarf"),
+          CategoryItem("cl_9", "Gloves", "🧤", "Hand warming gloves"),
+          CategoryItem("cl_10", "Boots", "👢", "Rain and puddle boots"),
+          CategoryItem("cl_11", "Glasses", "👓", "Clear reading glasses"),
+          CategoryItem("cl_12", "Watch", "⌚", "Wristwatch telling time")
+        )
+      ),
+      StructuredCategoryContent(
+        category = GameCategory.FAMILY,
+        group = CategoryGroup.EVERYDAY_LIFE,
+        items = listOf(
+          CategoryItem("fm_1", "Mother", "👩", "Loving Mom"),
+          CategoryItem("fm_2", "Father", "👨", "Caring Dad"),
+          CategoryItem("fm_3", "Baby", "👶", "Cute smiling baby"),
+          CategoryItem("fm_4", "Sister", "👧", "Playful sister"),
+          CategoryItem("fm_5", "Brother", "👦", "Friendly brother"),
+          CategoryItem("fm_6", "Grandmother", "👵", "Sweet Grandma"),
+          CategoryItem("fm_7", "Grandfather", "👴", "Wise Grandpa"),
+          CategoryItem("fm_8", "Aunt", "👩‍🦰", "Fun Aunt"),
+          CategoryItem("fm_9", "Uncle", "👨‍🦰", "Helpful Uncle"),
+          CategoryItem("fm_10", "Family", "👨‍👩‍👧‍👦", "Happy family together")
+        )
+      ),
+      StructuredCategoryContent(
+        category = GameCategory.MUSIC,
+        group = CategoryGroup.LEARNING_DEV,
+        items = listOf(
+          CategoryItem("mu_1", "Piano", "🎹", "Black and white musical keys"),
+          CategoryItem("mu_2", "Drum", "🥁", "Tap the rhythm beat"),
+          CategoryItem("mu_3", "Guitar", "🎸", "Strum the acoustic strings"),
+          CategoryItem("mu_4", "Trumpet", "🎺", "Bright brass horn"),
+          CategoryItem("mu_5", "Violin", "🎻", "Sweet bowed instrument"),
+          CategoryItem("mu_6", "Flute", "🪈", "Gentle woodwind pipe"),
+          CategoryItem("mu_7", "Xylophone", "🎵", "Colorful rainbow chime bars"),
+          CategoryItem("mu_8", "Microphone", "🎤", "Sing along favorite songs")
+        )
+      ),
+      StructuredCategoryContent(
+        category = GameCategory.PUZZLES,
+        group = CategoryGroup.LEARNING_DEV,
+        items = listOf(
+          CategoryItem("pz_1", "Puzzle Piece", "🧩", "Interlocking picture piece"),
+          CategoryItem("pz_2", "Toy Block", "🧊", "Building stack blocks"),
+          CategoryItem("pz_3", "Magic Wand", "🪄", "Magical sparkle wand"),
+          CategoryItem("pz_4", "Golden Key", "🔑", "Unlocks treasure chest"),
+          CategoryItem("pz_5", "Shiny Gem", "💎", "Glittering crystal gem"),
+          CategoryItem("pz_6", "Crown", "👑", "Royal golden crown")
         )
       )
     )

@@ -248,14 +248,14 @@ fun BadgeCollectionScreen(
         desc = "Discovered tasty apples, bananas, berries and veggies!",
         iconEmoji = "🍎",
         filterCategory = BadgeCategoryFilter.CATEGORIES,
-        targetScreen = Screen.FRUITS_VEG_LESSON,
-        goalText = "Complete 1 Fruit & Veggie lesson",
+        targetScreen = Screen.CATEGORY_LESSON,
+        goalText = "Complete 1 Fruit or Veggie lesson",
         checkUnlocked = { _, stats, unlocked, _ ->
           unlocked.any { it.badgeId == "badge_fruits" } ||
-              stats.any { (it.categoryId.equals("fruits_veg", ignoreCase = true) || it.categoryId.equals("fruits", ignoreCase = true)) && (it.completedCount >= 1 || it.starsEarned >= 2) }
+              stats.any { (it.categoryId.equals("fruits", ignoreCase = true) || it.categoryId.equals("vegetables", ignoreCase = true) || it.categoryId.equals("fruits_veg", ignoreCase = true)) && (it.completedCount >= 1 || it.starsEarned >= 2) }
         },
         calculateProgress = { _, stats, _ ->
-          val stat = stats.find { it.categoryId.equals("fruits_veg", ignoreCase = true) || it.categoryId.equals("fruits", ignoreCase = true) }
+          val stat = stats.find { it.categoryId.equals("fruits", ignoreCase = true) || it.categoryId.equals("vegetables", ignoreCase = true) || it.categoryId.equals("fruits_veg", ignoreCase = true) }
           val count = stat?.completedCount ?: 0
           val frac = (count / 1f).coerceAtMost(1f)
           frac to "$count / 1 Completed"

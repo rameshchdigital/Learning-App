@@ -18,9 +18,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
@@ -28,7 +25,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -47,7 +43,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.data.models.CategoryGroup
 import com.example.data.models.DifficultyLevel
 import com.example.data.models.GameCategory
 import com.example.ui.components.BoboMascot
@@ -67,19 +62,22 @@ fun HomeScreen(
   onNavigate: (Screen) -> Unit = {},
   onParentLockClick: () -> Unit
 ) {
-  val featuredCategories = listOf(
+  val categories = listOf(
     GameCategory.ALPHABETS,
     GameCategory.PHONICS,
     GameCategory.NUMBERS,
     GameCategory.COLORS,
     GameCategory.SHAPES,
     GameCategory.ANIMALS,
-    GameCategory.FRUITS_VEG,
+    GameCategory.FRUITS,
+    GameCategory.VEGETABLES,
+    GameCategory.VEHICLES,
     GameCategory.BODY_PARTS,
-    GameCategory.FEELINGS,
+    GameCategory.ACTION_WORDS,
     GameCategory.SENTENCES,
     GameCategory.SPELLING,
-    GameCategory.MUSIC
+    GameCategory.MUSIC,
+    GameCategory.PUZZLES
   )
 
   Scaffold(
@@ -111,142 +109,47 @@ fun HomeScreen(
         modifier = Modifier
           .fillMaxSize()
           .verticalScroll(rememberScrollState())
-          .padding(bottom = 16.dp)
+          .padding(horizontal = 16.dp, vertical = 12.dp)
       ) {
-        // Mascot Greeting Banner
+        // Simple, Cheerful Hero Card
         Surface(
           modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 8.dp),
+            .padding(bottom = 14.dp),
           shape = RoundedCornerShape(24.dp),
           color = Color.White,
           shadowElevation = 3.dp
         ) {
-          Row(
-            modifier = Modifier
-              .fillMaxWidth()
-              .padding(16.dp),
-            verticalAlignment = Alignment.CenterVertically
+          Column(
+            modifier = Modifier.padding(16.dp)
           ) {
-            BoboMascot(
-              size = 72.dp,
-              state = MascotState.IDLE_WAVING
-            )
-
-            Column(modifier = Modifier.padding(start = 12.dp)) {
-              Text(
-                text = "Hello Little Buddy! 👋",
-                style = MaterialTheme.typography.titleLarge,
-                color = Color(0xFF1E88E5)
-              )
-              Text(
-                text = "Stage: ${currentDifficulty.title} (${currentDifficulty.ageRange})",
-                fontSize = 13.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color(0xFF78909C)
-              )
-            }
-          }
-        }
-
-        // Daily Vocabulary Habit Nudge Banner
-        Surface(
-          modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 4.dp)
-            .clickable { onNavigate(Screen.VOCABULARY_CARDS) }
-            .testTag("home_daily_habit_banner"),
-          shape = RoundedCornerShape(20.dp),
-          color = Color(0xFFFFF3E0),
-          border = androidx.compose.foundation.BorderStroke(1.5.dp, Color(0xFFFFB74D)),
-          shadowElevation = 2.dp
-        ) {
-          Row(
-            modifier = Modifier
-              .fillMaxWidth()
-              .padding(horizontal = 16.dp, vertical = 12.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-          ) {
-            Row(
-              modifier = Modifier.weight(1f),
-              verticalAlignment = Alignment.CenterVertically
-            ) {
-              Text("🔔", fontSize = 24.sp)
-              Spacer(modifier = Modifier.width(10.dp))
-              Column {
-                Text(
-                  text = "Daily Practice Habit! 🔥",
-                  fontSize = 14.sp,
-                  fontWeight = FontWeight.Bold,
-                  color = Color(0xFFE65100)
-                )
-                Text(
-                  text = "Practice vocabulary cards today to keep your streak active!",
-                  fontSize = 11.sp,
-                  color = Color(0xFFBF360C)
-                )
-              }
-            }
-
-            Surface(
-              shape = RoundedCornerShape(14.dp),
-              color = Color(0xFFFF9800)
-            ) {
-              Text(
-                text = "Practice 🚀",
-                fontSize = 12.sp,
-                fontWeight = FontWeight.ExtraBold,
-                color = Color.White,
-                modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp)
-              )
-            }
-          }
-        }
-
-        // Today's Lesson Featured Card
-        Surface(
-          modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 6.dp),
-          shape = RoundedCornerShape(28.dp),
-          color = Color(0xFFFFF3E0),
-          shadowElevation = 4.dp
-        ) {
-          Column(modifier = Modifier.padding(18.dp)) {
             Row(
               modifier = Modifier.fillMaxWidth(),
-              horizontalArrangement = Arrangement.SpaceBetween,
               verticalAlignment = Alignment.CenterVertically
             ) {
-              Column {
+              BoboMascot(
+                size = 64.dp,
+                state = MascotState.IDLE_WAVING
+              )
+
+              Spacer(modifier = Modifier.width(12.dp))
+
+              Column(modifier = Modifier.weight(1f)) {
                 Text(
-                  text = "🌟 TODAY'S LESSON",
-                  fontSize = 12.sp,
-                  fontWeight = FontWeight.Black,
-                  color = Color(0xFFE65100)
+                  text = "Hello Little Buddy! 👋",
+                  style = MaterialTheme.typography.titleLarge.copy(
+                    fontWeight = FontWeight.ExtraBold,
+                    fontSize = 20.sp
+                  ),
+                  color = Color(0xFF1E88E5)
                 )
                 Text(
-                  text = "Learn 5 New Words!",
-                  fontSize = 20.sp,
-                  fontWeight = FontWeight.Bold,
-                  color = Color(0xFFBF360C)
+                  text = "Ready to learn & play today?",
+                  fontSize = 13.sp,
+                  color = Color(0xFF546E7A)
                 )
               }
-              Text("🍎 🐱 ⚽", fontSize = 24.sp)
             }
-
-            Spacer(modifier = Modifier.height(12.dp))
-
-            LinearProgressIndicator(
-              progress = { 0.4f },
-              modifier = Modifier
-                .fillMaxWidth()
-                .height(10.dp)
-                .clip(CircleShape),
-              color = Color(0xFFFF9800),
-              trackColor = Color(0xFFFFE0B2)
-            )
 
             Spacer(modifier = Modifier.height(12.dp))
 
@@ -254,273 +157,153 @@ fun HomeScreen(
               onClick = { onCategoryClick(GameCategory.ALPHABETS) },
               modifier = Modifier
                 .fillMaxWidth()
-                .height(48.dp)
+                .height(46.dp)
                 .testTag("start_today_lesson"),
-              shape = RoundedCornerShape(24.dp),
+              shape = RoundedCornerShape(23.dp),
               colors = ButtonDefaults.buttonColors(
                 containerColor = Color(0xFFFF9800),
                 contentColor = Color.White
               )
             ) {
-              Text("START TODAY'S LESSON 🚀", fontWeight = FontWeight.Bold, fontSize = 16.sp)
+              Text("▶ Start Today's Lesson 🚀", fontWeight = FontWeight.Bold, fontSize = 15.sp)
             }
           }
         }
 
-        // Vocabulary Cards Feature Card
-        Surface(
-          modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 6.dp),
-          shape = RoundedCornerShape(28.dp),
-          color = Color(0xFFF3E5F5),
-          shadowElevation = 4.dp
-        ) {
-          Row(
-            modifier = Modifier
-              .fillMaxWidth()
-              .clickable { onNavigate(Screen.VOCABULARY_CARDS) }
-              .padding(18.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
-          ) {
-            Column(modifier = Modifier.weight(1f)) {
-              Text(
-                text = "🎴 NEW FEATURE",
-                fontSize = 11.sp,
-                fontWeight = FontWeight.Black,
-                color = Color(0xFF7E57C2)
-              )
-              Text(
-                text = "Vocabulary Cards 🎨",
-                fontSize = 18.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color(0xFF4A148C)
-              )
-              Text(
-                text = "Explore cheerful cards for colors, animals, shapes & more!",
-                fontSize = 12.sp,
-                color = Color(0xFF6A1B9A)
-              )
-            }
-
-            Text("🦁🎨📐", fontSize = 28.sp, modifier = Modifier.padding(start = 8.dp))
-          }
-        }
-
-        // Developmental Stage Switcher Row
+        // Quick Activities (Flashcards, Quiz, Badges)
         Text(
-          text = "Select Age Stage",
-          fontSize = 14.sp,
+          text = "Quick Fun",
+          fontSize = 15.sp,
           fontWeight = FontWeight.Bold,
-          color = Color(0xFF546E7A),
-          modifier = Modifier.padding(start = 20.dp, top = 12.dp, bottom = 6.dp)
+          color = Color(0xFF37474F),
+          modifier = Modifier.padding(start = 4.dp, bottom = 8.dp)
         )
 
-        LazyRow(
-          modifier = Modifier.fillMaxWidth(),
-          horizontalArrangement = Arrangement.spacedBy(8.dp),
-          contentPadding = PaddingValues(horizontal = 16.dp)
-        ) {
-          items(DifficultyLevel.entries) { diff ->
-            val isSelected = diff == currentDifficulty
-            Surface(
-              shape = RoundedCornerShape(18.dp),
-              color = if (isSelected) Color(0xFF1E88E5) else Color.White,
-              shadowElevation = if (isSelected) 3.dp else 1.dp,
-              modifier = Modifier
-                .testTag("home_difficulty_${diff.id}")
-                .clickable { onDifficultyClick(diff) }
-            ) {
-              Row(
-                modifier = Modifier.padding(horizontal = 14.dp, vertical = 8.dp),
-                verticalAlignment = Alignment.CenterVertically
-              ) {
-                Text(diff.iconEmoji, fontSize = 14.sp)
-                Spacer(modifier = Modifier.width(6.dp))
-                Text(
-                  text = "${diff.title} (${diff.ageRange})",
-                  fontWeight = FontWeight.Bold,
-                  fontSize = 12.sp,
-                  color = if (isSelected) Color.White else Color(0xFF37474F)
-                )
-              }
-            }
-          }
-        }
-
-        // Daily Quiz Showcase Banner
-        Surface(
+        Row(
           modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 6.dp)
-            .clickable {
+            .padding(bottom = 16.dp),
+          horizontalArrangement = Arrangement.spacedBy(10.dp)
+        ) {
+          QuickActionCard(
+            title = "Flashcards",
+            emoji = "🎴",
+            bgColor = Color(0xFFEDE7F6),
+            accentColor = Color(0xFF5E35B1),
+            modifier = Modifier
+              .weight(1f)
+              .testTag("home_quick_cards"),
+            onClick = { onNavigate(Screen.VOCABULARY_CARDS) }
+          )
+
+          QuickActionCard(
+            title = "Daily Quiz",
+            emoji = "🎯",
+            bgColor = Color(0xFFFFF3E0),
+            accentColor = Color(0xFFE65100),
+            modifier = Modifier
+              .weight(1f)
+              .testTag("home_quick_quiz"),
+            onClick = {
               onStartDailyQuiz()
               onNavigate(Screen.DAILY_QUIZ)
             }
-            .testTag("home_daily_quiz_banner"),
-          shape = RoundedCornerShape(24.dp),
-          color = Color(0xFFFFF3E0),
-          border = androidx.compose.foundation.BorderStroke(2.dp, Color(0xFFFFB74D)),
-          shadowElevation = 3.dp
-        ) {
-          Row(
-            modifier = Modifier
-              .fillMaxWidth()
-              .padding(16.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-          ) {
-            Row(
-              modifier = Modifier.weight(1f),
-              verticalAlignment = Alignment.CenterVertically
-            ) {
-              Text("📝", fontSize = 32.sp)
-              Spacer(modifier = Modifier.width(12.dp))
-              Column {
-                Text(
-                  text = "Daily Quiz 🎯",
-                  fontSize = 15.sp,
-                  fontWeight = FontWeight.ExtraBold,
-                  color = Color(0xFFE65100)
-                )
-                Text(
-                  text = "5 random questions from your practiced categories! Earn bonus stars!",
-                  fontSize = 11.sp,
-                  color = Color(0xFFF57C00)
-                )
-              }
-            }
+          )
 
-            Surface(
-              shape = RoundedCornerShape(16.dp),
-              color = Color(0xFFFF8F00)
-            ) {
-              Text(
-                text = "Start Quiz 🚀",
-                fontSize = 11.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.White,
-                modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp)
-              )
-            }
-          }
+          QuickActionCard(
+            title = "Badges",
+            emoji = "🏆",
+            bgColor = Color(0xFFE8F5E9),
+            accentColor = Color(0xFF2E7D32),
+            modifier = Modifier
+              .weight(1f)
+              .testTag("home_quick_badges"),
+            onClick = { onNavigate(Screen.BADGE_COLLECTION) }
+          )
         }
 
-        // Visual Badge Collection Showcase Banner
-        Surface(
-          modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 6.dp)
-            .clickable { onNavigate(Screen.BADGE_COLLECTION) }
-            .testTag("home_badge_collection_banner"),
-          shape = RoundedCornerShape(24.dp),
-          color = Color(0xFFEDE7F6),
-          border = androidx.compose.foundation.BorderStroke(2.dp, Color(0xFFB388FF)),
-          shadowElevation = 3.dp
-        ) {
-          Row(
-            modifier = Modifier
-              .fillMaxWidth()
-              .padding(16.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-          ) {
-            Row(
-              modifier = Modifier.weight(1f),
-              verticalAlignment = Alignment.CenterVertically
-            ) {
-              Text("🏆", fontSize = 32.sp)
-              Spacer(modifier = Modifier.width(12.dp))
-              Column {
-                Text(
-                  text = "Visual Badge Collection 🎖️",
-                  fontSize = 15.sp,
-                  fontWeight = FontWeight.ExtraBold,
-                  color = Color(0xFF4A148C)
-                )
-                Text(
-                  text = "Unlock rewards for animal, color & star milestones!",
-                  fontSize = 11.sp,
-                  color = Color(0xFF6A1B9A)
-                )
-              }
-            }
+        // Learning Categories Section
+        Text(
+          text = "Explore & Learn",
+          fontSize = 17.sp,
+          fontWeight = FontWeight.ExtraBold,
+          color = Color(0xFF263238),
+          modifier = Modifier.padding(start = 4.dp, bottom = 10.dp)
+        )
 
-            Surface(
-              shape = RoundedCornerShape(16.dp),
-              color = Color(0xFF7E57C2)
+        // 2-Column Category Grid
+        Column(
+          modifier = Modifier.fillMaxWidth(),
+          verticalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+          categories.chunked(2).forEach { rowCategories ->
+            Row(
+              modifier = Modifier.fillMaxWidth(),
+              horizontalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-              Text(
-                text = "View Badges 🌟",
-                fontSize = 11.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.White,
-                modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp)
-              )
+              rowCategories.forEach { category ->
+                Box(modifier = Modifier.weight(1f)) {
+                  CategoryCardItem(
+                    category = category,
+                    onClick = { onCategoryClick(category) }
+                  )
+                }
+              }
+              if (rowCategories.size == 1) {
+                Spacer(modifier = Modifier.weight(1f))
+              }
             }
           }
         }
 
         Spacer(modifier = Modifier.height(16.dp))
+      }
+    }
+  }
+}
 
-        // Categories grouped by Learning Group
-        CategoryGroup.entries.forEach { group ->
-          val groupCategories = GameCategory.entries.filter { it.group == group }
-          if (groupCategories.isNotEmpty()) {
-            Column(
-              modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 20.dp)
-            ) {
-              Row(
-                modifier = Modifier
-                  .fillMaxWidth()
-                  .padding(horizontal = 20.dp, vertical = 6.dp),
-                verticalAlignment = Alignment.CenterVertically
-              ) {
-                Text(
-                  text = group.iconEmoji,
-                  fontSize = 24.sp
-                )
-                Spacer(modifier = Modifier.width(8.dp))
-                Text(
-                  text = group.title,
-                  fontSize = 18.sp,
-                  fontWeight = FontWeight.ExtraBold,
-                  color = Color(group.colorHex)
-                )
-              }
+@Composable
+fun QuickActionCard(
+  title: String,
+  emoji: String,
+  bgColor: Color,
+  accentColor: Color,
+  modifier: Modifier = Modifier,
+  onClick: () -> Unit
+) {
+  val scaleAnim = remember { Animatable(1f) }
+  val scope = rememberCoroutineScope()
 
-              Column(
-                modifier = Modifier
-                  .fillMaxWidth()
-                  .padding(horizontal = 16.dp),
-                verticalArrangement = Arrangement.spacedBy(12.dp)
-              ) {
-                groupCategories.chunked(2).forEach { rowList ->
-                  Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp)
-                  ) {
-                    rowList.forEach { cat ->
-                      Box(modifier = Modifier.weight(1f)) {
-                        CategoryCardItem(
-                          category = cat,
-                          onClick = { onCategoryClick(cat) }
-                        )
-                      }
-                    }
-                    if (rowList.size == 1) {
-                      Spacer(modifier = Modifier.weight(1f))
-                    }
-                  }
-                }
-              }
-            }
-          }
+  Surface(
+    shape = RoundedCornerShape(18.dp),
+    color = bgColor,
+    shadowElevation = 2.dp,
+    modifier = modifier
+      .scale(scaleAnim.value)
+      .clickable {
+        scope.launch {
+          scaleAnim.animateTo(0.92f, spring(dampingRatio = 0.4f))
+          scaleAnim.animateTo(1.0f, spring(dampingRatio = 0.6f))
+          onClick()
         }
       }
+  ) {
+    Column(
+      modifier = Modifier
+        .fillMaxWidth()
+        .padding(vertical = 12.dp, horizontal = 8.dp),
+      horizontalAlignment = Alignment.CenterHorizontally,
+      verticalArrangement = Arrangement.Center
+    ) {
+      Text(emoji, fontSize = 24.sp)
+      Spacer(modifier = Modifier.height(4.dp))
+      Text(
+        text = title,
+        fontSize = 12.sp,
+        fontWeight = FontWeight.Bold,
+        color = accentColor,
+        maxLines = 1
+      )
     }
   }
 }
@@ -534,13 +317,13 @@ fun CategoryCardItem(
   val scope = rememberCoroutineScope()
 
   Surface(
-    shape = RoundedCornerShape(26.dp),
+    shape = RoundedCornerShape(22.dp),
     color = Color(category.bgHex),
-    shadowElevation = 4.dp,
+    shadowElevation = 3.dp,
     modifier = Modifier
       .scale(scaleAnim.value)
       .fillMaxWidth()
-      .aspectRatio(1.15f)
+      .aspectRatio(1.18f)
       .testTag("category_card_${category.id}")
       .clickable {
         scope.launch {
@@ -553,28 +336,28 @@ fun CategoryCardItem(
     Column(
       modifier = Modifier
         .fillMaxSize()
-        .padding(12.dp),
+        .padding(10.dp),
       horizontalAlignment = Alignment.CenterHorizontally,
       verticalArrangement = Arrangement.Center
     ) {
       Box(
         modifier = Modifier
-          .size(56.dp)
+          .size(50.dp)
           .clip(CircleShape)
           .background(Color.White.copy(alpha = 0.9f)),
         contentAlignment = Alignment.Center
       ) {
         Text(
           text = category.iconEmoji,
-          fontSize = 32.sp
+          fontSize = 28.sp
         )
       }
 
-      Spacer(modifier = Modifier.height(8.dp))
+      Spacer(modifier = Modifier.height(6.dp))
 
       Text(
         text = category.title,
-        fontSize = 16.sp,
+        fontSize = 15.sp,
         fontWeight = FontWeight.Bold,
         color = Color(category.colorHex),
         textAlign = TextAlign.Center,

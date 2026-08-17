@@ -110,7 +110,7 @@ fun ProgressRewardsScreen(
       Triple("animals", "Animals & Pets", "🦁") to (Color(0xFFFB8C00) to Screen.ANIMALS_EXPLORER),
       Triple("colors", "Colors & Art", "🎨") to (Color(0xFFE53935) to Screen.COLORS_LESSON),
       Triple("shapes", "Fun Shapes", "🔺") to (Color(0xFF3949AB) to Screen.SHAPES_LESSON),
-      Triple("fruits", "Fruits & Veggies", "🍎") to (Color(0xFF43A047) to Screen.FRUITS_VEG_LESSON),
+      Triple("fruits", "Fruits & Veggies", "🍎") to (Color(0xFF43A047) to Screen.CATEGORY_LESSON),
       Triple("numbers", "123 Numbers", "🔢") to (Color(0xFF8E24AA) to Screen.NUMBERS_LESSON),
       Triple("vocab", "Word Cards", "🎴") to (Color(0xFF7E57C2) to Screen.VOCABULARY_CARDS),
       Triple("alphabet", "ABC Alphabet", "🔤") to (Color(0xFF009688) to Screen.ALPHABET_LESSON),

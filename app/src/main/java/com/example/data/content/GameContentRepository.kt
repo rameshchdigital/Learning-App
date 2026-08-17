@@ -3,11 +3,20 @@ package com.example.data.content
 import com.example.data.models.AlphabetCard
 import com.example.data.models.AnimalCard
 import com.example.data.models.ColorCard
+import com.example.data.models.ColorLessonItem
+import com.example.data.models.ColorMinimalPair
+import com.example.data.models.ColorMixRecipe
+import com.example.data.models.ColorSeeExample
+import com.example.data.models.ColorSubcategory
 import com.example.data.models.DifficultyLevel
 import com.example.data.models.GameCategory
 import com.example.data.models.GameOption
 import com.example.data.models.GameQuestion
 import com.example.data.models.NumberCard
+import com.example.data.models.NumberLessonItem
+import com.example.data.models.NumberMinimalPair
+import com.example.data.models.NumberSeeExample
+import com.example.data.models.NumberSubcategory
 import com.example.data.models.PhonicsLessonItem
 import com.example.data.models.PhonicsMinimalPair
 import com.example.data.models.PhonicsSeeExample
@@ -1330,22 +1339,733 @@ object GameContentRepository {
       NumberCard(7, "SEVEN", "🎈🎈🎈🎈🎈🎈🎈", "7 Balloons"),
       NumberCard(8, "EIGHT", "🍓🍓🍓🍓🍓🍓🍓🍓", "8 Strawberries"),
       NumberCard(9, "NINE", "🍦🍦🍦🍦🍦🍦🍦🍦🍦", "9 Ice Creams"),
-      NumberCard(10, "TEN", "🐥🐥🐥🐥🐥🐥🐥🐥🐥🐥", "10 Little Ducks")
+      NumberCard(10, "TEN", "🐥🐥🐥🐥🐥🐥🐥🐥🐥🐥", "10 Little Ducks"),
+      NumberCard(11, "ELEVEN", "🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀", "11 Rockets"),
+      NumberCard(12, "TWELVE", "🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪🍪", "12 Cookies"),
+      NumberCard(15, "FIFTEEN", "💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎", "15 Gems"),
+      NumberCard(20, "TWENTY", "🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉", "20 Confetti Poppers")
+    )
+  }
+
+  fun getNumberLessonItems(): List<NumberLessonItem> {
+    return listOf(
+      // Level 1: Numbers 1-5
+      NumberLessonItem(
+        id = "num_item_1",
+        subcategory = NumberSubcategory.COUNTING_1_5,
+        number = 1,
+        word = "ONE",
+        emoji = "🍎",
+        countText = "1 Juicy Apple",
+        hearPrompt = "Number 1! Only one shiny red apple.",
+        seeExamples = listOf(
+          NumberSeeExample("1 Sun", "☀️", 1, "One Sun in the sky!"),
+          NumberSeeExample("1 Moon", "🌙", 1, "One Moon at night!"),
+          NumberSeeExample("1 Puppy", "🐶", 1, "One playful puppy!")
+        ),
+        chooseQuestion = "Where is Number 1?",
+        chooseOptions = listOf(
+          GameOption("1", "One", "1️⃣"),
+          GameOption("2", "Two", "2️⃣"),
+          GameOption("3", "Three", "3️⃣")
+        ),
+        correctOptionId = "1",
+        speakPrompt = "Can you say ONE?"
+      ),
+      NumberLessonItem(
+        id = "num_item_2",
+        subcategory = NumberSubcategory.COUNTING_1_5,
+        number = 2,
+        word = "TWO",
+        emoji = "⚽",
+        countText = "2 Bouncing Balls",
+        hearPrompt = "Number 2! 1, 2 bouncing soccer balls.",
+        seeExamples = listOf(
+          NumberSeeExample("2 Shoes", "👟👟", 2, "A pair of shoes!"),
+          NumberSeeExample("2 Eyes", "👀", 2, "Two seeing eyes!"),
+          NumberSeeExample("2 Kittens", "🐱🐱", 2, "Two cute kittens!")
+        ),
+        chooseQuestion = "Which card shows 2 soccer balls?",
+        chooseOptions = listOf(
+          GameOption("1", "1 Ball", "⚽"),
+          GameOption("2", "2 Balls", "⚽⚽"),
+          GameOption("4", "4 Balls", "⚽⚽⚽⚽")
+        ),
+        correctOptionId = "2",
+        speakPrompt = "Can you say TWO?"
+      ),
+      NumberLessonItem(
+        id = "num_item_3",
+        subcategory = NumberSubcategory.COUNTING_1_5,
+        number = 3,
+        word = "THREE",
+        emoji = "🍌",
+        countText = "3 Sweet Bananas",
+        hearPrompt = "Number 3! 1, 2, 3 delicious bananas.",
+        seeExamples = listOf(
+          NumberSeeExample("3 Triangles", "🔺🔺🔺", 3, "Three triangle sides!"),
+          NumberSeeExample("3 Balloons", "🎈🎈🎈", 3, "Three flying balloons!"),
+          NumberSeeExample("3 Stars", "⭐🌟⭐", 3, "Three shining stars!")
+        ),
+        chooseQuestion = "Where is Number 3?",
+        chooseOptions = listOf(
+          GameOption("5", "Five", "5️⃣"),
+          GameOption("3", "Three", "3️⃣"),
+          GameOption("1", "One", "1️⃣")
+        ),
+        correctOptionId = "3",
+        speakPrompt = "Can you say THREE?"
+      ),
+      NumberLessonItem(
+        id = "num_item_4",
+        subcategory = NumberSubcategory.COUNTING_1_5,
+        number = 4,
+        word = "FOUR",
+        emoji = "🚗",
+        countText = "4 Speedy Cars",
+        hearPrompt = "Number 4! 1, 2, 3, 4 zooming cars.",
+        seeExamples = listOf(
+          NumberSeeExample("4 Wheels", "🛞🛞🛞🛞", 4, "Four car wheels!"),
+          NumberSeeExample("4 Square Sides", "⬜", 4, "Four equal sides!"),
+          NumberSeeExample("4 Birds", "🐦🐦🐦🐦", 4, "Four singing birds!")
+        ),
+        chooseQuestion = "Find the group with 4 cars!",
+        chooseOptions = listOf(
+          GameOption("4", "4 Cars", "🚗🚗🚗🚗"),
+          GameOption("2", "2 Cars", "🚗🚗"),
+          GameOption("5", "5 Cars", "🚗🚗🚗🚗🚗")
+        ),
+        correctOptionId = "4",
+        speakPrompt = "Can you say FOUR?"
+      ),
+      NumberLessonItem(
+        id = "num_item_5",
+        subcategory = NumberSubcategory.COUNTING_1_5,
+        number = 5,
+        word = "FIVE",
+        emoji = "⭐",
+        countText = "5 Golden Stars",
+        hearPrompt = "Number 5! High five! 1, 2, 3, 4, 5 stars.",
+        seeExamples = listOf(
+          NumberSeeExample("5 Fingers", "🖐️", 5, "Five fingers on your hand!"),
+          NumberSeeExample("5 Star Points", "⭐", 5, "Five points on a star!"),
+          NumberSeeExample("5 Flowers", "🌸🌸🌸🌸🌸", 5, "Five pretty flowers!")
+        ),
+        chooseQuestion = "Where is Number 5?",
+        chooseOptions = listOf(
+          GameOption("2", "Two", "2️⃣"),
+          GameOption("4", "Four", "4️⃣"),
+          GameOption("5", "Five", "5️⃣")
+        ),
+        correctOptionId = "5",
+        speakPrompt = "Can you give a high FIVE?"
+      ),
+
+      // Level 2: Numbers 6-10
+      NumberLessonItem(
+        id = "num_item_6",
+        subcategory = NumberSubcategory.COUNTING_6_10,
+        number = 6,
+        word = "SIX",
+        emoji = "🐱",
+        countText = "6 Playful Kittens",
+        hearPrompt = "Number 6! 5 plus 1 makes 6!",
+        seeExamples = listOf(
+          NumberSeeExample("6 Dice Dots", "🎲", 6, "Six dots on a rolling die!"),
+          NumberSeeExample("6 Crayons", "🖍️🖍️🖍️🖍️🖍️🖍️", 6, "Six colored crayons!"),
+          NumberSeeExample("6 Fish", "🐟🐟🐟🐟🐟🐟", 6, "Six swimming fish!")
+        ),
+        chooseQuestion = "Which number comes after 5?",
+        chooseOptions = listOf(
+          GameOption("6", "Six", "6️⃣"),
+          GameOption("7", "Seven", "7️⃣"),
+          GameOption("4", "Four", "4️⃣")
+        ),
+        correctOptionId = "6",
+        speakPrompt = "Can you say SIX?"
+      ),
+      NumberLessonItem(
+        id = "num_item_7",
+        subcategory = NumberSubcategory.COUNTING_6_10,
+        number = 7,
+        word = "SEVEN",
+        emoji = "🎈",
+        countText = "7 Colorful Balloons",
+        hearPrompt = "Number 7! Like the 7 rainbow colors!",
+        seeExamples = listOf(
+          NumberSeeExample("7 Rainbow Colors", "🌈", 7, "Seven colors in a rainbow!"),
+          NumberSeeExample("7 Days", "📅", 7, "Seven days in a week!"),
+          NumberSeeExample("7 Butterflies", "🦋🦋🦋🦋🦋🦋🦋", 7, "Seven fluttering butterflies!")
+        ),
+        chooseQuestion = "Where is Number 7?",
+        chooseOptions = listOf(
+          GameOption("7", "Seven", "7️⃣"),
+          GameOption("1", "One", "1️⃣"),
+          GameOption("8", "Eight", "8️⃣")
+        ),
+        correctOptionId = "7",
+        speakPrompt = "Can you say SEVEN?"
+      ),
+      NumberLessonItem(
+        id = "num_item_8",
+        subcategory = NumberSubcategory.COUNTING_6_10,
+        number = 8,
+        word = "EIGHT",
+        emoji = "🍓",
+        countText = "8 Ripe Strawberries",
+        hearPrompt = "Number 8! Like the 8 legs of an octopus!",
+        seeExamples = listOf(
+          NumberSeeExample("8 Octopus Legs", "🐙", 8, "Eight wiggly octopus legs!"),
+          NumberSeeExample("8 Spider Legs", "🕷️", 8, "Eight little spider legs!"),
+          NumberSeeExample("8 Cookies", "🍪🍪🍪🍪🍪🍪🍪🍪", 8, "Eight sweet cookies!")
+        ),
+        chooseQuestion = "Find Number 8!",
+        chooseOptions = listOf(
+          GameOption("3", "Three", "3️⃣"),
+          GameOption("8", "Eight", "8️⃣"),
+          GameOption("9", "Nine", "9️⃣")
+        ),
+        correctOptionId = "8",
+        speakPrompt = "Can you say EIGHT?"
+      ),
+      NumberLessonItem(
+        id = "num_item_9",
+        subcategory = NumberSubcategory.COUNTING_6_10,
+        number = 9,
+        word = "NINE",
+        emoji = "🍦",
+        countText = "9 Cold Ice Creams",
+        hearPrompt = "Number 9! Almost full ten!",
+        seeExamples = listOf(
+          NumberSeeExample("9 Apples", "🍎🍎🍎🍎🍎🍎🍎🍎🍎", 9, "Nine crunchy apples!"),
+          NumberSeeExample("9 Hearts", "💖💖💖💖💖💖💖💖💖", 9, "Nine glowing hearts!"),
+          NumberSeeExample("9 Bees", "🐝🐝🐝🐝🐝🐝🐝🐝🐝", 9, "Nine buzzing bees!")
+        ),
+        chooseQuestion = "Which number is Number 9?",
+        chooseOptions = listOf(
+          GameOption("6", "Six", "6️⃣"),
+          GameOption("9", "Nine", "9️⃣"),
+          GameOption("10", "Ten", "🔟")
+        ),
+        correctOptionId = "9",
+        speakPrompt = "Can you say NINE?"
+      ),
+      NumberLessonItem(
+        id = "num_item_10",
+        subcategory = NumberSubcategory.COUNTING_6_10,
+        number = 10,
+        word = "TEN",
+        emoji = "🐥",
+        countText = "10 Happy Little Ducks",
+        hearPrompt = "Number 10! All ten fingers on two hands!",
+        seeExamples = listOf(
+          NumberSeeExample("10 Fingers", "🙌", 10, "Ten fingers together!"),
+          NumberSeeExample("10 Toes", "🦶🦶", 10, "Ten little toes!"),
+          NumberSeeExample("10 Coins", "🪙🪙🪙🪙🪙🪙🪙🪙🪙🪙", 10, "Ten shiny coins!")
+        ),
+        chooseQuestion = "Where is the big Number 10?",
+        chooseOptions = listOf(
+          GameOption("10", "Ten", "🔟"),
+          GameOption("1", "One", "1️⃣"),
+          GameOption("0", "Zero", "0️⃣")
+        ),
+        correctOptionId = "10",
+        speakPrompt = "Can you say TEN!"
+      ),
+
+      // Level 3: Teen Numbers 11-20
+      NumberLessonItem(
+        id = "num_item_11",
+        subcategory = NumberSubcategory.COUNTING_11_20,
+        number = 11,
+        word = "ELEVEN",
+        emoji = "🚀",
+        countText = "11 Blasting Rockets",
+        hearPrompt = "Number 11! Ten plus 1 is eleven!",
+        seeExamples = listOf(
+          NumberSeeExample("10 + 1", "🔟➕1️⃣", 11, "Ten and one more!"),
+          NumberSeeExample("11 Stars", "⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐", 11, "Eleven shining stars!")
+        ),
+        chooseQuestion = "Which number is Eleven?",
+        chooseOptions = listOf(
+          GameOption("11", "Eleven", "1️⃣1️⃣"),
+          GameOption("12", "Twelve", "1️⃣2️⃣"),
+          GameOption("10", "Ten", "🔟")
+        ),
+        correctOptionId = "11"
+      ),
+      NumberLessonItem(
+        id = "num_item_12",
+        subcategory = NumberSubcategory.COUNTING_11_20,
+        number = 12,
+        word = "TWELVE",
+        emoji = "🍪",
+        countText = "12 Sweet Cookies",
+        hearPrompt = "Number 12! A full dozen cookies!",
+        seeExamples = listOf(
+          NumberSeeExample("A Dozen", "🥚🥚🥚🥚🥚🥚🥚🥚🥚🥚🥚🥚", 12, "Twelve eggs in a carton!"),
+          NumberSeeExample("12 Clock Hours", "⏰", 12, "Twelve hours on the clock face!")
+        ),
+        chooseQuestion = "Where is Number 12?",
+        chooseOptions = listOf(
+          GameOption("12", "Twelve", "1️⃣2️⃣"),
+          GameOption("20", "Twenty", "2️⃣0️⃣"),
+          GameOption("13", "Thirteen", "1️⃣3️⃣")
+        ),
+        correctOptionId = "12"
+      ),
+      NumberLessonItem(
+        id = "num_item_20",
+        subcategory = NumberSubcategory.COUNTING_11_20,
+        number = 20,
+        word = "TWENTY",
+        emoji = "🎉",
+        countText = "20 Party Poppers",
+        hearPrompt = "Number 20! Two whole tens make twenty!",
+        seeExamples = listOf(
+          NumberSeeExample("2 Tens", "🔟🔟", 20, "Two groups of ten!"),
+          NumberSeeExample("20 Fingers & Toes", "🙌🦶🦶", 20, "All fingers and toes together!")
+        ),
+        chooseQuestion = "Find Number 20!",
+        chooseOptions = listOf(
+          GameOption("20", "Twenty", "2️⃣0️⃣"),
+          GameOption("12", "Twelve", "1️⃣2️⃣"),
+          GameOption("2", "Two", "2️⃣")
+        ),
+        correctOptionId = "20"
+      ),
+
+      // Level 4: Skip Counting Patterns
+      NumberLessonItem(
+        id = "num_pattern_2s",
+        subcategory = NumberSubcategory.NUMBER_PATTERNS,
+        number = 2,
+        word = "COUNT BY 2s",
+        emoji = "👟",
+        countText = "2, 4, 6, 8, 10!",
+        hearPrompt = "Let's count by 2s! 2, 4, 6, 8, 10! Two pairs at a time!",
+        seeExamples = listOf(
+          NumberSeeExample("Pair of Shoes", "👟👟", 2, "2 shoes"),
+          NumberSeeExample("Two Pairs", "👟👟 👟👟", 4, "4 shoes"),
+          NumberSeeExample("Three Pairs", "👟👟 👟👟 👟👟", 6, "6 shoes")
+        ),
+        chooseQuestion = "What comes next in: 2, 4, 6, ___?",
+        chooseOptions = listOf(
+          GameOption("8", "Eight", "8️⃣"),
+          GameOption("7", "Seven", "7️⃣"),
+          GameOption("5", "Five", "5️⃣")
+        ),
+        correctOptionId = "8",
+        mathFormula = "2, 4, 6, 8, 10 🔢"
+      ),
+      NumberLessonItem(
+        id = "num_pattern_5s",
+        subcategory = NumberSubcategory.NUMBER_PATTERNS,
+        number = 5,
+        word = "COUNT BY 5s",
+        emoji = "🖐️",
+        countText = "5, 10, 15, 20!",
+        hearPrompt = "Let's count by 5s! High five! 5, 10, 15, 20!",
+        seeExamples = listOf(
+          NumberSeeExample("One Hand", "🖐️", 5, "5 fingers"),
+          NumberSeeExample("Two Hands", "🖐️🖐️", 10, "10 fingers"),
+          NumberSeeExample("Three Hands", "🖐️🖐️🖐️", 15, "15 fingers")
+        ),
+        chooseQuestion = "What comes next in: 5, 10, ___?",
+        chooseOptions = listOf(
+          GameOption("15", "Fifteen", "1️⃣5️⃣"),
+          GameOption("11", "Eleven", "1️⃣1️⃣"),
+          GameOption("12", "Twelve", "1️⃣2️⃣")
+        ),
+        correctOptionId = "15",
+        mathFormula = "5, 10, 15, 20 🖐️"
+      ),
+
+      // Level 5: Number Bonds & Early Math
+      NumberLessonItem(
+        id = "num_bond_5",
+        subcategory = NumberSubcategory.NUMBER_BONDS,
+        number = 5,
+        word = "BONDS OF 5",
+        emoji = "➕",
+        countText = "2 + 3 = 5!",
+        hearPrompt = "Number Bond! 2 apples plus 3 apples make 5 apples!",
+        seeExamples = listOf(
+          NumberSeeExample("1 + 4 = 5", "🍎 + 🍎🍎🍎🍎", 5, "One plus four makes five"),
+          NumberSeeExample("2 + 3 = 5", "🍎🍎 + 🍎🍎🍎", 5, "Two plus three makes five"),
+          NumberSeeExample("0 + 5 = 5", "⭐ + ⭐⭐⭐⭐⭐", 5, "Zero plus five makes five")
+        ),
+        chooseQuestion = "2 plus 3 equals what number?",
+        chooseOptions = listOf(
+          GameOption("5", "Five", "5️⃣"),
+          GameOption("4", "Four", "4️⃣"),
+          GameOption("6", "Six", "6️⃣")
+        ),
+        correctOptionId = "5",
+        mathFormula = "2 + 3 = 5"
+      ),
+      NumberLessonItem(
+        id = "num_bond_10",
+        subcategory = NumberSubcategory.NUMBER_BONDS,
+        number = 10,
+        word = "BONDS OF 10",
+        emoji = "🔟",
+        countText = "5 + 5 = 10!",
+        hearPrompt = "Ten Friends! 5 fingers on left hand and 5 on right hand make 10!",
+        seeExamples = listOf(
+          NumberSeeExample("5 + 5 = 10", "🖐️ + 🖐️", 10, "Five and five make ten"),
+          NumberSeeExample("6 + 4 = 10", "🔵🔵🔵🔵🔵🔵 + 🔴🔴🔴🔴", 10, "Six and four make ten"),
+          NumberSeeExample("9 + 1 = 10", "⭐⭐⭐⭐⭐⭐⭐⭐⭐ + ⭐", 10, "Nine and one make ten")
+        ),
+        chooseQuestion = "5 plus 5 equals what number?",
+        chooseOptions = listOf(
+          GameOption("10", "Ten", "🔟"),
+          GameOption("9", "Nine", "9️⃣"),
+          GameOption("8", "Eight", "8️⃣")
+        ),
+        correctOptionId = "10",
+        mathFormula = "5 + 5 = 10"
+      )
+    )
+  }
+
+  fun getNumberMinimalPairs(): List<NumberMinimalPair> {
+    return listOf(
+      NumberMinimalPair("np_1", 2, "Two", "⚽⚽", 3, "Three", "🍌🍌🍌", 2, "Two", "Count the objects: 2 balls vs 3 bananas!"),
+      NumberMinimalPair("np_2", 4, "Four", "🚗🚗🚗🚗", 5, "Five", "⭐⭐⭐⭐⭐", 5, "Five", "Listen carefully: Four or Five?"),
+      NumberMinimalPair("np_3", 6, "Six", "🐱🐱🐱🐱🐱🐱", 9, "Nine", "🍦🍦🍦🍦🍦🍦🍦🍦🍦", 6, "Six", "Look at the shape: Six vs Nine!"),
+      NumberMinimalPair("np_4", 7, "Seven", "🎈🎈🎈🎈🎈🎈🎈", 8, "Eight", "🍓🍓🍓🍓🍓🍓🍓🍓", 8, "Eight", "Listen carefully: Seven or Eight?"),
+      NumberMinimalPair("np_5", 13, "Thirteen", "💎", 30, "Thirty", "💰", 13, "Thirteen", "Listen for the -teen sound: Thirteen!"),
+      NumberMinimalPair("np_6", 14, "Fourteen", "🚀", 40, "Forty", "🏎️", 14, "Fourteen", "Listen for Fourteen!")
+    )
+  }
+
+  fun getColorLessonItems(): List<ColorLessonItem> {
+    return listOf(
+      // Level 1: Primary Colors
+      ColorLessonItem(
+        id = "col_red",
+        subcategory = ColorSubcategory.PRIMARY_COLORS,
+        colorName = "Red",
+        colorHex = 0xFFEF5350,
+        emoji = "🔴",
+        hearPrompt = "Red! Red is warm and vibrant like an apple, a rose, or a shiny fire engine!",
+        seeExamples = listOf(
+          ColorSeeExample("Red Apple", "🍎", "Red", "Crisp red apple"),
+          ColorSeeExample("Red Fire Truck", "🚒", "Red", "Heroic red fire engine"),
+          ColorSeeExample("Red Rose", "🌹", "Red", "Sweet red blossom"),
+          ColorSeeExample("Red Heart", "❤️", "Red", "Loving red heart")
+        ),
+        chooseQuestion = "Which object is RED?",
+        chooseOptions = listOf(
+          GameOption("apple", "Red Apple", "🍎"),
+          GameOption("leaf", "Green Leaf", "🍃"),
+          GameOption("ocean", "Blue Ocean", "🌊")
+        ),
+        correctOptionId = "apple",
+        speakPrompt = "Can you say RED?"
+      ),
+      ColorLessonItem(
+        id = "col_blue",
+        subcategory = ColorSubcategory.PRIMARY_COLORS,
+        colorName = "Blue",
+        colorHex = 0xFF1E88E5,
+        emoji = "🔵",
+        hearPrompt = "Blue! Blue is calm and cool like the clear sky and the deep ocean waves!",
+        seeExamples = listOf(
+          ColorSeeExample("Blue Sky", "🌤️", "Blue", "Bright blue sunny sky"),
+          ColorSeeExample("Blue Whale", "🐋", "Blue", "Giant blue sea whale"),
+          ColorSeeExample("Blue Berries", "🫐", "Blue", "Yummy blueberries"),
+          ColorSeeExample("Blue Jeans", "👖", "Blue", "Cozy blue denim")
+        ),
+        chooseQuestion = "Where is the BLUE circle?",
+        chooseOptions = listOf(
+          GameOption("yellow", "Yellow Circle", "🟡"),
+          GameOption("blue", "Blue Circle", "🔵"),
+          GameOption("red", "Red Circle", "🔴")
+        ),
+        correctOptionId = "blue",
+        speakPrompt = "Can you say BLUE?"
+      ),
+      ColorLessonItem(
+        id = "col_yellow",
+        subcategory = ColorSubcategory.PRIMARY_COLORS,
+        colorName = "Yellow",
+        colorHex = 0xFFFFB300,
+        emoji = "🟡",
+        hearPrompt = "Yellow! Yellow is cheerful and bright like the morning sun and ripe bananas!",
+        seeExamples = listOf(
+          ColorSeeExample("Yellow Sun", "☀️", "Yellow", "Warm morning sunshine"),
+          ColorSeeExample("Yellow Banana", "🍌", "Yellow", "Sweet yellow banana"),
+          ColorSeeExample("Yellow Duckling", "🐥", "Yellow", "Cute yellow baby duck"),
+          ColorSeeExample("Yellow Sunflower", "🌻", "Yellow", "Tall yellow sunflower")
+        ),
+        chooseQuestion = "Which fruit is naturally YELLOW?",
+        chooseOptions = listOf(
+          GameOption("banana", "Yellow Banana", "🍌"),
+          GameOption("strawberry", "Red Strawberry", "🍓"),
+          GameOption("grape", "Purple Grape", "🍇")
+        ),
+        correctOptionId = "banana",
+        speakPrompt = "Can you say YELLOW?"
+      ),
+
+      // Level 2: Secondary Colors
+      ColorLessonItem(
+        id = "col_green",
+        subcategory = ColorSubcategory.SECONDARY_COLORS,
+        colorName = "Green",
+        colorHex = 0xFF43A047,
+        emoji = "🟢",
+        hearPrompt = "Green! Green is the color of nature, trees, frogs, and crunchy broccoli!",
+        seeExamples = listOf(
+          ColorSeeExample("Green Tree", "🌳", "Green", "Big green tree"),
+          ColorSeeExample("Green Frog", "🐸", "Green", "Hopping green frog"),
+          ColorSeeExample("Green Broccoli", "🥦", "Green", "Healthy green veggie"),
+          ColorSeeExample("Green Turtle", "🐢", "Green", "Swimming green sea turtle")
+        ),
+        chooseQuestion = "Which animal is GREEN?",
+        chooseOptions = listOf(
+          GameOption("frog", "Green Frog", "🐸"),
+          GameOption("flamingo", "Pink Flamingo", "🦩"),
+          GameOption("lion", "Golden Lion", "🦁")
+        ),
+        correctOptionId = "frog",
+        mixRecipe = ColorMixRecipe("Blue", "🔵", "Yellow", "🟡", "Green", "🟢", 0xFF43A047, "Blue and Yellow mix to make Green!"),
+        speakPrompt = "Can you say GREEN?"
+      ),
+      ColorLessonItem(
+        id = "col_orange",
+        subcategory = ColorSubcategory.SECONDARY_COLORS,
+        colorName = "Orange",
+        colorHex = 0xFFFF9800,
+        emoji = "🟠",
+        hearPrompt = "Orange! Orange is warm and playful like carrots, tigers, and juicy oranges!",
+        seeExamples = listOf(
+          ColorSeeExample("Orange Fruit", "🍊", "Orange", "Juicy fresh orange"),
+          ColorSeeExample("Orange Carrot", "🥕", "Orange", "Crunchy garden carrot"),
+          ColorSeeExample("Orange Tiger", "🐯", "Orange", "Striped orange tiger"),
+          ColorSeeExample("Orange Pumpkin", "🎃", "Orange", "Big orange pumpkin")
+        ),
+        chooseQuestion = "Find the ORANGE vegetable!",
+        chooseOptions = listOf(
+          GameOption("carrot", "Orange Carrot", "🥕"),
+          GameOption("cucumber", "Green Cucumber", "🥒"),
+          GameOption("eggplant", "Purple Eggplant", "🍆")
+        ),
+        correctOptionId = "carrot",
+        mixRecipe = ColorMixRecipe("Red", "🔴", "Yellow", "🟡", "Orange", "🟠", 0xFFFF9800, "Red and Yellow mix to make Orange!"),
+        speakPrompt = "Can you say ORANGE?"
+      ),
+      ColorLessonItem(
+        id = "col_purple",
+        subcategory = ColorSubcategory.SECONDARY_COLORS,
+        colorName = "Purple",
+        colorHex = 0xFF8E24AA,
+        emoji = "🟣",
+        hearPrompt = "Purple! Purple is royal and magical like sweet grapes and fragrant lavender!",
+        seeExamples = listOf(
+          ColorSeeExample("Purple Grapes", "🍇", "Purple", "Sweet bunch of grapes"),
+          ColorSeeExample("Purple Eggplant", "🍆", "Purple", "Glossy purple eggplant"),
+          ColorSeeExample("Purple Crown", "👑", "Purple", "Royal velvet crown"),
+          ColorSeeExample("Purple Butterfly", "🦋", "Purple", "Gentle purple butterfly")
+        ),
+        chooseQuestion = "Which fruit is PURPLE?",
+        chooseOptions = listOf(
+          GameOption("grapes", "Purple Grapes", "🍇"),
+          GameOption("orange", "Orange Fruit", "🍊"),
+          GameOption("banana", "Yellow Banana", "🍌")
+        ),
+        correctOptionId = "grapes",
+        mixRecipe = ColorMixRecipe("Red", "🔴", "Blue", "🔵", "Purple", "🟣", 0xFF8E24AA, "Red and Blue mix to make Purple!"),
+        speakPrompt = "Can you say PURPLE?"
+      ),
+
+      // Level 3: Shades & Neutrals
+      ColorLessonItem(
+        id = "col_pink",
+        subcategory = ColorSubcategory.SHADES_AND_NEUTRALS,
+        colorName = "Pink",
+        colorHex = 0xFFEC407A,
+        emoji = "🌸",
+        hearPrompt = "Pink! Soft and lovely like cherry blossoms, flamingos, and sweet cotton candy!",
+        seeExamples = listOf(
+          ColorSeeExample("Pink Flamingo", "🦩", "Pink", "Tall pink wading bird"),
+          ColorSeeExample("Pink Flower", "🌸", "Pink", "Blossoming pink petal"),
+          ColorSeeExample("Pink Piglet", "🐷", "Pink", "Cute little pink pig")
+        ),
+        chooseQuestion = "Where is the PINK flower?",
+        chooseOptions = listOf(
+          GameOption("pink", "Pink Flower", "🌸"),
+          GameOption("sun", "Yellow Sun", "☀️"),
+          GameOption("leaf", "Green Leaf", "🍃")
+        ),
+        correctOptionId = "pink",
+        mixRecipe = ColorMixRecipe("Red", "🔴", "White", "⚪", "Pink", "🌸", 0xFFEC407A, "Red and White mix to make Pink!"),
+        speakPrompt = "Can you say PINK?"
+      ),
+      ColorLessonItem(
+        id = "col_brown",
+        subcategory = ColorSubcategory.SHADES_AND_NEUTRALS,
+        colorName = "Brown",
+        colorHex = 0xFF795548,
+        emoji = "🟤",
+        hearPrompt = "Brown! Earthy and cozy like teddy bears, chocolate, and tree bark!",
+        seeExamples = listOf(
+          ColorSeeExample("Brown Bear", "🐻", "Brown", "Furry brown grizzly"),
+          ColorSeeExample("Brown Chocolate", "🍫", "Brown", "Sweet chocolate bar"),
+          ColorSeeExample("Brown Monkey", "🐒", "Brown", "Playful brown monkey")
+        ),
+        chooseQuestion = "Which cute friend is BROWN?",
+        chooseOptions = listOf(
+          GameOption("bear", "Brown Bear", "🐻"),
+          GameOption("duck", "Yellow Duck", "🐥"),
+          GameOption("frog", "Green Frog", "🐸")
+        ),
+        correctOptionId = "bear"
+      ),
+      ColorLessonItem(
+        id = "col_white_black",
+        subcategory = ColorSubcategory.SHADES_AND_NEUTRALS,
+        colorName = "Black & White",
+        colorHex = 0xFF37474F,
+        emoji = "🐼",
+        hearPrompt = "Black and White! Classic contrasts like penguins, pandas, and zebras!",
+        seeExamples = listOf(
+          ColorSeeExample("Panda", "🐼", "Black & White", "Friendly giant panda"),
+          ColorSeeExample("Penguin", "🐧", "Black & White", "Cute waddling penguin"),
+          ColorSeeExample("Zebra", "🦓", "Black & White", "Striped savannah zebra")
+        ),
+        chooseQuestion = "Which animal has BLACK and WHITE stripes?",
+        chooseOptions = listOf(
+          GameOption("zebra", "Zebra", "🦓"),
+          GameOption("lion", "Lion", "🦁"),
+          GameOption("elephant", "Elephant", "🐘")
+        ),
+        correctOptionId = "zebra"
+      ),
+
+      // Level 4: Color Mixing Lab
+      ColorLessonItem(
+        id = "col_mix_orange",
+        subcategory = ColorSubcategory.COLOR_MIXING,
+        colorName = "Making Orange",
+        colorHex = 0xFFFF9800,
+        emoji = "🧪",
+        hearPrompt = "Color Magic! Mix Red paint with Yellow paint to make bright Orange!",
+        seeExamples = listOf(
+          ColorSeeExample("Red Paint", "🔴", "Red", "Start with Red"),
+          ColorSeeExample("Yellow Paint", "🟡", "Yellow", "Add bright Yellow"),
+          ColorSeeExample("Orange Result", "🟠", "Orange", "You get Orange!")
+        ),
+        chooseQuestion = "Red + Yellow = Which magic color?",
+        chooseOptions = listOf(
+          GameOption("orange", "Orange", "🟠", colorHex = 0xFFFF9800),
+          GameOption("green", "Green", "🟢", colorHex = 0xFF43A047),
+          GameOption("blue", "Blue", "🔵", colorHex = 0xFF1E88E5)
+        ),
+        correctOptionId = "orange",
+        mixRecipe = ColorMixRecipe("Red", "🔴", "Yellow", "🟡", "Orange", "🟠", 0xFFFF9800, "Red plus Yellow makes Orange!")
+      ),
+      ColorLessonItem(
+        id = "col_mix_green",
+        subcategory = ColorSubcategory.COLOR_MIXING,
+        colorName = "Making Green",
+        colorHex = 0xFF43A047,
+        emoji = "🧪",
+        hearPrompt = "Color Magic! Mix Blue and Yellow together to make fresh Green!",
+        seeExamples = listOf(
+          ColorSeeExample("Blue Paint", "🔵", "Blue", "Start with Blue"),
+          ColorSeeExample("Yellow Paint", "🟡", "Yellow", "Add sunny Yellow"),
+          ColorSeeExample("Green Result", "🟢", "Green", "You get vibrant Green!")
+        ),
+        chooseQuestion = "Blue + Yellow = Which color?",
+        chooseOptions = listOf(
+          GameOption("green", "Green", "🟢", colorHex = 0xFF43A047),
+          GameOption("purple", "Purple", "🟣", colorHex = 0xFF8E24AA),
+          GameOption("pink", "Pink", "🌸", colorHex = 0xFFEC407A)
+        ),
+        correctOptionId = "green",
+        mixRecipe = ColorMixRecipe("Blue", "🔵", "Yellow", "🟡", "Green", "🟢", 0xFF43A047, "Blue plus Yellow makes Green!")
+      ),
+      ColorLessonItem(
+        id = "col_mix_purple",
+        subcategory = ColorSubcategory.COLOR_MIXING,
+        colorName = "Making Purple",
+        colorHex = 0xFF8E24AA,
+        emoji = "🧪",
+        hearPrompt = "Color Magic! Mix Red and Blue together to make royal Purple!",
+        seeExamples = listOf(
+          ColorSeeExample("Red Paint", "🔴", "Red", "Warm Red"),
+          ColorSeeExample("Blue Paint", "🔵", "Blue", "Cool Blue"),
+          ColorSeeExample("Purple Result", "🟣", "Purple", "You get Royal Purple!")
+        ),
+        chooseQuestion = "Red + Blue = Which color?",
+        chooseOptions = listOf(
+          GameOption("purple", "Purple", "🟣", colorHex = 0xFF8E24AA),
+          GameOption("orange", "Orange", "🟠", colorHex = 0xFFFF9800),
+          GameOption("brown", "Brown", "🟤", colorHex = 0xFF795548)
+        ),
+        correctOptionId = "purple",
+        mixRecipe = ColorMixRecipe("Red", "🔴", "Blue", "🔵", "Purple", "🟣", 0xFF8E24AA, "Red plus Blue makes Purple!")
+      ),
+
+      // Level 5: Rainbow Explorer
+      ColorLessonItem(
+        id = "col_rainbow_all",
+        subcategory = ColorSubcategory.RAINBOW_DISCOVERY,
+        colorName = "The Rainbow",
+        colorHex = 0xFFFF5722,
+        emoji = "🌈",
+        hearPrompt = "Rainbow Magic! Red, Orange, Yellow, Green, Blue, Indigo, and Violet shine across the sky after the rain!",
+        seeExamples = listOf(
+          ColorSeeExample("Red & Orange", "🔴🟠", "Warm", "Warm top arches"),
+          ColorSeeExample("Yellow & Green", "🟡🟢", "Middle", "Sunny middle arches"),
+          ColorSeeExample("Blue & Violet", "🔵🟣", "Cool", "Cool bottom arches")
+        ),
+        chooseQuestion = "What creates a beautiful rainbow in the sky?",
+        chooseOptions = listOf(
+          GameOption("rain_sun", "Sun & Rain", "🌈"),
+          GameOption("snow", "Snow Only", "❄️"),
+          GameOption("night", "Dark Night", "🌙")
+        ),
+        correctOptionId = "rain_sun",
+        speakPrompt = "Can you say RAINBOW!"
+      )
+    )
+  }
+
+  fun getColorMinimalPairs(): List<ColorMinimalPair> {
+    return listOf(
+      ColorMinimalPair("cp_1", "Red", "🔴", 0xFFEF5350, "Pink", "🌸", 0xFFEC407A, "Red", "Look closely: Red is deep, Pink is soft!"),
+      ColorMinimalPair("cp_2", "Blue", "🔵", 0xFF1E88E5, "Purple", "🟣", 0xFF8E24AA, "Blue", "Listen for the color name: Blue!"),
+      ColorMinimalPair("cp_3", "Yellow", "🟡", 0xFFFFB300, "Green", "🟢", 0xFF43A047, "Yellow", "Look for the sunny color: Yellow!"),
+      ColorMinimalPair("cp_4", "Orange", "🟠", 0xFFFF9800, "Red", "🔴", 0xFFEF5350, "Orange", "Look for the citrus color: Orange!"),
+      ColorMinimalPair("cp_5", "Brown", "🟤", 0xFF795548, "Black", "⚫", 0xFF37474F, "Brown", "Cozy teddy bear color: Brown!")
+    )
+  }
+
+  fun getColorMixRecipes(): List<ColorMixRecipe> {
+    return listOf(
+      ColorMixRecipe("Red", "🔴", "Yellow", "🟡", "Orange", "🟠", 0xFFFF9800, "Red and Yellow make Orange!"),
+      ColorMixRecipe("Blue", "🔵", "Yellow", "🟡", "Green", "🟢", 0xFF43A047, "Blue and Yellow make Green!"),
+      ColorMixRecipe("Red", "🔴", "Blue", "🔵", "Purple", "🟣", 0xFF8E24AA, "Red and Blue make Purple!"),
+      ColorMixRecipe("Red", "🔴", "White", "⚪", "Pink", "🌸", 0xFFEC407A, "Red and White make Pink!")
     )
   }
 
   fun getColors(): List<ColorCard> {
     return listOf(
-      ColorCard("Red", "🔴", 0xFFEF5350, "Red Apple 🍎"),
-      ColorCard("Blue", "🔵", 0xFF42A5F5, "Blue Sea 🌊"),
-      ColorCard("Yellow", "🟡", 0xFFFFCA28, "Yellow Sun ☀️"),
-      ColorCard("Green", "🟢", 0xFF66BB6A, "Green Leaf 🍃"),
-      ColorCard("Orange", "🟠", 0xFFFF9800, "Orange Carrot 🥕"),
-      ColorCard("Purple", "🟣", 0xFFAB47BC, "Purple Grapes 🍇"),
-      ColorCard("Pink", "🩷", 0xFFEC407A, "Pink Flower 🌸"),
-      ColorCard("Brown", "🟤", 0xFF8D6E63, "Brown Bear 🐻"),
-      ColorCard("Black", "⚫", 0xFF37474F, "Black Cat 🐈‍⬛"),
-      ColorCard("White", "⚪", 0xFFCFD8DC, "White Snowman ☃️")
+      ColorCard("Red", "🍎", 0xFFEF5350, "Red Apple"),
+      ColorCard("Blue", "🌊", 0xFF1E88E5, "Blue Ocean"),
+      ColorCard("Yellow", "☀️", 0xFFFFB300, "Yellow Sun"),
+      ColorCard("Green", "🌲", 0xFF43A047, "Green Tree"),
+      ColorCard("Orange", "🍊", 0xFFFF9800, "Orange Fruit"),
+      ColorCard("Purple", "🍇", 0xFF8E24AA, "Purple Grape"),
+      ColorCard("Pink", "🌸", 0xFFEC407A, "Pink Flower"),
+      ColorCard("Brown", "🧸", 0xFF795548, "Brown Bear"),
+      ColorCard("Black", "🐈‍⬛", 0xFF37474F, "Black Cat"),
+      ColorCard("White", "🕊️", 0xFFECEFF1, "White Dove")
     )
   }
 
@@ -1425,7 +2145,7 @@ object GameContentRepository {
         listOf(GameCategory.ANIMALS, GameCategory.COLORS, GameCategory.SHAPES, GameCategory.ALPHABETS, GameCategory.NUMBERS)
       }
     } else {
-      listOf(GameCategory.ANIMALS, GameCategory.COLORS, GameCategory.SHAPES, GameCategory.ALPHABETS, GameCategory.NUMBERS, GameCategory.FRUITS_VEG)
+      listOf(GameCategory.ANIMALS, GameCategory.COLORS, GameCategory.SHAPES, GameCategory.ALPHABETS, GameCategory.NUMBERS, GameCategory.FRUITS, GameCategory.VEGETABLES)
     }
 
     val allQuestions = categoriesToUse.flatMap { category ->
@@ -1830,154 +2550,20 @@ object GameContentRepository {
         )
       )
 
-      GameCategory.FRUITS_VEG -> listOf(
-        GameQuestion(
-          id = "frt_1",
-          category = category,
-          questionText = "Where is the Apple? 🍎",
-          voicePrompt = "Where is the Apple?",
-          options = listOf(
-            GameOption("banana", "Banana", "🍌"),
-            GameOption("apple", "Apple", "🍎"),
-            GameOption("grapes", "Grapes", "🍇")
-          ),
-          correctAnswerId = "apple"
-        ),
-        GameQuestion(
-          id = "frt_2",
-          category = category,
-          questionText = "Find the Banana! 🍌",
-          voicePrompt = "Find the Banana!",
-          options = listOf(
-            GameOption("banana", "Banana", "🍌"),
-            GameOption("strawberry", "Strawberry", "🍓"),
-            GameOption("orange", "Orange", "🍊")
-          ),
-          correctAnswerId = "banana"
-        ),
-        GameQuestion(
-          id = "frt_3",
-          category = category,
-          questionText = "Where are the Grapes? 🍇",
-          voicePrompt = "Where are the Grapes?",
-          options = listOf(
-            GameOption("pineapple", "Pineapple", "🍍"),
-            GameOption("watermelon", "Watermelon", "🍉"),
-            GameOption("grapes", "Grapes", "🍇")
-          ),
-          correctAnswerId = "grapes"
-        ),
-        GameQuestion(
-          id = "frt_4",
-          category = category,
-          questionText = "Find the Strawberry! 🍓",
-          voicePrompt = "Find the Strawberry!",
-          options = listOf(
-            GameOption("strawberry", "Strawberry", "🍓"),
-            GameOption("apple", "Apple", "🍎"),
-            GameOption("peach", "Peach", "🍑")
-          ),
-          correctAnswerId = "strawberry"
-        ),
-        GameQuestion(
-          id = "frt_5",
-          category = category,
-          questionText = "Where is the Watermelon? 🍉",
-          voicePrompt = "Where is the Watermelon?",
-          options = listOf(
-            GameOption("cherry", "Cherry", "🍒"),
-            GameOption("watermelon", "Watermelon", "🍉"),
-            GameOption("banana", "Banana", "🍌")
-          ),
-          correctAnswerId = "watermelon"
-        ),
-        GameQuestion(
-          id = "frt_6",
-          category = category,
-          questionText = "Find the Orange! 🍊",
-          voicePrompt = "Find the Orange!",
-          options = listOf(
-            GameOption("lemon", "Lemon", "🍋"),
-            GameOption("orange", "Orange", "🍊"),
-            GameOption("pear", "Pear", "🍐")
-          ),
-          correctAnswerId = "orange"
-        )
+      GameCategory.CLOTHES -> listOf(
+        GameQuestion("clo_1", category, "Where is the T-Shirt? 👕", "Where is the T-Shirt?", listOf(GameOption("sh", "T-Shirt", "👕"), GameOption("pt", "Pants", "👖"), GameOption("ht", "Hat", "🧢")), "sh"),
+        GameQuestion("clo_2", category, "Find the Blue Pants! 👖", "Find the Blue Pants!", listOf(GameOption("pt", "Pants", "👖"), GameOption("dr", "Dress", "👗"), GameOption("sc", "Socks", "🧦")), "pt"),
+        GameQuestion("clo_3", category, "Where are the Shoes? 👟", "Where are the Shoes?", listOf(GameOption("sh", "Shoes", "👟"), GameOption("jk", "Jacket", "🧥"), GameOption("gl", "Gloves", "🧤")), "sh"),
+        GameQuestion("clo_4", category, "Find the Sun Hat! 🧢", "Find the Sun Hat!", listOf(GameOption("ht", "Sun Hat", "🧢"), GameOption("bt", "Boots", "👢"), GameOption("sf", "Scarf", "🧣")), "ht"),
+        GameQuestion("clo_5", category, "Where is the Pretty Dress? 👗", "Where is the Pretty Dress?", listOf(GameOption("dr", "Dress", "👗"), GameOption("wt", "Watch", "⌚"), GameOption("gl", "Glasses", "👓")), "dr")
       )
 
-      GameCategory.TRANSPORTATION -> listOf(
-        GameQuestion(
-          id = "veh_1",
-          category = category,
-          questionText = "Where is the Car? 🚗",
-          voicePrompt = "Where is the Car?",
-          options = listOf(
-            GameOption("car", "Car", "🚗"),
-            GameOption("bus", "Bus", "🚌"),
-            GameOption("train", "Train", "🚂")
-          ),
-          correctAnswerId = "car"
-        ),
-        GameQuestion(
-          id = "veh_2",
-          category = category,
-          questionText = "Find the Airplane! ✈️",
-          voicePrompt = "Find the Airplane!",
-          options = listOf(
-            GameOption("boat", "Boat", "⛵"),
-            GameOption("airplane", "Airplane", "✈️"),
-            GameOption("rocket", "Rocket", "🚀")
-          ),
-          correctAnswerId = "airplane"
-        ),
-        GameQuestion(
-          id = "veh_3",
-          category = category,
-          questionText = "Where is the Train? 🚂",
-          voicePrompt = "Where is the Train?",
-          options = listOf(
-            GameOption("train", "Train", "🚂"),
-            GameOption("bicycle", "Bicycle", "🚲"),
-            GameOption("bus", "Bus", "🚌")
-          ),
-          correctAnswerId = "train"
-        ),
-        GameQuestion(
-          id = "veh_4",
-          category = category,
-          questionText = "Find the Fire Truck! 🚒",
-          voicePrompt = "Find the Fire Truck!",
-          options = listOf(
-            GameOption("police", "Police Car", "🚓"),
-            GameOption("firetruck", "Fire Truck", "🚒"),
-            GameOption("taxi", "Taxi", "🚕")
-          ),
-          correctAnswerId = "firetruck"
-        ),
-        GameQuestion(
-          id = "veh_5",
-          category = category,
-          questionText = "Where is the Rocket? 🚀",
-          voicePrompt = "Where is the Rocket?",
-          options = listOf(
-            GameOption("helicopter", "Helicopter", "🚁"),
-            GameOption("rocket", "Rocket", "🚀"),
-            GameOption("boat", "Boat", "⛵")
-          ),
-          correctAnswerId = "rocket"
-        ),
-        GameQuestion(
-          id = "veh_6",
-          category = category,
-          questionText = "Find the Bus! 🚌",
-          voicePrompt = "Find the Bus!",
-          options = listOf(
-            GameOption("bus", "Bus", "🚌"),
-            GameOption("car", "Car", "🚗"),
-            GameOption("train", "Train", "🚂")
-          ),
-          correctAnswerId = "bus"
-        )
+      GameCategory.FAMILY -> listOf(
+        GameQuestion("fam_1", category, "Who is Mommy? 👩", "Who is Mommy?", listOf(GameOption("mo", "Mommy", "👩"), GameOption("fa", "Daddy", "👨"), GameOption("bb", "Baby", "👶")), "mo"),
+        GameQuestion("fam_2", category, "Who is Daddy? 👨", "Who is Daddy?", listOf(GameOption("fa", "Daddy", "👨"), GameOption("gr", "Grandpa", "👴"), GameOption("br", "Brother", "👦")), "fa"),
+        GameQuestion("fam_3", category, "Where is the Baby? 👶", "Where is the Baby?", listOf(GameOption("bb", "Baby", "👶"), GameOption("si", "Sister", "👧"), GameOption("gm", "Grandma", "👵")), "bb"),
+        GameQuestion("fam_4", category, "Where is Grandpa? 👴", "Where is Grandpa?", listOf(GameOption("gr", "Grandpa", "👴"), GameOption("mo", "Mommy", "👩"), GameOption("un", "Uncle", "👨‍🦰")), "gr"),
+        GameQuestion("fam_5", category, "Where is Grandma? 👵", "Where is Grandma?", listOf(GameOption("gm", "Grandma", "👵"), GameOption("au", "Aunt", "👩‍🦰"), GameOption("fa", "Daddy", "👨")), "gm")
       )
 
       GameCategory.PUZZLES -> listOf(
@@ -2042,26 +2628,12 @@ object GameContentRepository {
           correctAnswerId = "gem"
         )
       )
-      GameCategory.COMMUNITY_HELPERS -> listOf(
-        GameQuestion("ch_1", category, "Who puts out fires? 👨‍🚒", "Who puts out fires?", listOf(GameOption("ff", "Firefighter", "👨‍🚒"), GameOption("dr", "Doctor", "👨‍⚕️"), GameOption("tc", "Teacher", "👩‍🏫")), "ff"),
-        GameQuestion("ch_2", category, "Who helps us when we are sick? 👨‍⚕️", "Who helps us when we are sick?", listOf(GameOption("po", "Police Officer", "👮‍♂️"), GameOption("dr", "Doctor", "👨‍⚕️"), GameOption("fm", "Farmer", "👨‍🌾")), "dr"),
-        GameQuestion("ch_3", category, "Who teaches us at school? 👩‍🏫", "Who teaches us at school?", listOf(GameOption("tc", "Teacher", "👩‍🏫"), GameOption("ch", "Chef", "👨‍🍳"), GameOption("pl", "Pilot", "👨‍✈️")), "tc"),
-        GameQuestion("ch_4", category, "Who keeps our neighborhood safe? 👮‍♂️", "Who keeps our neighborhood safe?", listOf(GameOption("po", "Police Officer", "👮‍♂️"), GameOption("bk", "Baker", "🧑‍🍳"), GameOption("vet", "Vet", "🐶")), "po"),
-        GameQuestion("ch_5", category, "Who flies an airplane? 👨‍✈️", "Who flies an airplane?", listOf(GameOption("pl", "Pilot", "👨‍✈️"), GameOption("dr", "Doctor", "👨‍⚕️"), GameOption("gr", "Gardener", "🧑‍🌾")), "pl")
-      )
       GameCategory.TOYS -> listOf(
         GameQuestion("toy_1", category, "Where is the Teddy Bear? 🧸", "Where is the Teddy Bear?", listOf(GameOption("td", "Teddy Bear", "🧸"), GameOption("dl", "Doll", "🪆"), GameOption("kt", "Kite", "🪁")), "td"),
         GameQuestion("toy_2", category, "Find the Toy Robot! 🤖", "Find the Toy Robot!", listOf(GameOption("rb", "Toy Robot", "🤖"), GameOption("bl", "Ball", "⚽"), GameOption("tr", "Toy Train", "🚂")), "rb"),
         GameQuestion("toy_3", category, "Where is the Toy Car? 🚗", "Where is the Toy Car?", listOf(GameOption("car", "Toy Car", "🚗"), GameOption("bk", "Blocks", "🧊"), GameOption("dr", "Toy Drum", "🥁")), "car"),
         GameQuestion("toy_4", category, "Find the Colorful Yo-Yo! 🪀", "Find the Colorful Yo-Yo!", listOf(GameOption("yo", "Yo-Yo", "🪀"), GameOption("pz", "Puzzle", "🧩"), GameOption("dn", "Toy Dinosaur", "🦖")), "yo"),
         GameQuestion("toy_5", category, "Where is the Toy Plane? ✈️", "Where is the Toy Plane?", listOf(GameOption("pl", "Toy Plane", "✈️"), GameOption("bt", "Toy Boat", "⛵"), GameOption("gt", "Toy Guitar", "🎸")), "pl")
-      )
-      GameCategory.HEALTH -> listOf(
-        GameQuestion("hl_1", category, "What do we use to brush our teeth? 🪥", "What do we use to brush our teeth?", listOf(GameOption("tb", "Toothbrush", "🪥"), GameOption("sp", "Soap", "🧼"), GameOption("bd", "Bandage", "🩹")), "tb"),
-        GameQuestion("hl_2", category, "What cleans our hands? 🧼", "What cleans our hands?", listOf(GameOption("sp", "Soap", "🧼"), GameOption("tm", "Thermometer", "🌡️"), GameOption("hs", "Hospital", "🏥")), "sp"),
-        GameQuestion("hl_3", category, "Where do we go when sick? 🏥", "Where do we go when sick?", listOf(GameOption("hs", "Hospital", "🏥"), GameOption("pk", "Park", "🛝"), GameOption("bk", "Bakery", "🥖")), "hs"),
-        GameQuestion("hl_4", category, "Find the Ambulance! 🚑", "Find the Ambulance!", listOf(GameOption("amb", "Ambulance", "🚑"), GameOption("wat", "Water", "💧"), GameOption("slp", "Sleep", "🛌")), "amb"),
-        GameQuestion("hl_5", category, "What keeps us hydrated? 💧", "What keeps us hydrated?", listOf(GameOption("wat", "Water", "💧"), GameOption("med", "Medicine", "💊"), GameOption("st", "Stethoscope", "🩺")), "wat")
       )
       GameCategory.DAYS -> listOf(
         GameQuestion("dy_1", category, "What is the first day of the school week? 📅", "What is the first day of the school week?", listOf(GameOption("mon", "Monday", "📅"), GameOption("sat", "Saturday", "📅"), GameOption("sun", "Sunday", "📅")), "mon"),
@@ -2097,13 +2669,6 @@ object GameContentRepository {
         GameQuestion("ho_3", category, "What keeps our food cold? 🧊", "What keeps our food cold?", listOf(GameOption("frg", "Refrigerator", "🧊"), GameOption("tv", "Television", "📺"), GameOption("wm", "Washing Machine", "🧺")), "frg"),
         GameQuestion("ho_4", category, "What do we sleep on at night? 🛏️", "What do we sleep on at night?", listOf(GameOption("bed", "Bed", "🛏️"), GameOption("tbl", "Table", "🪵"), GameOption("dr", "Door", "🚪")), "bed"),
         GameQuestion("ho_5", category, "What do we use to eat soup? 🥄", "What do we use to eat soup?", listOf(GameOption("spn", "Spoon", "🥄"), GameOption("plt", "Plate", "🍽️"), GameOption("gla", "Glass", "🥛")), "spn")
-      )
-      GameCategory.NATURE -> listOf(
-        GameQuestion("nat_1", category, "What shines bright in the day sky? ☀️", "What shines bright in the day sky?", listOf(GameOption("sun", "Sun", "☀️"), GameOption("mon", "Moon", "🌙"), GameOption("cld", "Cloud", "☁️")), "sun"),
-        GameQuestion("nat_2", category, "What has colorful arches after rain? 🌈", "What has colorful arches after rain?", listOf(GameOption("rnb", "Rainbow", "🌈"), GameOption("rn", "Rain", "🌧️"), GameOption("mnt", "Mountain", "🏔️")), "rnb"),
-        GameQuestion("nat_3", category, "What has green leaves and trunks? 🌳", "What has green leaves and trunks?", listOf(GameOption("tre", "Tree", "🌳"), GameOption("flw", "Flower", "🌸"), GameOption("rck", "Rock", "🪨")), "tre"),
-        GameQuestion("nat_4", category, "What flutters gently on flowers? 🦋", "What flutters gently on flowers?", listOf(GameOption("btf", "Butterfly", "🦋"), GameOption("bee", "Bee", "🐝"), GameOption("ant", "Ant", "🐜")), "btf"),
-        GameQuestion("nat_5", category, "What shines at night in the sky? 🌙", "What shines at night in the sky?", listOf(GameOption("mon", "Moon", "🌙"), GameOption("str", "Stars", "⭐"), GameOption("rvr", "River", "🏞️")), "mon")
       )
       GameCategory.FRUITS -> listOf(
         GameQuestion("fr_1", category, "Where is the Apple? 🍎", "Where is the Apple?", listOf(GameOption("app", "Apple", "🍎"), GameOption("ban", "Banana", "🍌"), GameOption("org", "Orange", "🍊")), "app"),

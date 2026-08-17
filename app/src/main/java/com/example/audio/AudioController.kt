@@ -324,6 +324,8 @@ class AudioController(private val context: Context) : TextToSpeech.OnInitListene
     }.start()
   }
 
+  fun playWrongSound() = playTryAgainSound()
+
   fun playDrumSound() {
     Thread { playTone(120.0, 80.0, 120, "triangle") }.start()
   }

@@ -43,46 +43,32 @@ enum class GameCategory(
   val group: CategoryGroup = CategoryGroup.LEARNING_DEV
 ) {
   // 👨‍👩‍👧 Everyday Life
-  COMMUNITY_HELPERS("community_helpers", "Community Helpers", "👮", 0xFFFF9800, 0xFFFFF3E0, "Police, Doctor & Firefighter", CategoryGroup.EVERYDAY_LIFE),
   TOYS("toys", "Toys", "🧸", 0xFFAB47BC, 0xFFF3E5F5, "Teddy, blocks, cars & robots", CategoryGroup.EVERYDAY_LIFE),
   PLACES("places", "Places", "🏫", 0xFF1E88E5, 0xFFE3F2FD, "Home, school, park & zoo", CategoryGroup.EVERYDAY_LIFE),
   HOUSEHOLD_OBJECTS("household_objects", "Household Objects", "🏠", 0xFF5D4037, 0xFFEFEBE9, "Chair, clock, fan & bed", CategoryGroup.EVERYDAY_LIFE),
+  CLOTHES("clothes", "Clothes & Shoes", "👕", 0xFF5C6BC0, 0xFFE8EAF6, "Hats, shirts, pants & shoes", CategoryGroup.EVERYDAY_LIFE),
+  FAMILY("family", "Family Members", "👨‍👩‍👧", 0xFF26A69A, 0xFFE0F2F1, "Mom, Dad, Sister & Brother", CategoryGroup.EVERYDAY_LIFE),
 
   // 🧠 Learning & Development
   DAYS("days", "Days", "📅", 0xFF29B6F6, 0xFFE0F7FA, "Monday to Sunday", CategoryGroup.LEARNING_DEV),
   MONTHS("months", "Months", "🗓️", 0xFF7E57C2, 0xFFEDE7F6, "January to December", CategoryGroup.LEARNING_DEV),
   ACTION_WORDS("action_words", "Action Words", "🏃", 0xFFFF7043, 0xFFFBE9E7, "Run, jump, eat & sleep", CategoryGroup.LEARNING_DEV),
-  HEALTH("health", "Health & Hygiene", "🏥", 0xFF26A69A, 0xFFE0F2F1, "Doctor, soap & brushing teeth", CategoryGroup.LEARNING_DEV),
-  ALPHABETS("alphabets", "Alphabets", "🔤", 0xFF42A5F5, 0xFFE3F2FD, "Learn A to Z with sounds", CategoryGroup.LEARNING_DEV),
-  PHONICS("phonics", "Phonics & Early Reading", "🔤", 0xFF26A69A, 0xFFE0F2F1, "Sounds, blending, word families & reading", CategoryGroup.LEARNING_DEV),
-  NUMBERS("numbers", "Numbers", "🔢", 0xFFFFB300, 0xFFFFF8E1, "Count 1 to 20 with objects", CategoryGroup.LEARNING_DEV),
+  ALPHABETS("alphabets", "Alphabets (A-Z)", "🔤", 0xFF42A5F5, 0xFFE3F2FD, "Learn A to Z with sounds", CategoryGroup.LEARNING_DEV),
+  PHONICS("phonics", "Phonics & Sounds", "🔤", 0xFF26A69A, 0xFFE0F2F1, "Sounds, blending, word families & reading", CategoryGroup.LEARNING_DEV),
+  NUMBERS("numbers", "Numbers (1-20)", "🔢", 0xFFFFB300, 0xFFFFF8E1, "Count 1 to 20 with objects", CategoryGroup.LEARNING_DEV),
   SPELLING("spelling", "Spelling Fun", "✏️", 0xFF7E57C2, 0xFFEDE7F6, "Arrange scrambled letters", CategoryGroup.LEARNING_DEV),
   SENTENCES("sentences", "Sentences", "🗣️", 0xFF26A69A, 0xFFE0F2F1, "Listen & read aloud", CategoryGroup.LEARNING_DEV),
+  MUSIC("music", "Music & Sounds", "🎵", 0xFF00897B, 0xFFE0F2F1, "Drums, pianos & flutes", CategoryGroup.LEARNING_DEV),
+  PUZZLES("puzzles", "Fun Puzzles", "🧩", 0xFFEC407A, 0xFFFCE4EC, "Match pieces & shapes", CategoryGroup.LEARNING_DEV),
 
   // 🌎 World Around Us
-  NATURE("nature", "Nature", "🌳", 0xFF66BB6A, 0xFFE8F5E9, "Sun, moon, tree & river", CategoryGroup.WORLD_AROUND),
-  ANIMALS("animals", "Animals", "🐶", 0xFF42A5F5, 0xFFE3F2FD, "Pets, farm & wild animals", CategoryGroup.WORLD_AROUND),
+  ANIMALS("animals", "Animals & Pets", "🐶", 0xFF42A5F5, 0xFFE3F2FD, "Pets, farm & wild animals", CategoryGroup.WORLD_AROUND),
   FRUITS("fruits", "Fruits", "🍎", 0xFFEF5350, 0xFFFFEBEE, "Yummy apples, bananas & grapes", CategoryGroup.WORLD_AROUND),
   VEGETABLES("vegetables", "Vegetables", "🥦", 0xFF4CAF50, 0xFFE8F5E9, "Carrots, tomatoes & broccoli", CategoryGroup.WORLD_AROUND),
-  VEHICLES("vehicles", "Vehicles", "🚗", 0xFF5C6BC0, 0xFFE8EAF6, "Cars, trains & airplanes", CategoryGroup.WORLD_AROUND),
+  VEHICLES("vehicles", "Vehicles & Transport", "🚗", 0xFF5C6BC0, 0xFFE8EAF6, "Cars, trains & airplanes", CategoryGroup.WORLD_AROUND),
   COLORS("colors", "Colors", "🎨", 0xFFEF5350, 0xFFFFEBEE, "Identify bright colors", CategoryGroup.WORLD_AROUND),
   SHAPES("shapes", "Shapes", "🔺", 0xFFAB47BC, 0xFFF3E5F5, "Learn geometry & forms", CategoryGroup.WORLD_AROUND),
-  BODY_PARTS("body_parts", "Body Parts", "👀", 0xFFEC407A, 0xFFFCE4EC, "Eyes, ears, nose & hands", CategoryGroup.WORLD_AROUND),
-
-  // Legacy Aliases for Seamless Backward Compatibility
-  FRUITS_VEG("fruits_veg", "Fruits & Veggies", "🍎", 0xFFEF5350, 0xFFFFEBEE, "Yummy fruits & healthy veggies", CategoryGroup.WORLD_AROUND),
-  FOOD("food", "Food & Meals", "🍕", 0xFFFFB300, 0xFFFFF8E1, "Tasty treats & meals", CategoryGroup.EVERYDAY_LIFE),
-  CLOTHES("clothes", "Clothes", "👕", 0xFF5C6BC0, 0xFFE8EAF6, "Hats, shirts & shoes", CategoryGroup.EVERYDAY_LIFE),
-  FAMILY("family", "Family", "👨‍👩‍👧", 0xFF26A69A, 0xFFE0F2F1, "Mom, Dad, Sister & Brother", CategoryGroup.EVERYDAY_LIFE),
-  SCHOOL("school", "School", "🏫", 0xFF42A5F5, 0xFFE3F2FD, "Pencils, books & classroom", CategoryGroup.EVERYDAY_LIFE),
-  TRANSPORTATION("transportation", "Vehicles", "🚗", 0xFF5C6BC0, 0xFFE8EAF6, "Cars, trains & planes", CategoryGroup.WORLD_AROUND),
-  OCCUPATIONS("occupations", "Community Helpers", "👷", 0xFFFF9800, 0xFFFFF3E0, "Doctors, firefighters & teachers", CategoryGroup.EVERYDAY_LIFE),
-  FEELINGS("feelings", "Feelings & Actions", "😊", 0xFFEC407A, 0xFFFCE4EC, "Happy, sad, run & jump", CategoryGroup.LEARNING_DEV),
-  BIRDS("birds", "Birds", "🐦", 0xFF29B6F6, 0xFFE0F7FA, "Feathered friends & chirps", CategoryGroup.WORLD_AROUND),
-  MUSIC("music", "Music", "🎵", 0xFF26A69A, 0xFFE0F2F1, "Drums, pianos & flutes", CategoryGroup.LEARNING_DEV),
-  PUZZLES("puzzles", "Puzzles", "🧩", 0xFFEC407A, 0xFFFCE4EC, "Match pieces & shapes", CategoryGroup.EVERYDAY_LIFE),
-  GOOD_HABITS("good_habits", "Good Habits", "⭐", 0xFF66BB6A, 0xFFE8F5E9, "Brush teeth & hygiene", CategoryGroup.LEARNING_DEV),
-  SEASONS_WEATHER("seasons", "Seasons & Weather", "☀️", 0xFFFFB300, 0xFFFFF8E1, "Sun, rain, snow & wind", CategoryGroup.WORLD_AROUND)
+  BODY_PARTS("body_parts", "Body Parts", "👀", 0xFFEC407A, 0xFFFCE4EC, "Eyes, ears, nose & hands", CategoryGroup.WORLD_AROUND)
 }
 
 data class AlphabetCard(
@@ -223,11 +209,134 @@ data class NumberCard(
   val countText: String
 )
 
+enum class NumberSubcategory(
+  val levelNumber: Int,
+  val title: String,
+  val emoji: String,
+  val subtitle: String,
+  val pedagogicalGoal: String,
+  val colorHex: Long,
+  val bgHex: Long
+) {
+  COUNTING_1_5(1, "Numbers 1-5", "🌱", "Early Counting", "Count small quantities 1 to 5 with touch and audio", 0xFFFF8F00, 0xFFFFF8E1),
+  COUNTING_6_10(2, "Numbers 6-10", "🖐️", "Ten Frame Explorer", "Count quantities up to 10 and recognize patterns", 0xFF00897B, 0xFFE0F2F1),
+  COUNTING_11_20(3, "Teen Numbers 11-20", "🚀", "Double-Digit Journey", "Learn teen numbers 11 through 20 with audio rhythm", 0xFF7E57C2, 0xFFEDE7F6),
+  NUMBER_PATTERNS(4, "Skip Counting", "🔢", "2s, 5s & 10s", "Recognize sequence patterns and skip counting rhythms", 0xFF1E88E5, 0xFFE3F2FD),
+  NUMBER_BONDS(5, "Number Bonds", "➕", "Early Addition", "Discover how numbers combine to make totals", 0xFFE91E63, 0xFFFCE4EC);
+
+  companion object {
+    fun fromLevel(level: Int): NumberSubcategory =
+      entries.firstOrNull { it.levelNumber == level } ?: COUNTING_1_5
+  }
+}
+
+data class NumberSeeExample(
+  val label: String,
+  val emoji: String,
+  val count: Int,
+  val soundPrompt: String = label
+)
+
+data class NumberLessonItem(
+  val id: String,
+  val subcategory: NumberSubcategory,
+  val number: Int,
+  val word: String,
+  val emoji: String,
+  val countText: String,
+  val hearPrompt: String,
+  val seeExamples: List<NumberSeeExample>,
+  val chooseQuestion: String,
+  val chooseOptions: List<GameOption>,
+  val correctOptionId: String,
+  val mathFormula: String? = null,
+  val speakPrompt: String = "Say '$word'!"
+)
+
+data class NumberMinimalPair(
+  val id: String,
+  val number1: Int,
+  val word1: String,
+  val emoji1: String,
+  val number2: Int,
+  val word2: String,
+  val emoji2: String,
+  val spokenNumber: Int,
+  val spokenWord: String,
+  val hint: String = "Listen carefully to the spoken number!"
+)
+
 data class ColorCard(
   val name: String,
   val emoji: String,
   val colorHex: Long,
   val exampleObject: String
+)
+
+enum class ColorSubcategory(
+  val levelNumber: Int,
+  val title: String,
+  val emoji: String,
+  val subtitle: String,
+  val pedagogicalGoal: String,
+  val colorHex: Long,
+  val bgHex: Long
+) {
+  PRIMARY_COLORS(1, "Primary Colors", "🔴", "Red, Blue & Yellow", "Identify fundamental primary colors", 0xFFE53935, 0xFFFFEBEE),
+  SECONDARY_COLORS(2, "Secondary Colors", "🟢", "Green, Orange & Purple", "Discover secondary color combinations", 0xFF43A047, 0xFFE8F5E9),
+  SHADES_AND_NEUTRALS(3, "Shades & Neutrals", "🌸", "Pink, Brown, Black, White", "Expand vocabulary with soft shades and neutral tones", 0xFF8E24AA, 0xFFF3E5F5),
+  COLOR_MIXING(4, "Color Mixing Lab", "🧪", "Magic Transformations", "Blend two colors to create exciting new hues", 0xFF00ACC1, 0xFFE0F7FA),
+  RAINBOW_DISCOVERY(5, "Rainbow Explorer", "🌈", "Colors in Nature", "Explore the spectrum of colors across the sky", 0xFFFF9800, 0xFFFFF3E0);
+
+  companion object {
+    fun fromLevel(level: Int): ColorSubcategory =
+      entries.firstOrNull { it.levelNumber == level } ?: PRIMARY_COLORS
+  }
+}
+
+data class ColorSeeExample(
+  val label: String,
+  val emoji: String,
+  val colorName: String,
+  val soundPrompt: String = label
+)
+
+data class ColorMixRecipe(
+  val colorA: String,
+  val emojiA: String,
+  val colorB: String,
+  val emojiB: String,
+  val resultColor: String,
+  val resultEmoji: String,
+  val resultHex: Long,
+  val prompt: String
+)
+
+data class ColorLessonItem(
+  val id: String,
+  val subcategory: ColorSubcategory,
+  val colorName: String,
+  val colorHex: Long,
+  val emoji: String,
+  val hearPrompt: String,
+  val seeExamples: List<ColorSeeExample>,
+  val chooseQuestion: String,
+  val chooseOptions: List<GameOption>,
+  val correctOptionId: String,
+  val mixRecipe: ColorMixRecipe? = null,
+  val speakPrompt: String = "Say '$colorName'!"
+)
+
+data class ColorMinimalPair(
+  val id: String,
+  val color1: String,
+  val emoji1: String,
+  val hex1: Long,
+  val color2: String,
+  val emoji2: String,
+  val hex2: Long,
+  val spokenColor: String,
+  val hint: String = "Listen carefully to the color name!"
 )
 
 data class ShapeCard(

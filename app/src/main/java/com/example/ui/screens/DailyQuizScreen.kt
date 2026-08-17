@@ -62,7 +62,6 @@ import com.example.audio.AudioController
 import com.example.data.models.GameOption
 import com.example.ui.components.BoboMascot
 import com.example.ui.components.CelebrationOverlay
-import com.example.ui.components.LittleBuddyBottomBar
 import com.example.ui.components.MascotState
 import com.example.ui.components.StarsBar
 import com.example.ui.components.TapStarBurstOverlay
@@ -91,12 +90,6 @@ fun DailyQuizScreen(
         streak = userProgress.learningStreak,
         title = "📝 Daily Quiz",
         onParentLockClick = onParentLockClick
-      )
-    },
-    bottomBar = {
-      LittleBuddyBottomBar(
-        currentScreen = Screen.DAILY_QUIZ,
-        onNavigate = onNavigate
       )
     },
     containerColor = Color(0xFFF3E5F5)

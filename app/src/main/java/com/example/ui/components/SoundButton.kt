@@ -487,6 +487,414 @@ fun CvcSoundButton(
   }
 }
 
+/**
+ * Specialized Number Sound Button displaying large numeral, word label, emoji quantity, and sound wave.
+ */
+@Composable
+fun NumberSoundButton(
+  number: Int,
+  word: String,
+  audioController: AudioController,
+  modifier: Modifier = Modifier,
+  emoji: String? = null,
+  countText: String? = null,
+  accentColor: Color = Color(0xFFFF8F00),
+  backgroundColor: Color = Color.White,
+  size: SoundButtonSize = SoundButtonSize.HERO,
+  onClick: (() -> Unit)? = null
+) {
+  val coroutineScope = rememberCoroutineScope()
+  var isPlaying by remember { mutableStateOf(false) }
+  val scaleAnim = remember { Animatable(1f) }
+
+  Surface(
+    shape = RoundedCornerShape(28.dp),
+    color = backgroundColor,
+    shadowElevation = if (isPlaying) 10.dp else 4.dp,
+    border = androidx.compose.foundation.BorderStroke(
+      2.5.dp,
+      if (isPlaying) accentColor else accentColor.copy(alpha = 0.35f)
+    ),
+    modifier = modifier
+      .scale(scaleAnim.value)
+      .clickable {
+        coroutineScope.launch {
+          isPlaying = true
+          scaleAnim.animateTo(1.06f, animationSpec = tween(100))
+          scaleAnim.animateTo(1.0f, animationSpec = spring(dampingRatio = 0.5f, stiffness = 350f))
+          delay(850)
+          isPlaying = false
+        }
+        audioController.speak("Number $number! $word! ${countText ?: ""}")
+        onClick?.invoke()
+      }
+      .testTag("number_sound_button_$number")
+  ) {
+    Column(
+      modifier = Modifier
+        .fillMaxWidth()
+        .background(
+          Brush.verticalGradient(
+            colors = listOf(
+              accentColor.copy(alpha = 0.08f),
+              Color.White
+            )
+          )
+        )
+        .padding(18.dp),
+      horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+      if (emoji != null) {
+        Text(text = emoji, fontSize = 36.sp)
+        Spacer(modifier = Modifier.height(6.dp))
+      }
+
+      Text(
+        text = "$number",
+        fontSize = 64.sp,
+        fontWeight = FontWeight.Black,
+        color = accentColor
+      )
+
+      Text(
+        text = word.uppercase(),
+        fontSize = 22.sp,
+        fontWeight = FontWeight.ExtraBold,
+        color = Color(0xFF37474F)
+      )
+
+      if (countText != null) {
+        Spacer(modifier = Modifier.height(4.dp))
+        Text(
+          text = countText,
+          fontSize = 14.sp,
+          fontWeight = FontWeight.SemiBold,
+          color = Color(0xFF00897B)
+        )
+      }
+
+      Spacer(modifier = Modifier.height(10.dp))
+
+      Surface(
+        shape = RoundedCornerShape(18.dp),
+        color = accentColor
+      ) {
+        Row(
+          modifier = Modifier.padding(horizontal = 14.dp, vertical = 6.dp),
+          verticalAlignment = Alignment.CenterVertically
+        ) {
+          Icon(
+            imageVector = Icons.AutoMirrored.Filled.VolumeUp,
+            contentDescription = "Hear Number $number",
+            tint = Color.White,
+            modifier = Modifier.size(18.dp)
+          )
+          Spacer(modifier = Modifier.width(6.dp))
+          Text(
+            text = "TAP TO COUNT 🔊",
+            fontSize = 12.sp,
+            fontWeight = FontWeight.ExtraBold,
+            color = Color.White
+          )
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Interactive Tap-to-Count item sound button that speaks progressive count indices.
+ */
+@Composable
+fun CountItemSoundButton(
+  index: Int,
+  emoji: String,
+  label: String,
+  audioController: AudioController,
+  modifier: Modifier = Modifier,
+  accentColor: Color = Color(0xFFFF8F00),
+  onClick: (() -> Unit)? = null
+) {
+  val coroutineScope = rememberCoroutineScope()
+  var isTapped by remember { mutableStateOf(false) }
+  val scaleAnim = remember { Animatable(1f) }
+
+  Surface(
+    shape = RoundedCornerShape(16.dp),
+    color = if (isTapped) accentColor.copy(alpha = 0.2f) else Color.White,
+    shadowElevation = if (isTapped) 4.dp else 2.dp,
+    border = androidx.compose.foundation.BorderStroke(
+      1.5.dp,
+      if (isTapped) accentColor else Color(0xFFE0E0E0)
+    ),
+    modifier = modifier
+      .scale(scaleAnim.value)
+      .clickable {
+        coroutineScope.launch {
+          isTapped = true
+          scaleAnim.animateTo(1.2f, animationSpec = tween(90))
+          scaleAnim.animateTo(1.0f, animationSpec = spring(dampingRatio = 0.5f))
+          delay(600)
+          isTapped = false
+        }
+        audioController.speak("$index! $label")
+        onClick?.invoke()
+      }
+      .testTag("count_item_sound_button_$index")
+  ) {
+    Column(
+      modifier = Modifier.padding(8.dp),
+      horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+      Text(text = emoji, fontSize = 28.sp)
+      Spacer(modifier = Modifier.height(2.dp))
+      Text(
+        text = "$index",
+        fontSize = 12.sp,
+        fontWeight = FontWeight.Black,
+        color = accentColor
+      )
+    }
+  }
+}
+
+/**
+ * Specialized Color Sound Button displaying swatch, emoji, color name, and pronunciation sound pill.
+ */
+@Composable
+fun ColorSoundButton(
+  colorName: String,
+  colorHex: Long,
+  audioController: AudioController,
+  modifier: Modifier = Modifier,
+  emoji: String? = null,
+  exampleObject: String? = null,
+  accentColor: Color = Color(colorHex),
+  onClick: (() -> Unit)? = null
+) {
+  val coroutineScope = rememberCoroutineScope()
+  var isPlaying by remember { mutableStateOf(false) }
+  val scaleAnim = remember { Animatable(1f) }
+
+  Surface(
+    shape = RoundedCornerShape(26.dp),
+    color = Color.White,
+    shadowElevation = if (isPlaying) 8.dp else 4.dp,
+    border = androidx.compose.foundation.BorderStroke(
+      2.dp,
+      if (isPlaying) accentColor else accentColor.copy(alpha = 0.35f)
+    ),
+    modifier = modifier
+      .scale(scaleAnim.value)
+      .clickable {
+        coroutineScope.launch {
+          isPlaying = true
+          scaleAnim.animateTo(1.05f, animationSpec = tween(100))
+          scaleAnim.animateTo(1.0f, animationSpec = spring(dampingRatio = 0.5f))
+          delay(800)
+          isPlaying = false
+        }
+        audioController.speak("$colorName! ${exampleObject ?: ""}")
+        onClick?.invoke()
+      }
+      .testTag("color_sound_button_$colorName")
+  ) {
+    Column(
+      modifier = Modifier
+        .fillMaxWidth()
+        .background(
+          Brush.verticalGradient(
+            colors = listOf(
+              Color(colorHex).copy(alpha = 0.12f),
+              Color.White
+            )
+          )
+        )
+        .padding(16.dp),
+      horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+      Box(
+        modifier = Modifier
+          .size(68.dp)
+          .clip(CircleShape)
+          .background(Color(colorHex))
+          .shadow(4.dp, CircleShape),
+        contentAlignment = Alignment.Center
+      ) {
+        if (emoji != null) {
+          Text(text = emoji, fontSize = 32.sp)
+        }
+      }
+
+      Spacer(modifier = Modifier.height(10.dp))
+
+      Text(
+        text = colorName,
+        fontSize = 24.sp,
+        fontWeight = FontWeight.Black,
+        color = Color(0xFF263238)
+      )
+
+      if (exampleObject != null) {
+        Spacer(modifier = Modifier.height(2.dp))
+        Text(
+          text = exampleObject,
+          fontSize = 13.sp,
+          fontWeight = FontWeight.Bold,
+          color = Color(0xFF546E7A)
+        )
+      }
+
+      Spacer(modifier = Modifier.height(10.dp))
+
+      Surface(
+        shape = RoundedCornerShape(16.dp),
+        color = Color(colorHex)
+      ) {
+        Row(
+          modifier = Modifier.padding(horizontal = 12.dp, vertical = 5.dp),
+          verticalAlignment = Alignment.CenterVertically
+        ) {
+          Icon(
+            imageVector = Icons.AutoMirrored.Filled.VolumeUp,
+            contentDescription = "Hear $colorName",
+            tint = Color.White,
+            modifier = Modifier.size(16.dp)
+          )
+          Spacer(modifier = Modifier.width(4.dp))
+          Text(
+            text = "HEAR COLOR 🔊",
+            fontSize = 11.sp,
+            fontWeight = FontWeight.ExtraBold,
+            color = Color.White
+          )
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Interactive Magic Color Mixing Sound Button (e.g. Red + Yellow = Orange).
+ */
+@Composable
+fun ColorMixSoundButton(
+  colorA: String,
+  emojiA: String,
+  colorB: String,
+  emojiB: String,
+  resultColor: String,
+  resultEmoji: String,
+  resultHex: Long,
+  prompt: String,
+  audioController: AudioController,
+  modifier: Modifier = Modifier,
+  onClick: (() -> Unit)? = null
+) {
+  val coroutineScope = rememberCoroutineScope()
+  var isPlaying by remember { mutableStateOf(false) }
+  val scaleAnim = remember { Animatable(1f) }
+
+  Surface(
+    shape = RoundedCornerShape(22.dp),
+    color = Color.White,
+    shadowElevation = if (isPlaying) 8.dp else 4.dp,
+    border = androidx.compose.foundation.BorderStroke(
+      2.dp,
+      if (isPlaying) Color(resultHex) else Color(resultHex).copy(alpha = 0.4f)
+    ),
+    modifier = modifier
+      .scale(scaleAnim.value)
+      .clickable {
+        coroutineScope.launch {
+          isPlaying = true
+          scaleAnim.animateTo(1.05f, animationSpec = tween(100))
+          scaleAnim.animateTo(1.0f, animationSpec = spring(dampingRatio = 0.5f))
+          delay(900)
+          isPlaying = false
+        }
+        audioController.playRewardSound()
+        audioController.speak("$colorA plus $colorB makes $resultColor! $prompt")
+        onClick?.invoke()
+      }
+      .testTag("color_mix_button_${resultColor.lowercase()}")
+  ) {
+    Column(
+      modifier = Modifier
+        .fillMaxWidth()
+        .background(
+          Brush.verticalGradient(
+            colors = listOf(
+              Color(resultHex).copy(alpha = 0.15f),
+              Color.White
+            )
+          )
+        )
+        .padding(14.dp),
+      horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+      Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(6.dp)
+      ) {
+        Surface(
+          shape = RoundedCornerShape(12.dp),
+          color = Color(0xFFF5F5F5),
+          modifier = Modifier.padding(2.dp)
+        ) {
+          Text(text = "$emojiA $colorA", fontSize = 13.sp, fontWeight = FontWeight.Bold, modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp))
+        }
+
+        Text(text = "+", fontSize = 18.sp, fontWeight = FontWeight.Black, color = Color(0xFF455A64))
+
+        Surface(
+          shape = RoundedCornerShape(12.dp),
+          color = Color(0xFFF5F5F5),
+          modifier = Modifier.padding(2.dp)
+        ) {
+          Text(text = "$emojiB $colorB", fontSize = 13.sp, fontWeight = FontWeight.Bold, modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp))
+        }
+
+        Text(text = "=", fontSize = 18.sp, fontWeight = FontWeight.Black, color = Color(0xFF455A64))
+
+        Surface(
+          shape = RoundedCornerShape(12.dp),
+          color = Color(resultHex),
+          modifier = Modifier.padding(2.dp)
+        ) {
+          Text(text = "$resultEmoji $resultColor", fontSize = 13.sp, fontWeight = FontWeight.Black, color = Color.White, modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp))
+        }
+      }
+
+      Spacer(modifier = Modifier.height(8.dp))
+
+      Surface(
+        shape = RoundedCornerShape(16.dp),
+        color = Color(resultHex)
+      ) {
+        Row(
+          modifier = Modifier.padding(horizontal = 12.dp, vertical = 5.dp),
+          verticalAlignment = Alignment.CenterVertically
+        ) {
+          Icon(
+            imageVector = Icons.AutoMirrored.Filled.VolumeUp,
+            contentDescription = "Mix $colorA and $colorB",
+            tint = Color.White,
+            modifier = Modifier.size(16.dp)
+          )
+          Spacer(modifier = Modifier.width(4.dp))
+          Text(
+            text = "MIX COLORS 🎨",
+            fontSize = 11.sp,
+            fontWeight = FontWeight.ExtraBold,
+            color = Color.White
+          )
+        }
+      }
+    }
+  }
+}
+
 // -----------------------------------------
 // Sub-variants of SoundButton
 // -----------------------------------------

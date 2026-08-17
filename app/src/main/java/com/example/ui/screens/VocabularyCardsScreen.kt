@@ -70,7 +70,6 @@ import com.example.audio.AudioController
 import com.example.ui.components.BoboMascot
 import com.example.ui.components.CelebrationOverlay
 import com.example.ui.components.LessonNavigationControls
-import com.example.ui.components.LittleBuddyBottomBar
 import com.example.ui.components.MascotState
 import com.example.ui.components.StarsBar
 import com.example.ui.components.TapStarBurstOverlay
@@ -408,12 +407,6 @@ fun VocabularyCardsScreen(
         stars = totalStars,
         title = "🎨 Vocab Explorer",
         onParentLockClick = onParentLockClick
-      )
-    },
-    bottomBar = {
-      LittleBuddyBottomBar(
-        currentScreen = Screen.LEARN_CATEGORIES,
-        onNavigate = onNavigate
       )
     },
     containerColor = Color(0xFFFFFDE7)
